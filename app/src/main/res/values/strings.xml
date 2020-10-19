@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Madspild</string>
+    <string name="dette_er_en_placeholder_for_kamera_siden">Dette er en placeholder for kamera-siden</string>
+    <string name="qr_screenshot">qr_screenshot</string>
+    <string name="overview_icon">overview_icon</string>
+    <string name="camera_icon">camera_icon</string>
+    <string name="profile_icon">profile_icon</string>
 </resources>
