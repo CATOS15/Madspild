@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/overviewMenuItem"
+        android:enabled="true"
+        android:icon="@android:drawable/ic_dialog_dialer"
+        android:title="@string/overview" />
+    <item
+        android:id="@+id/scanMenuItem"
+        android:enabled="true"
+        android:icon="@android:drawable/ic_menu_camera"
+        android:title="@string/scan"
+        tools:ignore="PrivateResource" />
+    <item
+        android:id="@+id/profileMenuItem"
+        android:icon="@drawable/outline_account_circle_black_36"
+        android:title="@string/profile" />
+</menu>

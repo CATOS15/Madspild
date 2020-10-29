@@ -15,8 +15,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/qr_code"
+        app:srcCompat="@drawable/overview"
         android:contentDescription="@string/overview_icon" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

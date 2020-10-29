@@ -5,4 +5,14 @@
     <string name="overview_icon">overview_icon</string>
     <string name="camera_icon">camera_icon</string>
     <string name="profile_icon">profile_icon</string>
+    <string name="user" />
+    <string name="overview">overview</string>
+    <string name="profile">profile</string>
+    <string name="scan">scan</string>
+    <string name="f_rste_side">Første side</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="profil_siden">Profil siden</string>
+    <string name="scan_siden">Scan siden</string>
+    <string name="overview_side">overView side</string>
 </resources>
