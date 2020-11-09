@@ -7,4 +7,15 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- Base application theme. -->
+    <style name="AppThemeTest" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#00ff55</item>
+        <item name="colorPrimaryDark">#3e6049</item>
+        <item name="colorAccent">#d1ffe0</item>
+    </style>
+
+
+
+
 </resources>

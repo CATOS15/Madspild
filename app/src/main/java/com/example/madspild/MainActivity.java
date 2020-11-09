@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.test_buttom_nav);
+        getSupportActionBar().hide(); // hide the title bar
 
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
