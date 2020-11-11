@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.madspild.R;
@@ -21,9 +20,6 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 import madspild.Adapters.ScreenSlidePagerAdapter;
-import madspild.Fragments.OverviewFragment;
-import madspild.Fragments.ProfileFragment;
-import madspild.Fragments.ScanFragment;
 import madspild.Helpers.MenuHelper;
 
 
@@ -37,10 +33,6 @@ public class MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        if(ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.CAMERA},1);
-        }
 
         viewPager = findViewById(R.id.viewPager);
         navigation = findViewById(R.id.bottom_navigation);
@@ -66,21 +58,6 @@ public class MainActivity extends FragmentActivity {
                 return true;
             }
         });
-
-    }
-
-    //TODO Når man klikker at man gerne må bruge kameraet
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == 1) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                System.out.println("Todo");
-                //Permission granted!
-            } else {
-                System.out.println("Todo");
-                //Permission denied!
-            }
-        }
     }
 
     @Override

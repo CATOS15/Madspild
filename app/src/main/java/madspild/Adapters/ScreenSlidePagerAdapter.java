@@ -24,6 +24,6 @@ public class ScreenSlidePagerAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return MenuHelper.getNumPages();
+        return MenuHelper.NUM_PAGES;
     }
 }

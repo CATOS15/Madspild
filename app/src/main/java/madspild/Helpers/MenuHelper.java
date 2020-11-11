@@ -8,12 +8,9 @@ import madspild.Fragments.OverviewFragment;
 import madspild.Fragments.ProfileFragment;
 import madspild.Fragments.ScanFragment;
 
+//This is used for mapnings
 public class MenuHelper {
-    private static final int NUM_PAGES = 3;
-
-    public static int getNumPages() {
-        return NUM_PAGES;
-    }
+    public static final int NUM_PAGES = 3;
 
     public static int getMenuNumberFromId(int id){
         switch (id) {

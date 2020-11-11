@@ -1,65 +1,59 @@
 package madspild.Fragments;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
-import com.budiyev.android.codescanner.DecodeCallback;
 import com.example.madspild.R;
-import com.google.zxing.Result;
 
-public class ScanFragment  extends Fragment {
-    private CodeScanner mCodeScanner;
+import java.util.Objects;
+
+public class ScanFragment extends Fragment {
+    private CodeScanner codeScanner;
 
     @Override
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
-        final Activity activity = getActivity();
-
         View root = i.inflate(R.layout.fragment_scan, container, false);
-        try{
-            CodeScannerView scannerView = root.findViewById(R.id.scanner_view);
-            mCodeScanner = new CodeScanner(activity, scannerView);
-            mCodeScanner.setDecodeCallback(new DecodeCallback() {
-                @Override
-                public void onDecoded(@NonNull final Result result) {
-                    activity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(activity, result.getText(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-            });
-            scannerView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    mCodeScanner.startPreview();
-                }
-            });
+        codeScanner = new CodeScanner(Objects.requireNonNull(getActivity()), (CodeScannerView)root.findViewById(R.id.scanner_view));
+
+        if(!hasCameraPermission()) {
+            requestCameraPermission();
         }
-        catch(Exception e){
-            System.out.println("Kamera er ikke tilgængeligt");
-        }
+
         return root;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mCodeScanner.startPreview();
+
+        if(hasCameraPermission())  {
+            codeScanner.startPreview();
+        }
     }
 
     @Override
     public void onPause() {
-        mCodeScanner.releaseResources();
+        if(hasCameraPermission()) {
+            codeScanner.releaseResources();
+        }
         super.onPause();
+    }
+
+    private boolean hasCameraPermission(){
+        return ActivityCompat.checkSelfPermission(Objects.requireNonNull(getActivity()), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED;
+    }
+    private void requestCameraPermission(){
+        ActivityCompat.requestPermissions(Objects.requireNonNull(getActivity()), new String[]{Manifest.permission.CAMERA},1);
     }
 }
