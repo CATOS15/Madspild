@@ -31,11 +31,15 @@ public class MainActivity extends FragmentActivity {
 
         viewPager = findViewById(R.id.view_pager);
         navigation = findViewById(R.id.bottom_navigation_view);
-        navigation.setSelectedItemId(R.id.scanMenuItem);
 
+        navigation.setSelectedItemId(R.id.scanMenuItem);
         viewPager.setAdapter(new ScreenSlidePagerAdapter(this));
         viewPager.setCurrentItem(1);
 
+        initEvents();
+    }
+
+    private void initEvents(){
         viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
