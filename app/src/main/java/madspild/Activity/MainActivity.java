@@ -18,13 +18,16 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.Stack;
 
 import madspild.Adapters.ScreenSlidePagerAdapter;
 import madspild.Helpers.MenuHelper;
 
 
 public class MainActivity extends FragmentActivity {
-    private Deque<Integer> pageStack = new ArrayDeque<>();
+    private int lastPagePosition = 1;
+    private Stack<Integer> pageStack = new Stack<>();
+
     private ViewPager2 viewPager;
     private BottomNavigationView navigation;
 
@@ -44,17 +47,18 @@ public class MainActivity extends FragmentActivity {
         viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
+                if(lastPagePosition != position){
+                    pageStack.add(lastPagePosition);
+                }
                 navigation.setSelectedItemId(MenuHelper.getMenuIdFromNumber(position));
+
+                lastPagePosition = position;
             }
         });
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int menuNumber = MenuHelper.getMenuNumberFromId(item.getItemId());
-                if(viewPager.getCurrentItem() != menuNumber){
-                    pageStack.add(menuNumber);
-                    viewPager.setCurrentItem(menuNumber);
-                }
+                viewPager.setCurrentItem(MenuHelper.getMenuNumberFromId(item.getItemId()));
                 return true;
             }
         });
@@ -65,7 +69,8 @@ public class MainActivity extends FragmentActivity {
         if (pageStack.isEmpty()) {
             finish();
         } else {
-            viewPager.setCurrentItem(pageStack.pop());
+            lastPagePosition = pageStack.pop();
+            viewPager.setCurrentItem(lastPagePosition);
         }
     }
 }
