@@ -1,20 +1,10 @@
 <resources>
-    <string name="app_name">Madspild</string>
-    <string name="dette_er_en_placeholder_for_kamera_siden">Dette er en placeholder for kamera-siden</string>
-    <string name="qr_screenshot">qr_screenshot</string>
-    <string name="overview_icon">overview_icon</string>
-    <string name="camera_icon">camera_icon</string>
-    <string name="profile_icon">profile_icon</string>
-    <string name="user" />
-    <string name="overview">overview</string>
-    <string name="profile">profile</string>
-    <string name="scan">scan</string>
-    <string name="f_rste_side">Første side</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="profil_siden">Profil siden</string>
-    <string name="scan_siden">Scan siden</string>
-    <string name="overview_side">overView side</string>
-    <string name="profile_page">Profile page</string>
-    <string name="overview_page">Overview Page</string>
+    <string name="appname">Madspild</string>
+
+    <string name="overview">Overview</string>
+    <string name="scan">Scan</string>
+    <string name="profile">Profil</string>
+
+    <string name="txt_overview">Herinde kan du se en oversigt over dine produkter</string>
+    <string name="txt_profile">Herinde kan du se din profil</string>
 </resources>

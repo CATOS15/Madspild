@@ -1,23 +1,15 @@
-package madspild.Activity;
+package madspild.Activities;
 
-import android.Manifest;
-import android.app.Activity;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.madspild.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
 import java.util.Stack;
 
 import madspild.Adapters.ScreenSlidePagerAdapter;
@@ -37,8 +29,8 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        viewPager = findViewById(R.id.viewPager);
-        navigation = findViewById(R.id.bottom_navigation);
+        viewPager = findViewById(R.id.view_pager);
+        navigation = findViewById(R.id.bottom_navigation_view);
         navigation.setSelectedItemId(R.id.scanMenuItem);
 
         viewPager.setAdapter(new ScreenSlidePagerAdapter(this));
