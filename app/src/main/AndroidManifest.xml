@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name="madspild.Activity.MainActivity"
             android:theme="@style/AppThemeTest">
 
             <intent-filter>
