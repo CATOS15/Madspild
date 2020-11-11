@@ -7,12 +7,10 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
-public class OverviewFragement   extends Fragment {
+public class OverviewFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
-        View rod = i.inflate(R.layout.overview_activity, container, false);
-
-        return rod;
+        return i.inflate(R.layout.overview_activity, container, false);
     }
 }

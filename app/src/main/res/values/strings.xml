@@ -15,4 +15,6 @@
     <string name="profil_siden">Profil siden</string>
     <string name="scan_siden">Scan siden</string>
     <string name="overview_side">overView side</string>
+    <string name="profile_page">Profile page</string>
+    <string name="overview_page">Overview Page</string>
 </resources>
