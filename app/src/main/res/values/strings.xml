@@ -7,4 +7,9 @@
 
     <string name="txt_overview">Herinde kan du se en oversigt over dine produkter</string>
     <string name="txt_profile">Herinde kan du se din profil</string>
+
+    <!--overview values -->
+    <string name="temp_image">temp-image</string>
+    <string name="beskrivelse">beskrivelse</string>
+    <string name="overskrift">overskrift</string>
 </resources>
