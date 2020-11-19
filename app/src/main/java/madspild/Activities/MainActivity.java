@@ -42,7 +42,7 @@ public class MainActivity extends FragmentActivity {
         initEvents();
 
         User user = new User();
-        user.setPasswords("1234");
+        user.setPasswords("555");
         user.setEmail("1234@1234.com");
         user.setUsername("test");
         user.setUserID(1);
