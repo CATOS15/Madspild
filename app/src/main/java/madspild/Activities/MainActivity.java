@@ -9,11 +9,14 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.madspild.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Stack;
 
 import madspild.Adapters.ScreenSlidePagerAdapter;
 import madspild.Helpers.MenuHelper;
+import madspild.Model.User;
 
 
 public class MainActivity extends FragmentActivity {
@@ -37,6 +40,38 @@ public class MainActivity extends FragmentActivity {
         viewPager.setCurrentItem(1);
 
         initEvents();
+
+        User user = new User();
+        user.setPasswords("555");
+        user.setEmail("1234@1234.com");
+        user.setUsername("test");
+        user.setUserID(1);
+
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("user");
+
+
+        myRef.child("user").push().setValue(user);
+//        database.setValue("Hello, World!");
+
+
+// Read from the database
+//        myRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                // This method is called once with the initial value and again
+//                // whenever data at this location is updated.
+//                String value = dataSnapshot.getValue(String.class);
+//                Log.d(TAG, "Value is: " + value);
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError error) {
+//                // Failed to read value
+//                Log.w(TAG, "Failed to read value.", error.toException());
+//            }
+//        });
     }
 
     private void initEvents(){
