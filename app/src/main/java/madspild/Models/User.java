@@ -1,4 +1,4 @@
-package madspild.Model;
+package madspild.Models;
 
 public class User {
 

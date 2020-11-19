@@ -16,7 +16,7 @@ import java.util.Stack;
 
 import madspild.Adapters.ScreenSlidePagerAdapter;
 import madspild.Helpers.MenuHelper;
-import madspild.Model.User;
+import madspild.Models.User;
 
 
 public class MainActivity extends FragmentActivity {
@@ -41,18 +41,20 @@ public class MainActivity extends FragmentActivity {
 
         initEvents();
 
-        User user = new User();
-        user.setPasswords("555");
-        user.setEmail("1234@1234.com");
-        user.setUsername("test");
-        user.setUserID(1);
+
+        //Database
+//        User user = new User();
+//        user.setPasswords("11");
+//        user.setEmail("12333");
+//        user.setUsername("test");
+//        user.setUserID(1);
+//
+//
+//        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        DatabaseReference myRef = database.getReference("user");
 
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("user");
-
-
-        myRef.child("user").push().setValue(user);
+//        myRef.child("user").push().setValue(user);
 //        database.setValue("Hello, World!");
 
 
