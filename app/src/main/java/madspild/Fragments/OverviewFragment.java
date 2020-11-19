@@ -1,12 +1,16 @@
 package madspild.Fragments;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +24,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+
+import madspild.Controllers.ProductController;
+import madspild.Models.Product;
 
 public class OverviewFragment extends Fragment {
 
@@ -49,7 +56,10 @@ public class OverviewFragment extends Fragment {
     HashSet<Integer> openCountries = new HashSet<>(); // hvilke lande der lige nu er åbne
 
     RecyclerView recyclerView;
+    ListView listviewtest;
 
+    public static final String SHARED_PREFS = "sharedPrefs";
+    public static final String DataMatrixDataPref = "DataMatrixData";
 
     @Override
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
@@ -64,9 +74,20 @@ public class OverviewFragment extends Fragment {
         //åbneLande = (HashSet<Integer>) savedInstanceState.getSerializable("åbneLande");
         //recyclerView.getLayoutManager().onRestoreInstanceState(savedInstanceState.getParcelable("liste"));
 
+        listviewtest = view.findViewById(R.id.listviewtest);
+        //showlistview();
+
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        String DataMatrixDataString = sharedPreferences.getString(DataMatrixDataPref, "");
+        Toast.makeText(getActivity(),DataMatrixDataString,Toast.LENGTH_SHORT).show();
+
         return view;
     }
 
+
+    public void showtextview(){
+
+    }
 
     RecyclerView.Adapter adapter = new RecyclerView.Adapter<EkspanderbartListeelemViewholder>() {
 
@@ -88,7 +109,6 @@ public class OverviewFragment extends Fragment {
             vh.landeview.setOnClickListener(vh);
             vh.landeview.setBackgroundResource(android.R.drawable.list_selector_background); // giv visuelt feedback når der trykkes på baggrunden
             vh.openCloseImage.setOnClickListener(vh);
-//      vh.åbnLukBillede.setBackgroundResource(android.R.drawable.btn_default);
             vh.rodLayout.addView(vh.landeview);
             return vh;
         }
@@ -97,14 +117,29 @@ public class OverviewFragment extends Fragment {
         @Override
         public void onBindViewHolder(EkspanderbartListeelemViewholder vh, int position) {
             boolean open = openCountries.contains(position);
-            vh.overskrift.setText(data.Produkter.get(position) +" åben="+open);
-            vh.beskrivelse.setText("Land nummer " + position + " på vh@"+Integer.toHexString(vh.hashCode()));
+            //vh.overskrift.setText(data.Produkter.get(position) +" åben="+open);
+            //vh.beskrivelse.setText("Land nummer " + position + " på vh@"+Integer.toHexString(vh.hashCode()));
+            vh.overskrift.setText(data.Produkter.get(position));
+            vh.beskrivelse.setText("" + position + "");
+
+            if(position%4 == 0){
+                vh.openCloseImage.setImageResource(R.drawable.milk_temp);
+            }
+            else if(position%3 == 0){
+                vh.openCloseImage.setImageResource(R.drawable.freezer_temp);
+            }
+            else if(position%2 == 0){
+                vh.openCloseImage.setImageResource(R.drawable.can_temp);
+            }
+            else {
+                vh.openCloseImage.setImageResource(R.drawable.vegetables_temp);
+            }
 
             if (!open) {
-                vh.openCloseImage.setImageResource(android.R.drawable.ic_input_add); // vis 'åbn' ikon
+                //vh.openCloseImage.setImageResource(android.R.drawable.ic_input_add); // vis 'åbn' ikon
                 for (View underview : vh.underviews) underview.setVisibility(View.GONE); // skjul underelementer
             } else {
-                vh.openCloseImage.setImageResource(android.R.drawable.ic_delete); // vis 'luk' ikon
+                //vh.openCloseImage.setImageResource(android.R.drawable.ic_delete); // vis 'luk' ikon
 
                 List<String> byerILandet = data.Detaljer.get(position);
 
@@ -127,6 +162,7 @@ public class OverviewFragment extends Fragment {
                         underView.setVisibility(View.GONE);      // for underviewet skal ikke bruges
                     }
                 }
+
             }
         }
     };
@@ -147,6 +183,10 @@ public class OverviewFragment extends Fragment {
         @Override
         public void onClick(View v) {
             final int position = getAdapterPosition();
+
+            SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+            String DataMatrixDataString = sharedPreferences.getString(DataMatrixDataPref, "");
+            Toast.makeText(getActivity(),DataMatrixDataString,Toast.LENGTH_SHORT).show();
 
             if (v == openCloseImage || v==landeview) { // Klik på billede åbner/lukker for listen af byer i dette land
                 boolean Open = openCountries.contains(position);

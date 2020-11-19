@@ -16,21 +16,23 @@
 
     <TextView
         android:id="@+id/listeelem_overskrift"
-        android:layout_width="match_parent"
+        android:layout_width="333dp"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/listeelem_billede"
         android:layout_toEndOf="@+id/listeelem_billede"
         android:text="@string/overskrift"
         android:textSize="18sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/listeelem_beskrivelse"
-        android:layout_width="match_parent"
+        android:layout_width="330dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/listeelem_overskrift"
+        android:layout_marginTop="3dp"
+        android:layout_toEndOf="@+id/listeelem_billede"
         android:text="@string/beskrivelse"
-        android:textSize="12sp"/>
+        android:textSize="12sp" />
 
 
 </RelativeLayout>
