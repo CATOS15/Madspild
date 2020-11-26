@@ -42,6 +42,9 @@ public class MainActivity extends FragmentActivity {
         initEvents();
 
 
+        //Lige nu er database delen inaktiv for at undgå at spilde plads på databasen
+        //den vil blive sat aktiv når vi skal til at arbejde dybere med databasen
+
         //Database
 //        User user = new User();
 //        user.setPasswords("11");
