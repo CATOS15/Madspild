@@ -25,7 +25,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
-import madspild.Controllers.ProductController;
 import madspild.Models.Product;
 
 public class OverviewFragment extends Fragment {

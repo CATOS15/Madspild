@@ -23,13 +23,11 @@ import com.google.zxing.Result;
 
 import java.util.Objects;
 
-import madspild.Controllers.ProductController;
 import madspild.Models.Product;
 
 public class ScanFragment extends Fragment {
     private CodeScanner codeScanner;
 
-    ProductController pc;
     Product product;
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String DataMatrixDataPref = "DataMatrixData";
