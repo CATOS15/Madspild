@@ -12,4 +12,8 @@
     <string name="temp_image">temp-image</string>
     <string name="beskrivelse">beskrivelse</string>
     <string name="overskrift">overskrift</string>
+    <string name="your_name">Your Name</string>
+    <string name="full_name">Full Name</string>
+    <string name="e_mail">E-mail</string>
+    <string name="password">Password</string>
 </resources>
