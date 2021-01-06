@@ -1,6 +1,5 @@
 package madspild.Fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.KeyEvent;
@@ -21,9 +20,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-import madspild.Activities.MainActivity;
-
-public class LoginFragment extends Fragment{
+public class RegisterFragment extends Fragment{
 
     MaterialButton loginbutton;
     TextInputLayout usernameTextInput; //username
@@ -31,58 +28,22 @@ public class LoginFragment extends Fragment{
 
     TextInputLayout passwordTextInput; //password
     TextInputEditText passwordEditText;
-    TextView login_create_account_text;
+
+    TextView register_already_registered_text;
 
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
-        View view = i.inflate(R.layout.fragment_login, container, false);
+        View view = i.inflate(R.layout.fragment_register, container, false);
+
+        register_already_registered_text = view.findViewById(R.id.register_already_registered_text);
 
         //til at teste login/registrer ved startup af appen
+        /*
         final TextInputLayout usernameTextInput = view.findViewById(R.id.login_username_text_input); //username
         final TextInputEditText usernameEditText = view.findViewById(R.id.login_username_edit_text);
 
         final TextInputLayout passwordTextInput = view.findViewById(R.id.login_password_text_input); //password
         final TextInputEditText passwordEditText = view.findViewById(R.id.login_password_edit_text);
-
-        login_create_account_text = view.findViewById(R.id.login_create_account_text);
-
         MaterialButton loginbutton = view.findViewById(R.id.login_button);
-
-        loginbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!isPasswordValid(passwordEditText.getText())) {
-                    passwordTextInput.setError(getString(R.string.ms_error_password));
-                }
-                if (!isUsernameValid(usernameEditText.getText())) {
-                    usernameTextInput.setError(getString(R.string.ms_error_username_empty));
-                }
-                else if (2==2){
-
-                    Intent intent = new Intent(getActivity(), MainActivity.class);
-                    startActivity(intent);
-                    getActivity().finish();
-
-                    /*passwordTextInput.setError(null); // Clear the error
-                    ((NavigationHost) getActivity()).navigateTo(new ProductGridFragment(), false); // Navigate to the next Fragment
-                    */
-
-                    return;
-                }
-            }
-        });
-
-        login_create_account_text.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Fragment fragment = new RegisterFragment();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.container, fragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-            }
-        });
-
 
         // Clear the error once more than 8 characters are typed.
         passwordEditText.setOnKeyListener(new View.OnKeyListener() {
@@ -94,6 +55,23 @@ public class LoginFragment extends Fragment{
                 return false;
             }
         });
+
+
+
+         */
+
+        register_already_registered_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new LoginFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+
         return view;
     }
 
@@ -107,5 +85,4 @@ public class LoginFragment extends Fragment{
     private boolean isUsernameValid(@Nullable Editable text) {
         return text != null && text.length() >= 0;
     }
-
 }

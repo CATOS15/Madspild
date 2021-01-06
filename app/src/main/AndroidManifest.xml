@@ -14,7 +14,7 @@
         <!-- android:theme="@style/AppTheme"> -->
 
         <activity
-            android:name="madspild.Activities.MainActivity"
+            android:name="madspild.Activities.OpstartActivity"
             android:windowSoftInputMode="adjustPan"
             android:theme="@style/Theme.TipTime">
             <intent-filter>
@@ -22,6 +22,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="madspild.Activities.MainActivity"/>
+
     </application>
 
 </manifest>

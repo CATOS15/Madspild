@@ -71,6 +71,7 @@
                 android:text="@string/ms_button_login" />
 
             <TextView
+                android:id="@+id/login_create_account_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/login_button"

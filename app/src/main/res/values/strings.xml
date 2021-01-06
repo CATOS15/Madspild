@@ -1,6 +1,4 @@
 <resources>
-
-
     <string name="appname">C2 Madspild</string>
 
     <string name="overview">Overview</string>
@@ -18,22 +16,6 @@
     <string name="full_name">Full Name</string>
     <string name="e_mail">E-mail</string>
     <string name="password">Password</string>
-
-    <!-- Profile/Signup-->
-    <string name="ms_imagedescription_logo">Logo</string>
-    <string name="ms_button_login">login</string>
-
-    <string name="ms_hint_username">Username</string>
-    <string name="ms_hint_password">Password</string>
-    <string name="ms_error_password">Password must contain at least 8 characters.</string>
-
-    <string name="ms_hint_lastname">lastname</string>
-    <string name="ms_hint_firstname">firstname</string>
-    <string name="ms_hint_email">email</string>
-    <string name="ms_hint_phone">phone</string>
-
-    <string name="login_no_account_yet">No account yet? Create one</string>
-    <string name="register_already_registered">Already registered? Login</string>
 
     <!--random -->
     <string name="ms_button_next">Next</string>

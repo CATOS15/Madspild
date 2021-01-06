@@ -131,6 +131,7 @@
                 android:text="@string/ms_button_login" />
 
             <TextView
+                android:id="@+id/register_already_registered_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/login_button"
