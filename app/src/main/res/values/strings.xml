@@ -1,4 +1,6 @@
 <resources>
+
+
     <string name="appname">C2 Madspild</string>
 
     <string name="overview">Overview</string>
@@ -16,6 +18,7 @@
     <string name="full_name">Full Name</string>
     <string name="e_mail">E-mail</string>
     <string name="password">Password</string>
+
 
     <!--random -->
     <string name="ms_button_next">Next</string>
