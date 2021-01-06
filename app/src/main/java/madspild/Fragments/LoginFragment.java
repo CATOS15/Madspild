@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,7 +48,7 @@ public class LoginFragment extends Fragment{
         View view = i.inflate(R.layout.fragment_login, container, false);
         authenticationClient = new AuthenticationClient();
         if(HttpClientHelper.getToken() != null){
-            getUserInformation();
+            checkUserAccess();
         }
 
         //til at teste login/registrer ved startup af appen
@@ -70,9 +71,9 @@ public class LoginFragment extends Fragment{
             String username = "missekat";
             String password = "missekat";
             authenticationClient.login(username, password, (resp) -> {
-                getUserInformation();
+                checkUserAccess();
             }, (respError) -> {
-                System.out.println(respError);
+                Log.println(Log.ERROR, "AUTHENTICATION", respError);
             });
         });
 
@@ -86,20 +87,15 @@ public class LoginFragment extends Fragment{
         });
     }
 
-    private void getUserInformation(){
-        authenticationClient.getUserInformation((resp1) -> {
-            ObjectMapper mapper = new ObjectMapper();
-            try {
-                User user = mapper.readValue(resp1, User.class);
+    private void checkUserAccess(){
+        authenticationClient.getUserInformation((resp) -> {
+            User user = (User) resp;
 
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                startActivity(intent);
-                Objects.requireNonNull(getActivity()).finish();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            startActivity(intent);
+            Objects.requireNonNull(getActivity()).finish();
         },(respError) -> {
-            System.out.println(respError);
+            Log.println(Log.ERROR, "AUTHENTICATION", respError);
         });
     }
 

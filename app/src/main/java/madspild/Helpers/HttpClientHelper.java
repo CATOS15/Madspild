@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class HttpClientHelper {
     private static String token = null;
     private static SharedPreferences sharedPreferences = null;

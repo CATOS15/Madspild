@@ -1,7 +1,9 @@
 package madspild.HttpClient;
 
 import android.content.Context;
+import android.util.Log;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.OkHttpClient;
@@ -13,8 +15,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import madspild.Helpers.HttpClientHelper;
+import madspild.Models.User;
 
 public class AuthenticationClient extends HttpClient {
     public void login(String username, String password, RespCallback respCallback, RespErrorCallback respErrorCallback){
@@ -42,7 +46,7 @@ public class AuthenticationClient extends HttpClient {
                     String responseBody = response.body().string();
                     if(response.code() == 200) {
                         HttpClientHelper.setToken(responseBody);
-                        respCallback.onRespCallback("OK");
+                        respCallback.onRespCallback("Bruger logget ind");
                     }else{
                         respErrorCallback.onRespErrorCallback(responseBody);
                     }
@@ -51,6 +55,42 @@ public class AuthenticationClient extends HttpClient {
 
         } catch (JSONException e) {
             e.printStackTrace();
+            Log.println(Log.WARN, "JSON", Objects.requireNonNull(e.getMessage()));
+        }
+    }
+
+    public void createUser(User user, RespCallback respCallback, RespErrorCallback respErrorCallback){
+        try {
+            OkHttpClient client = new OkHttpClient();
+
+            String JSON_user = mapper.writeValueAsString(user);
+            RequestBody body = RequestBody.create(MediaType.parse("application/json"), JSON_user);
+            Request request = new Request.Builder()
+                    .url(BASE_URL + "/authentication/createUser")
+                    .post(body)
+                    .build();
+
+            client.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Request request, IOException e) {
+                    respErrorCallback.onRespErrorCallback(e.getMessage());
+                }
+
+                @Override
+                public void onResponse(Response response) throws IOException {
+                    String responseBody = response.body().string();
+                    if(response.code() == 200) {
+                        HttpClientHelper.setToken(responseBody);
+                        respCallback.onRespCallback("Bruger oprettet");
+                    }else{
+                        respErrorCallback.onRespErrorCallback(responseBody);
+                    }
+                }
+            });
+
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            Log.println(Log.WARN, "JSON", Objects.requireNonNull(e.getMessage()));
         }
     }
 
@@ -77,7 +117,8 @@ public class AuthenticationClient extends HttpClient {
             public void onResponse(Response response) throws IOException {
                 String responseBody = response.body().string();
                 if(response.code() == 200) {
-                    respCallback.onRespCallback(responseBody);
+                    User user = mapper.readValue(responseBody, User.class);
+                    respCallback.onRespCallback(user);
                 }else{
                     respErrorCallback.onRespErrorCallback(responseBody);
                 }
