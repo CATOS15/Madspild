@@ -4,13 +4,14 @@ import com.example.madspild.R;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import madspild.Fragments.LoginFragment;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
+import madspild.Helpers.HttpClientHelper;
 
-public class OpstartActivity extends AppCompatActivity {
+public class StartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_opstart);
+        setContentView(R.layout.activity_start);
+
+        HttpClientHelper.init(getBaseContext());
 
         if (savedInstanceState == null) {
             getSupportFragmentManager()

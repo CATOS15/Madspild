@@ -15,7 +15,7 @@
         <!-- android:theme="@style/AppTheme"> -->
 
         <activity
-            android:name="madspild.Activities.OpstartActivity"
+            android:name="madspild.Activities.StartActivity"
             android:windowSoftInputMode="adjustPan"
             android:theme="@style/Theme.TipTime">
             <intent-filter>
