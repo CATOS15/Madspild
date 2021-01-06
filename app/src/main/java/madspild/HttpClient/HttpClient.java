@@ -18,7 +18,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-public class HttpClient extends Thread {
+public class HttpClient {
     private final String BASE_URL = "http://www.madspild.com/api";
 
     SharedPreferences sharedPreferences = null;
