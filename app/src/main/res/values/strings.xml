@@ -27,6 +27,17 @@
     <string name="ms_search_title">Search</string>
     <string name="ms_product_title">Title</string>
     <string name="ms_product_description">Secondary text</string>
+    <string name="icon_clock" />
+    <string name="list_element" />
+    <string name="_1_dag">1 dag</string>
+    <string name="ble">Æble</string>
+    <string name="v_gt_300g">Vægt: 300g</string>
+    <string name="udl_bsdato_07_01_2021">Udløbsdato: 07/01/2021</string>
+    <string name="icon_foodcategory" />
+    <string name="udl_bsdato_08_01_2021">Udløbsdato: 08/01/2021</string>
+    <string name="_3_dage">3 dage</string>
+    <string name="oversigt">Oversigt</string>
+    <string name="image_border">image_border</string>
 
     <!-- nye ting / andet-->
 </resources>

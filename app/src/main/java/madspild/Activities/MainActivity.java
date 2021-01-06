@@ -31,12 +31,6 @@ public class MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //til at teste login/registrer ved startup af appen
-        //setContentView(R.layout.fragment_login);
-        //setContentView(R.layout.fragment_login);
-
-
-
         setContentView(R.layout.activity_main);
 
         viewPager = findViewById(R.id.view_pager);
@@ -47,43 +41,9 @@ public class MainActivity extends FragmentActivity {
         viewPager.setCurrentItem(1);
 
         initEvents();
-
-        //Lige nu er database delen inaktiv for at undgå at spilde plads på databasen
-        //den vil blive sat aktiv når vi skal til at arbejde dybere med databasen
-
-        //Database
-//        User user = new User();
-//        user.setPasswords("11");
-//        user.setEmail("12333");
-//        user.setUsername("test");
-//        user.setUserID(1);
-//
-//
-//        FirebaseDatabase database = FirebaseDatabase.getInstance();
-//        DatabaseReference myRef = database.getReference("user");
-
-
-//        myRef.child("user").push().setValue(user);
-//        database.setValue("Hello, World!");
-
-
-// Read from the database
-//        myRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                // This method is called once with the initial value and again
-//                // whenever data at this location is updated.
-//                String value = dataSnapshot.getValue(String.class);
-//                Log.d(TAG, "Value is: " + value);
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError error) {
-//                // Failed to read value
-//                Log.w(TAG, "Failed to read value.", error.toException());
-//            }
-//        });
     }
+
+
 
     private void initEvents(){
         viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
@@ -116,3 +76,41 @@ public class MainActivity extends FragmentActivity {
         }
     }
 }
+
+
+//Lige nu er database delen inaktiv for at undgå at spilde plads på databasen
+    //den vil blive sat aktiv når vi skal til at arbejde dybere med databasen
+
+    //Database
+//        User user = new User();
+//        user.setPasswords("11");
+//        user.setEmail("12333");
+//        user.setUsername("test");
+//        user.setUserID(1);
+//
+//
+//        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        DatabaseReference myRef = database.getReference("user");
+
+
+//        myRef.child("user").push().setValue(user);
+//        database.setValue("Hello, World!");
+
+
+// Read from the database
+//        myRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                // This method is called once with the initial value and again
+//                // whenever data at this location is updated.
+//                String value = dataSnapshot.getValue(String.class);
+//                Log.d(TAG, "Value is: " + value);
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError error) {
+//                // Failed to read value
+//                Log.w(TAG, "Failed to read value.", error.toException());
+//            }
+//        });
+

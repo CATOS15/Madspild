@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -20,52 +21,51 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.madspild.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.UUID;
 
+import madspild.Adapters.OverViewListAdapter;
+import madspild.Models.Overview;
 import madspild.Models.Product;
+import madspild.Models.ProductType;
 
 public class OverviewFragment extends Fragment {
-
-    static class LandeOgByerData {
-        List<String> Produkter = Arrays.asList("Mælk", "Banan", "Makrald", "Island", "Færøerne", "Finland",
-                "Frankrig", "Spanien", "Portugal", "Nepal", "Indien", "Kina", "Japan", "Thailand");
-
-        List<List<String>> Detaljer = Arrays.asList(
-                Arrays.asList("H2O", "ARLA", "udløbsdato: 29/49/2085"),
-                Arrays.asList("5x", "Calcium", "købt: 1/1/42"),
-                Arrays.asList("Fisk", "fiskemanden", "Udløbsdato: når det lugter"),
-                Arrays.asList("Reykjavík", "Kópavogur", "Hafnarfjörður", "Dalvík"),
-                Arrays.asList("Tórshavn", "Klaksvík", "Fuglafjørður"),
-                Arrays.asList("Helsinki", "Espoo", "Tampere", "Vantaa"),
-                Arrays.asList("Paris", "Lyon"),
-                Arrays.asList("Madrid", "Barcelona", "Sevilla"),
-                Arrays.asList("Lissabon", "Porto"),
-                Arrays.asList("Kathmandu", "Bhaktapur"),
-                Arrays.asList("Mumbai", "Delhi", "Bangalore"),
-                Arrays.asList("Shanghai", "Zhengzhou"),
-                Arrays.asList("Tokyo", "Osaka", "Hiroshima", "Kawasaki", "Yokohama"),
-                Arrays.asList("Bankok", "Sura Thani", "Phuket"));
-    }
-
-    LandeOgByerData data = new LandeOgByerData();
-
-    HashSet<Integer> openCountries = new HashSet<>(); // hvilke lande der lige nu er åbne
-
-    RecyclerView recyclerView;
-    ListView listviewtest;
-
-    public static final String SHARED_PREFS = "sharedPrefs";
-    public static final String DataMatrixDataPref = "DataMatrixData";
+    GridView overviewGrid;
 
     @Override
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
-
         View view = i.inflate(R.layout.fragment_overview, container, false);
 
-        recyclerView = view.findViewById(R.id.OverviewRecyclerView);
+        // Test liste
+        ArrayList<Overview> inventory = new ArrayList<Overview>();
+        Date date = new Date();
+        inventory.add(new Overview("c27c441a-e025-4a19-a0dd-9d2eee6ed763",9504000059101L,parseDate("2021-01-06"),"Banan",ProductType.FRUIT,false));
+        inventory.add(new Overview("c52c441a-e025-4a19-a0dd-9d2eee6ed763",9504000059101L,parseDate("2021-01-07"),"Banan",ProductType.BAKERY,false));
+        inventory.add(new Overview("c52c441a-e025-4a19-a0dd-9d2eee6ed765",9504000059102L,parseDate("2021-01-08"),"Rugbrød",ProductType.BEVERAGES,false));
+        inventory.add(new Overview("c27c441a-e025-4a19-a0dd-9d2eee6ed763",9504000059101L,parseDate("2021-01-09"),"Banan",ProductType.FRUIT,false));
+        inventory.add(new Overview("c52c441a-e025-4a19-a0dd-9d2eee6ed763",9504000059101L,parseDate("2021-01-10"),"Banan",ProductType.BAKERY,false));
+        inventory.add(new Overview("c52c441a-e025-4a19-a0dd-9d2eee6ed765",9504000059102L,parseDate("2021-01-11"),"Rugbrød",ProductType.BEVERAGES,false));
+        inventory.add(new Overview("c27c441a-e025-4a19-a0dd-9d2eee6ed763",9504000059101L,parseDate("2021-01-12"),"Banan",ProductType.FRUIT,false));
+        inventory.add(new Overview("c52c441a-e025-4a19-a0dd-9d2eee6ed763",9504000059101L,parseDate("2021-01-15"),"Banan",ProductType.BAKERY,false));
+        inventory.add(new Overview("c52c441a-e025-4a19-a0dd-9d2eee6ed765",9504000059102L,parseDate("2021-01-20"),"Rugbrød",ProductType.BEVERAGES,false));
+
+
+        // OverViewListApdater
+        OverViewListAdapter overViewListAdapter = new OverViewListAdapter(getActivity(),R.layout.gridview_listitem,inventory);
+
+        // Insert in grid
+        overviewGrid = view.findViewById(R.id.overviewGrid);
+        overviewGrid.setAdapter(overViewListAdapter);
+        overviewGrid.setNumColumns(1);
+
+        /*
+        recyclerView = view.findViewById(R.id.r);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(adapter);
@@ -79,11 +79,19 @@ public class OverviewFragment extends Fragment {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         String DataMatrixDataString = sharedPreferences.getString(DataMatrixDataPref, "");
         Toast.makeText(getActivity(),DataMatrixDataString,Toast.LENGTH_SHORT).show();
-
+        */
         return view;
     }
 
-
+    @SuppressLint("SimpleDateFormat")
+    public static Date parseDate(String date) {
+        try {
+            return new SimpleDateFormat("yyyy-MM-dd").parse(date);
+        } catch (ParseException e) {
+            return null;
+        }
+    }
+    /*
     public void showtextview(){
 
     }
@@ -198,7 +206,43 @@ public class OverviewFragment extends Fragment {
             }
         }
     }
+    */
 
+
+
+
+    /*    static class LandeOgByerData {
+        List<String> Produkter = Arrays.asList("Mælk", "Banan", "Makrald", "Island", "Færøerne", "Finland",
+                "Frankrig", "Spanien", "Portugal", "Nepal", "Indien", "Kina", "Japan", "Thailand");
+
+        List<List<String>> Detaljer = Arrays.asList(
+                Arrays.asList("H2O", "ARLA", "udløbsdato: 29/49/2085"),
+                Arrays.asList("5x", "Calcium", "købt: 1/1/42"),
+                Arrays.asList("Fisk", "fiskemanden", "Udløbsdato: når det lugter"),
+                Arrays.asList("Reykjavík", "Kópavogur", "Hafnarfjörður", "Dalvík"),
+                Arrays.asList("Tórshavn", "Klaksvík", "Fuglafjørður"),
+                Arrays.asList("Helsinki", "Espoo", "Tampere", "Vantaa"),
+                Arrays.asList("Paris", "Lyon"),
+                Arrays.asList("Madrid", "Barcelona", "Sevilla"),
+                Arrays.asList("Lissabon", "Porto"),
+                Arrays.asList("Kathmandu", "Bhaktapur"),
+                Arrays.asList("Mumbai", "Delhi", "Bangalore"),
+                Arrays.asList("Shanghai", "Zhengzhou"),
+                Arrays.asList("Tokyo", "Osaka", "Hiroshima", "Kawasaki", "Yokohama"),
+                Arrays.asList("Bankok", "Sura Thani", "Phuket"));
+    }
+
+    LandeOgByerData data = new LandeOgByerData();
+
+    HashSet<Integer> openCountries = new HashSet<>(); // hvilke lande der lige nu er åbne
+
+    RecyclerView recyclerView;
+    ListView listviewtest;
+
+    public static final String SHARED_PREFS = "sharedPrefs";
+    public static final String DataMatrixDataPref = "DataMatrixData";
+
+     */
 
 
 
