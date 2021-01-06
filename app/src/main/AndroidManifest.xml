@@ -10,10 +10,13 @@
         android:label="@string/appname"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/Theme.TipTime">
+        <!-- android:theme="@style/AppTheme"> -->
+
         <activity
             android:name="madspild.Activities.MainActivity"
-            android:theme="@style/AppTheme">
+            android:windowSoftInputMode="adjustPan"
+            android:theme="@style/Theme.TipTime">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

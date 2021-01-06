@@ -30,6 +30,12 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //til at teste login/registrer ved startup af appen
+        setContentView(R.layout.fragment_login);
+        //setContentView(R.layout.fragment_login);
+
+        /*
         setContentView(R.layout.activity_main);
 
         viewPager = findViewById(R.id.view_pager);
@@ -40,7 +46,7 @@ public class MainActivity extends FragmentActivity {
         viewPager.setCurrentItem(1);
 
         initEvents();
-
+*/
 
         //Lige nu er database delen inaktiv for at undgå at spilde plads på databasen
         //den vil blive sat aktiv når vi skal til at arbejde dybere med databasen
