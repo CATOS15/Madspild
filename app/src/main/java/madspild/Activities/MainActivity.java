@@ -9,14 +9,11 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.madspild.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Stack;
 
 import madspild.Adapters.ScreenSlidePagerAdapter;
 import madspild.Helpers.MenuHelper;
-import madspild.Models.User;
 
 
 public class MainActivity extends FragmentActivity {

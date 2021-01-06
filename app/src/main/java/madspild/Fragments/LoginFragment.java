@@ -1,6 +1,7 @@
 package madspild.Fragments;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.KeyEvent;
@@ -9,19 +10,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.madspild.R;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.io.IOException;
+import java.util.Objects;
+
 import madspild.Activities.MainActivity;
+import madspild.HttpClient.HttpClient;
+import madspild.Models.User;
 
 public class LoginFragment extends Fragment{
 
@@ -47,6 +52,11 @@ public class LoginFragment extends Fragment{
 
         MaterialButton loginbutton = view.findViewById(R.id.login_button);
 
+        HttpClient httpClient = new HttpClient(getContext());
+        if(httpClient.getToken() != null){
+            getUserInformation(httpClient);
+        }
+
         loginbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,17 +66,15 @@ public class LoginFragment extends Fragment{
                 if (!isUsernameValid(usernameEditText.getText())) {
                     usernameTextInput.setError(getString(R.string.ms_error_username_empty));
                 }
-                else if (2==2){
-
-                    Intent intent = new Intent(getActivity(), MainActivity.class);
-                    startActivity(intent);
-                    getActivity().finish();
-
-                    /*passwordTextInput.setError(null); // Clear the error
-                    ((NavigationHost) getActivity()).navigateTo(new ProductGridFragment(), false); // Navigate to the next Fragment
-                    */
-
-                    return;
+                else {
+                    String username = "missekat";
+                    String password = "missekat";
+                    httpClient.login(username, password, (resp) -> {
+                        getUserInformation(httpClient);
+                    }, (respError) -> {
+                        //noinspection Convert2MethodRef
+                        System.out.println(respError);
+                    });
                 }
             }
         });
@@ -106,6 +114,24 @@ public class LoginFragment extends Fragment{
     }
     private boolean isUsernameValid(@Nullable Editable text) {
         return text != null && text.length() >= 0;
+    }
+
+    private void getUserInformation(HttpClient httpClient){
+        httpClient.getUserInformation((resp1) -> {
+            ObjectMapper mapper = new ObjectMapper();
+            try {
+                User user = mapper.readValue(resp1, User.class);
+
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
+                Objects.requireNonNull(getActivity()).finish();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        },(respError) -> {
+            //noinspection Convert2MethodRef
+            System.out.println(respError);
+        });
     }
 
 }

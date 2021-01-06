@@ -1,45 +1,87 @@
 package madspild.Models;
 
+import java.util.UUID;
+
 public class User {
+    private UUID id;
+    private String username;
+    private String password;
+    private String firstname;
+    private String lastname;
+    private String email;
+    private String phone;
+    private UUID familyid;
+    private boolean admin;
 
-
-    int UserID;
-    String Username;
-    String Email;
-    String Passwords;
-
-
-    public int getUserID() {
-        return UserID;
+    public UUID getId() {
+        return id;
     }
 
-    public void setUserID(int userID) {
-        UserID = userID;
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public String getUsername() {
-        return Username;
+        return username;
     }
 
     public void setUsername(String username) {
-        Username = username;
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        this.email = email;
     }
 
-    public String getPasswords() {
-        return Passwords;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPasswords(String passwords) {
-        Passwords = passwords;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
+    public UUID getFamilyid() {
+        return familyid;
+    }
 
+    public void setFamilyid(UUID familyid) {
+        this.familyid = familyid;
+    }
+
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
+    }
 }
