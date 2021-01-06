@@ -12,22 +12,10 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-        <item name="android:textColorPrimary">@color/textColorPrimary</item>
-
     </style>
 
-    <!--
-    <style name="ThemeOverlay.App.TextInputLayout" parent="">
-        <item name="colorPrimary">@color/shrine_pink_100</item>
-        <item name="colorOnSurface">@color/shrine_pink_900</item>
-        <item name="colorError">@color/shrine_red</item>
-        <item name="textAppearanceSubtitle1">@style/TextAppearance.App.Subtitle1</item>
-        <item name="textAppearanceCaption">@style/TextAppearance.App.Caption</item>
-        <item name="editTextStyle">@style/Widget.MaterialComponents.TextInputEditText.*</item>
+    <style name="Widget.TipTime.TextInputLayout.Filled" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.Dense">
+        <item name="boxBackgroundColor">@color/white</item>
     </style>
-    -->
-
-
-
 
 </resources>

@@ -32,7 +32,7 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
 
         //til at teste login/registrer ved startup af appen
-        setContentView(R.layout.fragment_login);
+        setContentView(R.layout.fragment_register);
         //setContentView(R.layout.fragment_login);
 
         /*

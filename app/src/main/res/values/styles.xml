@@ -1,12 +1,3 @@
 <resources>
-    <style name="Widget.TipTime.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-        <item name="hintTextAppearance">@style/TextAppearance.TipTime.TextInputLayout.HintText</item>
-        <item name="hintTextColor">@color/textColorPrimary</item>
-        <item name="android:paddingBottom">8dp</item>
-        <item name="boxStrokeColor">@color/textColorPrimary</item>
-    </style>
 
-    <style name="TextAppearance.TipTime.TextInputLayout.HintText" parent="TextAppearance.MaterialComponents.Subtitle2">
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
-    </style>
 </resources>

@@ -20,14 +20,28 @@
     <string name="password">Password</string>
 
     <!-- Profile/Signup-->
+    <string name="ms_imagedescription_logo">Logo</string>
+    <string name="ms_button_login">login</string>
+
     <string name="ms_hint_username">Username</string>
     <string name="ms_hint_password">Password</string>
+    <string name="ms_error_password">Password must contain at least 8 characters.</string>
+
+    <string name="ms_hint_lastname">lastname</string>
+    <string name="ms_hint_firstname">firstname</string>
+    <string name="ms_hint_email">email</string>
+    <string name="ms_hint_phone">phone</string>
+
+    <string name="login_no_account_yet">No account yet? Create one</string>
+    <string name="register_already_registered">Already registered? Login</string>
+
+    <!--random -->
     <string name="ms_button_next">Next</string>
     <string name="ms_button_cancel">Cancel</string>
-    <string name="ms_error_password">Password must contain at least 8 characters.</string>
     <string name="ms_filter_title">Filter</string>
     <string name="ms_search_title">Search</string>
     <string name="ms_product_title">Title</string>
     <string name="ms_product_description">Secondary text</string>
-    <string name="ms_imagedescription_logo">Logo</string>
+
+    <!-- nye ting / andet-->
 </resources>
