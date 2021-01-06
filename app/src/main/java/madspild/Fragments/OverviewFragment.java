@@ -1,9 +1,12 @@
 package madspild.Fragments;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +18,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.MainThread;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -31,6 +35,7 @@ import java.util.List;
 import java.util.UUID;
 
 import madspild.Adapters.OverViewListAdapter;
+import madspild.HttpClient.OverviewClient;
 import madspild.Models.Overview;
 import madspild.Models.Product;
 import madspild.Models.ProductType;
@@ -42,27 +47,22 @@ public class OverviewFragment extends Fragment {
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
         View view = i.inflate(R.layout.fragment_overview, container, false);
 
-        // Test liste
-        ArrayList<Overview> inventory = new ArrayList<Overview>();
-        Date date = new Date();
-        inventory.add(new Overview("c27c441a-e025-4a19-a0dd-9d2eee6ed763",9504000059101L,parseDate("2021-01-06"),"Banan",ProductType.FRUIT,false));
-        inventory.add(new Overview("c52c441a-e025-4a19-a0dd-9d2eee6ed763",9504000059101L,parseDate("2021-01-07"),"Banan",ProductType.BAKERY,false));
-        inventory.add(new Overview("c52c441a-e025-4a19-a0dd-9d2eee6ed765",9504000059102L,parseDate("2021-01-08"),"Rugbrød",ProductType.BEVERAGES,false));
-        inventory.add(new Overview("c27c441a-e025-4a19-a0dd-9d2eee6ed763",9504000059101L,parseDate("2021-01-09"),"Banan",ProductType.FRUIT,false));
-        inventory.add(new Overview("c52c441a-e025-4a19-a0dd-9d2eee6ed763",9504000059101L,parseDate("2021-01-10"),"Banan",ProductType.BAKERY,false));
-        inventory.add(new Overview("c52c441a-e025-4a19-a0dd-9d2eee6ed765",9504000059102L,parseDate("2021-01-11"),"Rugbrød",ProductType.BEVERAGES,false));
-        inventory.add(new Overview("c27c441a-e025-4a19-a0dd-9d2eee6ed763",9504000059101L,parseDate("2021-01-12"),"Banan",ProductType.FRUIT,false));
-        inventory.add(new Overview("c52c441a-e025-4a19-a0dd-9d2eee6ed763",9504000059101L,parseDate("2021-01-15"),"Banan",ProductType.BAKERY,false));
-        inventory.add(new Overview("c52c441a-e025-4a19-a0dd-9d2eee6ed765",9504000059102L,parseDate("2021-01-20"),"Rugbrød",ProductType.BEVERAGES,false));
+        OverviewClient overviewClient = new OverviewClient();
+        overviewClient.getUserOverview(null, (respObject) -> {
+            List<Overview> overviewList = (List<Overview>) respObject;
 
+            new Handler(Looper.getMainLooper()).post(() -> {
+                // OverViewListApdater
+                OverViewListAdapter overViewListAdapter = new OverViewListAdapter(getActivity(),R.layout.gridview_listitem, overviewList);
 
-        // OverViewListApdater
-        OverViewListAdapter overViewListAdapter = new OverViewListAdapter(getActivity(),R.layout.gridview_listitem,inventory);
-
-        // Insert in grid
-        overviewGrid = view.findViewById(R.id.overviewGrid);
-        overviewGrid.setAdapter(overViewListAdapter);
-        overviewGrid.setNumColumns(1);
+                // Insert in grid
+                overviewGrid = view.findViewById(R.id.overviewGrid);
+                overviewGrid.setAdapter(overViewListAdapter);
+                overviewGrid.setNumColumns(1);
+            });
+        }, (respError) -> {
+            System.out.println("Blah blah fejl " + respError);
+        });
 
         /*
         recyclerView = view.findViewById(R.id.r);
@@ -80,6 +80,7 @@ public class OverviewFragment extends Fragment {
         String DataMatrixDataString = sharedPreferences.getString(DataMatrixDataPref, "");
         Toast.makeText(getActivity(),DataMatrixDataString,Toast.LENGTH_SHORT).show();
         */
+
         return view;
     }
 

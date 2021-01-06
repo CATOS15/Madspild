@@ -3,7 +3,6 @@ package madspild.Adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,23 +11,21 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.core.content.ContextCompat;
-
 import com.example.madspild.R;
 
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import madspild.Models.Overview;
 
 public class OverViewListAdapter extends ArrayAdapter {
 
-    ArrayList<Overview> inventory = new ArrayList<>();
+    List<Overview> overviewList;
 
-    public OverViewListAdapter(Context context, int textViewResourceId, ArrayList objects) {
-        super(context, textViewResourceId, objects);
-        inventory = objects;
+    public OverViewListAdapter(Context context, int textViewResourceId, List<Overview> overviewList) {
+        super(context, textViewResourceId, overviewList);
+        this.overviewList = overviewList;
     }
 
     @Override
@@ -54,7 +51,7 @@ public class OverViewListAdapter extends ArrayAdapter {
 
 
         // Get the day difference + get corresponding color
-        int dayDiff = getDifferenceDays(inventory.get(position).getExpdate());
+        int dayDiff = getDifferenceDays(overviewList.get(position).getExpdate());
         listitem_text_remainingdays.setText(dayDiff + " dag(e)");
 
         // Set color of border
@@ -78,7 +75,7 @@ public class OverViewListAdapter extends ArrayAdapter {
         listitem_image_border.setBackgroundDrawable(gd_border);
 
         // Set food category
-        switch (inventory.get(position).getProductType()){
+        switch (overviewList.get(position).getProductType()){
             case FRUIT :
                 listitem_image_foodcategory.setImageResource(R.drawable.freezer_temp);
                 break;
@@ -110,8 +107,8 @@ public class OverViewListAdapter extends ArrayAdapter {
                 break;
         }
         // Set Text fields
-        listitem_text_productname.setText(inventory.get(position).getName());
-        listitem_text_expiredate.setText(dateToString(inventory.get(position).getExpdate()));
+        listitem_text_productname.setText(overviewList.get(position).getName());
+        listitem_text_expiredate.setText(dateToString(overviewList.get(position).getExpdate()));
 
         return v;
     }

@@ -70,7 +70,7 @@ public class LoginFragment extends Fragment{
         loginButton.setOnClickListener(view -> {
             String username = "missekat";
             String password = "missekat";
-            authenticationClient.login(username, password, (resp) -> {
+            authenticationClient.login(username, password, (respObject) -> {
                 checkUserAccess();
             }, (respError) -> {
                 Log.println(Log.ERROR, "AUTHENTICATION", respError);
@@ -88,8 +88,8 @@ public class LoginFragment extends Fragment{
     }
 
     private void checkUserAccess(){
-        authenticationClient.getUserInformation((resp) -> {
-            User user = (User) resp;
+        authenticationClient.getUserInformation((respObject) -> {
+            User user = (User) respObject;
 
             Intent intent = new Intent(getActivity(), MainActivity.class);
             startActivity(intent);

@@ -26,7 +26,7 @@ public abstract class HttpClient {
     protected final ObjectMapper mapper;
 
     public interface RespCallback{
-        void onRespCallback(Object resp);
+        void onRespCallback(Object respObject);
     }
 
     public interface RespErrorCallback{

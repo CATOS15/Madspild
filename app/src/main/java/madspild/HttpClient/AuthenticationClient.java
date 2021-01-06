@@ -117,8 +117,7 @@ public class AuthenticationClient extends HttpClient {
             public void onResponse(Response response) throws IOException {
                 String responseBody = response.body().string();
                 if(response.code() == 200) {
-                    User user = mapper.readValue(responseBody, User.class);
-                    respCallback.onRespCallback(user);
+                    respCallback.onRespCallback(mapper.readValue(responseBody, User.class));
                 }else{
                     respErrorCallback.onRespErrorCallback(responseBody);
                 }

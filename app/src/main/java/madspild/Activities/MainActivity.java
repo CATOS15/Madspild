@@ -10,10 +10,15 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.example.madspild.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.List;
 import java.util.Stack;
 
 import madspild.Adapters.ScreenSlidePagerAdapter;
 import madspild.Helpers.MenuHelper;
+import madspild.HttpClient.FamilyClient;
+import madspild.HttpClient.OverviewClient;
+import madspild.Models.Family;
+import madspild.Models.Overview;
 
 
 public class MainActivity extends FragmentActivity {

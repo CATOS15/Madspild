@@ -4,29 +4,18 @@ import java.util.Date;
 import java.util.UUID;
 
 public class Overview {
-
-
-    private String inventoryId;
+    private UUID inventoryId;
     private long gtin;
     private Date expdate;
     private String name;
     private ProductType productType;
     private Boolean deleted;
 
-    public Overview(String inventoryId, long gtin, Date expdate, String name, ProductType productType, Boolean deleted) {
-        this.inventoryId = inventoryId;
-        this.gtin = gtin;
-        this.expdate = expdate;
-        this.name = name;
-        this.productType = productType;
-        this.deleted = deleted;
-    }
-
-    public String getInventoryId() {
+    public UUID getInventoryId() {
         return inventoryId;
     }
 
-    public void setInventoryId(String inventoryId) {
+    public void setInventoryId(UUID inventoryId) {
         this.inventoryId = inventoryId;
     }
 
