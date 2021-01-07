@@ -12,7 +12,7 @@ public class HttpClientHelper {
     private static String token = null;
     private static SharedPreferences sharedPreferences = null;
 
-    public static User user = null;
+    public static User user;
 
     public static void init(Context context){
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
