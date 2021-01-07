@@ -120,6 +120,9 @@ public class OverViewListAdapter extends ArrayAdapter {
                 case VEGETABLES:
                     listitem_image_foodcategory.setImageResource(R.drawable.freezer_temp);
                     break;
+                case MEAT:
+                    listitem_image_foodcategory.setImageResource(R.drawable.freezer_temp);
+                    break;
                 case OTHER:
                     listitem_image_foodcategory.setImageResource(R.drawable.freezer_temp);
                     break;
