@@ -104,9 +104,9 @@ public class ProductClient extends HttpClient {
         StringBuilder idsString = new StringBuilder();
         for(int i = 0;i<ids.size();i++){
             if(i==0) {
-                idsString.append("?ids=").append(ids.toString());
+                idsString.append("?ids=").append(ids.get(i).toString());
             }else{
-                idsString.append("&ids=").append(ids.toString());
+                idsString.append("&ids=").append(ids.get(i).toString());
             }
         }
 
@@ -126,7 +126,7 @@ public class ProductClient extends HttpClient {
             public void onResponse(Response response) throws IOException {
                 String responseBody = response.body().string();
                 if(response.code() == 200) {
-                    respCallback.onRespCallback(mapper.readValue(responseBody, String.class));
+                    respCallback.onRespCallback(responseBody);
                 }else{
                     respErrorCallback.onRespErrorCallback(responseBody);
                 }

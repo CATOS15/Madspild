@@ -25,6 +25,13 @@ public class HttpClientHelper {
         editor.apply();
     }
 
+    public static void removeToken() {
+        HttpClientHelper.token = null;
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove("token");
+        editor.apply();
+    }
+
     public static String getToken() {
         if(token == null){
             if(sharedPreferences != null) token = sharedPreferences.getString("token", null);

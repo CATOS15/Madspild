@@ -10,6 +10,7 @@
     <color name="blue_light">#81D4FA</color>
     <color name="textInputOutlineColor">#1B5E20</color>
     <color name="textColorPrimary">#FFFFFFFF</color>
+    <color name="alertColor">#D32F2F</color>
 </resources>
 <!--
 <resources>
