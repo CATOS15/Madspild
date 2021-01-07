@@ -94,7 +94,7 @@ public class ProductClient extends HttpClient {
         }
     }
 
-    public void deleteProduct(List<UUID> ids, RespCallback respCallback, RespErrorCallback respErrorCallback){
+    public void deleteProducts(List<UUID> ids, RespCallback respCallback, RespErrorCallback respErrorCallback){
         if(HttpClientHelper.getToken() == null){
             respErrorCallback.onRespErrorCallback("Token mangler!");
         }
