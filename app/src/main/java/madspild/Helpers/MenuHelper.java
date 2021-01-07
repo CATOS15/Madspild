@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment;
 import com.example.madspild.R;
 
 import madspild.Fragments.OverviewFragment;
-import madspild.Fragments.ProfileFragment;
+import madspild.Fragments.EditProfileFragment;
 import madspild.Fragments.ScanFragment;
 
 //This is used for mapnings
@@ -42,7 +42,7 @@ public class MenuHelper {
             case 1:
                 return new ScanFragment();
             case 2:
-                return new ProfileFragment();
+                return new EditProfileFragment();
         }
         return new ScanFragment();
     }
