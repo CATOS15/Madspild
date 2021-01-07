@@ -107,43 +107,25 @@ public class RegisterFragment extends Fragment{
         return view;
     }
 
-    private void initEvents()
+    public boolean validate(User user)
     {
-        loginbutton.setOnClickListener(view -> {
+        if (user.getUsername().length() < 4){
+//            usernameEditText.setError("Fejl");
+            return false;}
+        if(user.getPassword().length() < 5 ){return false;}
+        if(user.getFirstname().length() < 2 ){return false;}
+        if(user.getLastname().length() < 2 ){return false;}
+        if(!(user.getEmail().contains("@")) ){return false;}
+        if(user.getPhone().length() <= 7 || user.getPhone().length() >= 9 || user.getPhone().contains(" ")){
+            return false;}
+        else
+        {try{Integer.parseInt(user.getPhone());}
+        catch (Exception e){return false;} }
 
-            User user = new User();
-
-                    user.setUsername("ss");
-                    user.setPassword("ss");
-                    user.setFirstname("qqq");
-                    user.setLastname("qqq");
-                    user.setEmail("hhh@gmail.com");
-                    user.setPhone("12335678");
-                    user.setAdmin(false);
-                    user.setFamilyid(null);
-                    user.setId(null);
-
-
-            authenticationClient.createUser(user, (respObject) -> {
-                System.out.println("User been created");
-            }, (respError) -> {
-                Log.println(Log.ERROR, "AUTHENTICATION", respError.toString());
-            });
-
-
-
-        });
-
-
-        register_already_registered_text.setOnClickListener(view -> {
-            Fragment fragment = new LoginFragment();
-            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.container, fragment);
-            fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.commit();
-
-        });
+        return true;
     }
+
+
+
 
 }

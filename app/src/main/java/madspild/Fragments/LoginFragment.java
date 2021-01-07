@@ -40,9 +40,9 @@ public class LoginFragment extends Fragment {
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
         View view = i.inflate(R.layout.fragment_login, container, false);
         authenticationClient = new AuthenticationClient();
-//        if(HttpClientHelper.getToken() != null){
-//            checkUserAccess();
-//        }
+        if(HttpClientHelper.getToken() != null){
+            checkUserAccess();
+        }
 
 
         //til at teste login/registrer ved startup af appen
@@ -56,6 +56,8 @@ public class LoginFragment extends Fragment {
         loginCreateAcountText = view.findViewById(R.id.login_create_account_text);
 
 
+        usernameTextInput.getEditText().setText("missekat");
+        passwordTextInput.getEditText().setText("missekat");
         initEvents();
 
         return view;
@@ -70,8 +72,6 @@ public class LoginFragment extends Fragment {
             String username = usernameTextInput.getEditText().getText().toString();
             String password = passwordTextInput.getEditText().getText().toString();
 
-//            String username = "missekat";
-//            String password = "missekat";
             authenticationClient.login(username, password, (respObject) -> {
                 checkUserAccess();
             }, (respError) -> {
