@@ -16,6 +16,15 @@
         app:layout_constraintTop_toTopOf="parent"
         android:src="@drawable/icon_profile" />
 
+    <Button
+        android:id="@+id/logout_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/log_out"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toStartOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
     <EditText
         android:id="@+id/editTextTextPersonName3"
         android:layout_width="wrap_content"
@@ -27,7 +36,7 @@
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/logout_button" />
 
     <EditText
         android:id="@+id/editTextTextPersonName4"
@@ -72,4 +81,5 @@
         android:text="Phone number"
         app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName4"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName4" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

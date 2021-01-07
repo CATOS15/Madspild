@@ -42,6 +42,7 @@
     <string name="trashcan">trashcan</string>
     <string name="slet">Slet</string>
     <string name="button">Button</string>
+    <string name="log_out">Log out</string>
 
     <!-- nye ting / andet-->
 </resources>
