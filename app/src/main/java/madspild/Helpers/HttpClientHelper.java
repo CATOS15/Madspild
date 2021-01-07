@@ -6,9 +6,13 @@ import android.preference.PreferenceManager;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import madspild.Models.User;
+
 public class HttpClientHelper {
     private static String token = null;
     private static SharedPreferences sharedPreferences = null;
+
+    public static User user = null;
 
     public static void init(Context context){
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);

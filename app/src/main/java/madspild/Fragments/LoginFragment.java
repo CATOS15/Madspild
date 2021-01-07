@@ -89,7 +89,7 @@ public class LoginFragment extends Fragment{
 
     private void checkUserAccess(){
         authenticationClient.getUserInformation((respObject) -> {
-            User user = (User) respObject;
+            HttpClientHelper.user = (User) respObject;
 
             Intent intent = new Intent(getActivity(), MainActivity.class);
             startActivity(intent);
