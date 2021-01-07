@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.UUID;
 
 public class Overview {
-    private UUID inventoryId;
+    private UUID productId;
     private long gtin;
     private Date expdate;
     private String name;
@@ -25,12 +25,12 @@ public class Overview {
         this.marked = marked;
     }
 
-    public UUID getInventoryId() {
-        return inventoryId;
+    public UUID getProductId() {
+        return productId;
     }
 
-    public void setInventoryId(UUID inventoryId) {
-        this.inventoryId = inventoryId;
+    public void setProductId(UUID productId) {
+        this.productId = productId;
     }
 
     public long getGtin() {

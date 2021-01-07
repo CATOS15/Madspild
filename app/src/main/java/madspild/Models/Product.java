@@ -3,7 +3,7 @@ package madspild.Models;
 import java.util.Date;
 import java.util.UUID;
 
-public class Inventory {
+public class Product {
     private UUID id;
     private String serialnumber;
     private Date expdate;

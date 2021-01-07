@@ -10,20 +10,16 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
 import madspild.Helpers.HttpClientHelper;
-import madspild.Models.Inventory;
-import madspild.Models.User;
+import madspild.Models.Product;
 
-public class InventoryClient extends HttpClient {
-    public void createInventory(Inventory inventory, RespCallback respCallback, RespErrorCallback respErrorCallback){
+public class ProductClient extends HttpClient {
+    public void createProduct(Product product, RespCallback respCallback, RespErrorCallback respErrorCallback){
         try {
             if(HttpClientHelper.getToken() == null){
                 respErrorCallback.onRespErrorCallback("Token mangler!");
@@ -31,9 +27,9 @@ public class InventoryClient extends HttpClient {
 
             OkHttpClient client = new OkHttpClient();
 
-            RequestBody body = RequestBody.create(MediaType.parse("application/json"), mapper.writeValueAsString(inventory));
+            RequestBody body = RequestBody.create(MediaType.parse("application/json"), mapper.writeValueAsString(product));
             Request request = new Request.Builder()
-                    .url(BASE_URL + "/inventory")
+                    .url(BASE_URL + "/product")
                     .header("Authorization", "Bearer " + HttpClientHelper.getToken())
                     .post(body)
                     .build();
@@ -48,7 +44,7 @@ public class InventoryClient extends HttpClient {
                 public void onResponse(Response response) throws IOException {
                     String responseBody = response.body().string();
                     if(response.code() == 200) {
-                        respCallback.onRespCallback(mapper.readValue(responseBody, Inventory.class));
+                        respCallback.onRespCallback(mapper.readValue(responseBody, Product.class));
                     }else{
                         respErrorCallback.onRespErrorCallback(responseBody);
                     }
@@ -60,7 +56,7 @@ public class InventoryClient extends HttpClient {
             Log.println(Log.WARN, "JSON", Objects.requireNonNull(e.getMessage()));
         }
     }
-    public void updateInventory(Inventory inventory, RespCallback respCallback, RespErrorCallback respErrorCallback){
+    public void updateProduct(Product product, RespCallback respCallback, RespErrorCallback respErrorCallback){
         try {
             if(HttpClientHelper.getToken() == null){
                 respErrorCallback.onRespErrorCallback("Token mangler!");
@@ -68,9 +64,9 @@ public class InventoryClient extends HttpClient {
 
             OkHttpClient client = new OkHttpClient();
 
-            RequestBody body = RequestBody.create(MediaType.parse("application/json"), mapper.writeValueAsString(inventory));
+            RequestBody body = RequestBody.create(MediaType.parse("application/json"), mapper.writeValueAsString(product));
             Request request = new Request.Builder()
-                    .url(BASE_URL + "/inventory")
+                    .url(BASE_URL + "/product")
                     .header("Authorization", "Bearer " + HttpClientHelper.getToken())
                     .put(body)
                     .build();
@@ -85,7 +81,7 @@ public class InventoryClient extends HttpClient {
                 public void onResponse(Response response) throws IOException {
                     String responseBody = response.body().string();
                     if(response.code() == 200) {
-                        respCallback.onRespCallback(mapper.readValue(responseBody, Inventory.class));
+                        respCallback.onRespCallback(mapper.readValue(responseBody, Product.class));
                     }else{
                         respErrorCallback.onRespErrorCallback(responseBody);
                     }
@@ -98,7 +94,7 @@ public class InventoryClient extends HttpClient {
         }
     }
 
-    public void deleteInventory(List<UUID> ids, RespCallback respCallback, RespErrorCallback respErrorCallback){
+    public void deleteProduct(List<UUID> ids, RespCallback respCallback, RespErrorCallback respErrorCallback){
         if(HttpClientHelper.getToken() == null){
             respErrorCallback.onRespErrorCallback("Token mangler!");
         }
@@ -115,7 +111,7 @@ public class InventoryClient extends HttpClient {
         }
 
         Request request = new Request.Builder()
-                .url(BASE_URL + "/inventory" + idsString.toString())
+                .url(BASE_URL + "/product" + idsString.toString())
                 .header("Authorization", "Bearer " + HttpClientHelper.getToken())
                 .delete()
                 .build();

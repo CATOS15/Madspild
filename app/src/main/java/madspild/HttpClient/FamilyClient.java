@@ -1,21 +1,14 @@
 package madspild.HttpClient;
 
-import android.util.Log;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.squareup.okhttp.Callback;
-import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
-import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 
 import java.io.IOException;
-import java.util.Objects;
 
 import madspild.Helpers.HttpClientHelper;
 import madspild.Models.Family;
-import madspild.Models.Inventory;
 
 public class FamilyClient extends HttpClient {
     public void getUserFamily(RespCallback respCallback, RespErrorCallback respErrorCallback){
