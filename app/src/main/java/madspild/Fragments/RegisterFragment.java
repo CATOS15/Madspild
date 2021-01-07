@@ -1,16 +1,12 @@
 package madspild.Fragments;
 
 import android.os.Bundle;
-import android.text.Editable;
-import android.view.KeyEvent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -19,6 +15,9 @@ import com.example.madspild.R;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+
+import madspild.HttpClient.AuthenticationClient;
+import madspild.Models.User;
 
 public class RegisterFragment extends Fragment{
 
@@ -31,34 +30,67 @@ public class RegisterFragment extends Fragment{
 
     TextView register_already_registered_text;
 
+    TextInputLayout firstnameTextInput; //firstname
+    TextInputLayout lastnameTextInput; //lastname
+    TextInputLayout emailTextInput; //email
+    TextInputLayout phoneTextInput; //phone
+    User user;
+
+    AuthenticationClient authenticationClient;
+
+
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
         View view = i.inflate(R.layout.fragment_register, container, false);
 
         register_already_registered_text = view.findViewById(R.id.register_already_registered_text);
-
+        authenticationClient = new AuthenticationClient();
         //til at teste login/registrer ved startup af appen
-        /*
-        final TextInputLayout usernameTextInput = view.findViewById(R.id.login_username_text_input); //username
-        final TextInputEditText usernameEditText = view.findViewById(R.id.login_username_edit_text);
 
-        final TextInputLayout passwordTextInput = view.findViewById(R.id.login_password_text_input); //password
-        final TextInputEditText passwordEditText = view.findViewById(R.id.login_password_edit_text);
-        MaterialButton loginbutton = view.findViewById(R.id.login_button);
+        usernameTextInput = view.findViewById(R.id.register_username_text_input); //username
+        usernameEditText = view.findViewById(R.id.login_username_edit_text);
 
-        // Clear the error once more than 8 characters are typed.
-        passwordEditText.setOnKeyListener(new View.OnKeyListener() {
+        passwordTextInput = view.findViewById(R.id.register_password_text_input); //password
+        passwordEditText = view.findViewById(R.id.login_password_edit_text);
+        loginbutton = view.findViewById(R.id.login_button);
+
+       firstnameTextInput = view.findViewById(R.id.register_firstname_text_input); //firstname
+
+      lastnameTextInput = view.findViewById(R.id.register_lastname_text_input); //lastname
+
+        emailTextInput = view.findViewById(R.id.register_email_text_input); //email
+
+        phoneTextInput = view.findViewById(R.id.register_phone_text_input); //email
+
+
+
+        loginbutton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                if (isPasswordValid(passwordEditText.getText())) {
-                    passwordTextInput.setError(null); //Clear the error
+            public void onClick(View v) {
+
+                    User user = new User();
+                    user.setUsername(usernameTextInput.getEditText().getText().toString());
+                    user.setPassword(passwordTextInput.getEditText().getText().toString());
+                    user.setFirstname(firstnameTextInput.getEditText().getText().toString());
+                    user.setLastname(lastnameTextInput.getEditText().getText().toString());
+                    user.setEmail(emailTextInput.getEditText().getText().toString());
+                    user.setPhone(phoneTextInput.getEditText().getText().toString());
+                    user.setAdmin(false);
+                    user.setFamilyid(null);
+                    user.setId(null);
+
+
+                    if(user.validate())
+                    {
+                        authenticationClient.createUser(user, (respObject) -> {
+                            System.out.println("User been created");
+                        }, (respError) -> {
+                            Log.println(Log.ERROR, "AUTHENTICATION", respError);
+                        });
+                    }
+
                 }
-                return false;
-            }
         });
 
-
-
-         */
 
         register_already_registered_text.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,14 +107,43 @@ public class RegisterFragment extends Fragment{
         return view;
     }
 
-    /*
-        In reality, this will have more complex logic including, but not limited to, actual
-        authentication of the username and password.
-     */
-    private boolean isPasswordValid(@Nullable Editable text) {
-        return text != null && text.length() >= 8;
+    private void initEvents()
+    {
+        loginbutton.setOnClickListener(view -> {
+
+            User user = new User();
+
+                    user.setUsername("ss");
+                    user.setPassword("ss");
+                    user.setFirstname("qqq");
+                    user.setLastname("qqq");
+                    user.setEmail("hhh@gmail.com");
+                    user.setPhone("12335678");
+                    user.setAdmin(false);
+                    user.setFamilyid(null);
+                    user.setId(null);
+
+
+            authenticationClient.createUser(user, (respObject) -> {
+                System.out.println("User been created");
+            }, (respError) -> {
+                Log.println(Log.ERROR, "AUTHENTICATION", respError.toString());
+            });
+
+
+
+        });
+
+
+        register_already_registered_text.setOnClickListener(view -> {
+            Fragment fragment = new LoginFragment();
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.container, fragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+
+        });
     }
-    private boolean isUsernameValid(@Nullable Editable text) {
-        return text != null && text.length() >= 0;
-    }
+
 }

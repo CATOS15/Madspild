@@ -1,37 +1,30 @@
 package madspild.Fragments;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.Editable;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.madspild.R;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-import java.io.IOException;
 import java.util.Objects;
 
 import madspild.Activities.MainActivity;
 import madspild.Helpers.HttpClientHelper;
 import madspild.HttpClient.AuthenticationClient;
-import madspild.HttpClient.HttpClient;
 import madspild.Models.User;
 
-public class LoginFragment extends Fragment{
+public class LoginFragment extends Fragment {
 
     TextInputLayout usernameTextInput; //username
     TextInputEditText usernameEditText;
@@ -47,19 +40,21 @@ public class LoginFragment extends Fragment{
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
         View view = i.inflate(R.layout.fragment_login, container, false);
         authenticationClient = new AuthenticationClient();
-        if(HttpClientHelper.getToken() != null){
-            checkUserAccess();
-        }
+//        if(HttpClientHelper.getToken() != null){
+//            checkUserAccess();
+//        }
+
 
         //til at teste login/registrer ved startup af appen
-        final TextInputLayout usernameTextInput = view.findViewById(R.id.login_username_text_input); //username
-        final TextInputEditText usernameEditText = view.findViewById(R.id.login_username_edit_text);
+         usernameTextInput = (TextInputLayout)view.findViewById(R.id.login_username_text_input); //username
+          usernameEditText = (TextInputEditText)view.findViewById(R.id.login_username_edit_text);
 
-        final TextInputLayout passwordTextInput = view.findViewById(R.id.login_password_text_input); //password
-        final TextInputEditText passwordEditText = view.findViewById(R.id.login_password_edit_text);
+          passwordTextInput = (TextInputLayout)view.findViewById(R.id.login_password_text_input); //password
+          passwordEditText = (TextInputEditText)view.findViewById(R.id.login_password_edit_text);
 
         loginButton = view.findViewById(R.id.login_button);
         loginCreateAcountText = view.findViewById(R.id.login_create_account_text);
+
 
         initEvents();
 
@@ -67,14 +62,23 @@ public class LoginFragment extends Fragment{
     }
 
     private void initEvents(){
+
+
         loginButton.setOnClickListener(view -> {
-            String username = "missekat";
-            String password = "missekat";
+
+
+            String username = usernameTextInput.getEditText().getText().toString();
+            String password = passwordTextInput.getEditText().getText().toString();
+
+//            String username = "missekat";
+//            String password = "missekat";
             authenticationClient.login(username, password, (respObject) -> {
                 checkUserAccess();
             }, (respError) -> {
                 Log.println(Log.ERROR, "AUTHENTICATION", respError);
             });
+
+
         });
 
         loginCreateAcountText.setOnClickListener(view -> {
