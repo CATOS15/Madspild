@@ -6,11 +6,12 @@ import com.example.madspild.R;
 
 import madspild.Fragments.OverviewFragment;
 import madspild.Fragments.EditProfileFragment;
+import madspild.Fragments.ProfileFragment;
 import madspild.Fragments.ScanFragment;
 
 //This is used for mapnings
 public class MenuHelper {
-    public static final int NUM_PAGES = 3;
+    public static final int NUM_PAGES = 4;
 
     public static int getMenuNumberFromId(int id){
         switch (id) {
@@ -31,6 +32,8 @@ public class MenuHelper {
                 return R.id.scanMenuItem;
             case 2:
                 return R.id.profileMenuItem;
+            case 3:
+                return R.id.profileMenuItem;
         }
         return R.id.scanMenuItem;
     }
@@ -42,6 +45,8 @@ public class MenuHelper {
             case 1:
                 return new ScanFragment();
             case 2:
+                return new ProfileFragment();
+            case 3:
                 return new EditProfileFragment();
         }
         return new ScanFragment();

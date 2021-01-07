@@ -1,10 +1,12 @@
 package madspild.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,50 +15,30 @@ import android.widget.ImageView;
 
 import com.example.madspild.R;
 
+import java.util.Objects;
 
-public class ProfileFragment extends Fragment implements View.OnClickListener {
+import madspild.Activities.StartActivity;
+import madspild.Helpers.HttpClientHelper;
 
-    ImageView settingsicon;
-    public ProfileFragment() {
-    }
 
+public class ProfileFragment extends Fragment {
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        }
-
-    @Override
-
-
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        settingsicon = (ImageView) getView().findViewById(R.id.settingsIcon);
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
+        ImageView settingIcon = view.findViewById(R.id.settingsIcon);
+        settingIcon.setOnClickListener((event) -> {
+            ViewPager2 viewPager = view.getRootView().findViewById(R.id.view_pager);
+            viewPager.setCurrentItem(3);
+        });
 
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        view.findViewById(R.id.logout_button).setOnClickListener((event) -> {
+            HttpClientHelper.removeToken();
+            Intent intent = new Intent(getActivity(), StartActivity.class);
+            startActivity(intent);
+            Objects.requireNonNull(getActivity()).finish();
+        });
+
+        return view;
     }
-
-    @Override
-    public void onClick(View v) {
-        Fragment fragment = new LoginFragment();
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        //fragmentTransaction.replace(container, new EditProfileFragment());
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
-    }
-
-
-    /* public void onClick(View v) {
-        if (v.getId() == R.id.settingsIcon) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.layout.fragment_profile, new EditProfileFragment())
-                    .commit();
-
-        }
-} */
 }
