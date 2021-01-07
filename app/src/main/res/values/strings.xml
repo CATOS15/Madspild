@@ -18,6 +18,7 @@
     <string name="full_name">Full Name</string>
     <string name="e_mail">E-mail</string>
     <string name="password">Password</string>
+    <string name="toast_delete_success">Produktet blev slettet</string>
 
 
     <!--random -->
@@ -38,6 +39,9 @@
     <string name="_3_dage">3 dage</string>
     <string name="oversigt">Oversigt</string>
     <string name="image_border">image_border</string>
+    <string name="trashcan">trashcan</string>
+    <string name="slet">Slet</string>
+    <string name="button">Button</string>
 
     <!-- nye ting / andet-->
 </resources>

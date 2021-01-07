@@ -11,20 +11,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
         android:text="@string/oversigt"
         android:textColor="@color/green"
         android:textSize="36sp"
+        app:layout_constraintBottom_toBottomOf="@+id/frameLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/overview_button_delete"
+        style="@style/Widget.MaterialComponents.Button.Icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:backgroundTint="@color/alertColor"
+        app:layout_constraintBottom_toBottomOf="@+id/frameLayout"
+        app:layout_constraintEnd_toEndOf="@+id/frameLayout"
+        app:layout_constraintStart_toStartOf="@+id/frameLayout"
+        app:layout_constraintTop_toTopOf="@+id/frameLayout" />
+
     <FrameLayout
         android:id="@+id/frameLayout"
-        android:layout_width="409dp"
-        android:layout_height="100dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="#00FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
 
     </FrameLayout>
 
@@ -37,6 +50,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

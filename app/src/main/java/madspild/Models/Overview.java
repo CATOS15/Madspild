@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Date;
 import java.util.UUID;
 
-public class Overview {
+public class Overview implements Comparable<Overview> {
     private UUID productId;
     private String gtin;
     private Date expdate;
@@ -14,14 +14,14 @@ public class Overview {
     private Boolean deleted;
 
     @JsonIgnore
-    private Boolean marked;
+    private boolean marked = false;
 
 
-    public Boolean getMarked() {
+    public boolean getMarked() {
         return marked;
     }
 
-    public void setMarked(Boolean marked) {
+    public void setMarked(boolean marked) {
         this.marked = marked;
     }
 
@@ -73,6 +73,9 @@ public class Overview {
         this.deleted = deleted;
     }
 
-
+    @Override
+    public int compareTo(Overview Overview) {
+        return getExpdate().compareTo(Overview.getExpdate());
+    }
 
 }

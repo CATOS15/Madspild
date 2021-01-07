@@ -11,12 +11,12 @@
         android:layout_height="80dp"
         android:layout_margin="20dp"
         android:background="@drawable/gridelement_overview_listitem"
+        android:contentDescription="@string/image_border"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/image_border"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clock_frame"
