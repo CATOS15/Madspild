@@ -1,16 +1,16 @@
 package madspild.Models;
 
 public class ProductInformation {
-    private Long gtin;
+    private String gtin;
     private String name;
     private String description;
     private ProductType productType;
 
-    public Long getGtin() {
+    public String getGtin() {
         return gtin;
     }
 
-    public void setGtin(Long gtin) {
+    public void setGtin(String gtin) {
         this.gtin = gtin;
     }
 

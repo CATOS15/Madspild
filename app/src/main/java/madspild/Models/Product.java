@@ -8,7 +8,7 @@ public class Product {
     private String serialnumber;
     private Date expdate;
     private String batchnumber;
-    private Long gtin;
+    private String gtin;
     private UUID familyid;
     private Boolean deleted = false;
 
@@ -52,11 +52,11 @@ public class Product {
         this.batchnumber = batchnumber;
     }
 
-    public Long getGtin() {
+    public String getGtin() {
         return gtin;
     }
 
-    public void setGtin(Long gtin) {
+    public void setGtin(String gtin) {
         this.gtin = gtin;
     }
 

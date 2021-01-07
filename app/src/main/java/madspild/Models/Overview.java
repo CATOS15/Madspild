@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public class Overview {
     private UUID productId;
-    private long gtin;
+    private String gtin;
     private Date expdate;
     private String name;
     private ProductType productType;
@@ -33,11 +33,11 @@ public class Overview {
         this.productId = productId;
     }
 
-    public long getGtin() {
+    public String getGtin() {
         return gtin;
     }
 
-    public void setGtin(long gtin) {
+    public void setGtin(String gtin) {
         this.gtin = gtin;
     }
 
