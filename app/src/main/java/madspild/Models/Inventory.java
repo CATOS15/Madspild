@@ -10,13 +10,13 @@ public class Inventory {
     private String batchnumber;
     private Long gtin;
     private UUID familyid;
-    private boolean deleted = false;
+    private Boolean deleted = false;
 
-    public boolean isDeleted() {
+    public Boolean isDeleted() {
         return deleted;
     }
 
-    public void setDeleted(boolean deleted) {
+    public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
     }
 

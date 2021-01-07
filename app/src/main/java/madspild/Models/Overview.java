@@ -1,5 +1,7 @@
 package madspild.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Date;
 import java.util.UUID;
 
@@ -10,6 +12,18 @@ public class Overview {
     private String name;
     private ProductType productType;
     private Boolean deleted;
+
+    @JsonIgnore
+    private Boolean marked;
+
+
+    public Boolean getMarked() {
+        return marked;
+    }
+
+    public void setMarked(Boolean marked) {
+        this.marked = marked;
+    }
 
     public UUID getInventoryId() {
         return inventoryId;

@@ -1,44 +1,26 @@
 package madspild.Fragments;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.MainThread;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.madspild.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.UUID;
 
 import madspild.Adapters.OverViewListAdapter;
 import madspild.HttpClient.OverviewClient;
 import madspild.Models.Overview;
-import madspild.Models.Product;
-import madspild.Models.ProductType;
 
 public class OverviewFragment extends Fragment {
     GridView overviewGrid;

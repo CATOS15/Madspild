@@ -1,9 +1,9 @@
 package madspild.Models;
 
-public class Product {
+public class Datamatrix {
     private String DataMatrixData;
 
-    public Product(String dataMatrixData) {
+    public Datamatrix(String dataMatrixData) {
         DataMatrixData = dataMatrixData;
     }
 
