@@ -27,7 +27,6 @@
     <string name="ms_search_title">Search</string>
     <string name="ms_product_title">Title</string>
     <string name="ms_product_description">Secondary text</string>
-    <string name="icon_clock" />
     <string name="list_element" />
     <string name="_1_dag">1 dag</string>
     <string name="ble">Æble</string>
@@ -35,17 +34,20 @@
     <string name="udl_bsdato_07_01_2021">Udløbsdato: 07/01/2021</string>
     <string name="icon_foodcategory" />
     <string name="udl_bsdato_08_01_2021">Udløbsdato: 08/01/2021</string>
-    <string name="_3_dage">3 dage</string>
     <string name="image_border">image_border</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="trashcan">trashcan</string>
     <string name="slet">Slet</string>
     <string name="button">Button</string>
     <string name="log_out">Log out</string>
     <string name="phone_number">Phone number</string>
-    <string name="overview_listitem">Overview Listitem</string>
-    <string name="overview_title">Inventar</string>
+
+    <!-- Overview -->
+    <string name="fragment_overview_topbar_title">Inventar</string>
+    <string name="fragment_overview_listitem_daysleft_image" />
+    <string name="fragment_overview_listitem_daysleft_text">[-xxx dage]</string>
+    <string name="fragment_overview_listitem_information_productname">[PRODUCT NAME]</string>
+    <string name="fragment_overview_listitem_information_expdate">[UDLØBSDATO]</string>
 
     <!-- nye ting / andet-->
 </resources>

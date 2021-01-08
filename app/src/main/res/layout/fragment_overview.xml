@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/overviewContentLayout"
+        android:id="@+id/fragment_overview_topbar"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="@color/GS1Blue"
@@ -15,27 +15,38 @@
         app:layout_constraintRight_toRightOf="parent">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/fragment_overview_topbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="5dp"
-            android:text="@string/overview_title"
+            android:text="@string/fragment_overview_topbar_title"
             android:textColor="@color/GS1textColorPrimary"
             android:textSize="24sp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent" />
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/fragment_overview_topbar_button_delete"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="60dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/fragment_overview_topbar_button_image_delete"
+            app:backgroundTint="#FFFFFFFF"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"  />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/overview_button_delete"
+            android:id="@+id/fragment_overview_topbar_button_filter"
             style="@style/Widget.MaterialComponents.Button.Icon"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginEnd="20dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/baseline_delete_black_24"
-            app:backgroundTint="@color/GS1Candy"
+            android:background="@drawable/fragment_overview_topbar_button_image_filter"
+            app:backgroundTint="#FFFFFFFF"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintRight_toRightOf="parent"  />
 
@@ -49,7 +60,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/overviewContentLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/fragment_overview_topbar" />
 
 
 

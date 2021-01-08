@@ -26,7 +26,7 @@
         android:layout_height="65dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
-        android:src="@drawable/settingsicon"
+        android:src="@drawable/editprofile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -54,7 +54,7 @@ public class OverviewFragment extends Fragment {
                     overViewListAdapter.notifyDataSetChanged();
                 });
 
-                overviewButtonDelete = view.findViewById(R.id.overview_button_delete);
+                overviewButtonDelete = view.findViewById(R.id.fragment_overview_topbar_button_delete);
                 overviewButtonDelete.setOnClickListener(v -> deleteProductsFromInventory(overviewList));
             });
         }, (respError) -> {

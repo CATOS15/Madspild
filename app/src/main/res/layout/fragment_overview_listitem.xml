@@ -1,137 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/test"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fragment_overview_listitem"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="60dp"
         android:orientation="horizontal"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/fragment_overview_listitem_border"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent">
 
-        <ImageView
-            android:id="@+id/listitem_image_clock"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="8dp"
-            android:contentDescription="@string/icon_clock"
-            android:src="@drawable/icon_clock2" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/fragment_overview_listitem_producttype"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent">
 
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/fragment_overview_listitem_producttype_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:contentDescription="@string/fragment_overview_listitem_daysleft_image"
+                android:src="@drawable/fragment_overview_listitem_producttype_image_vegetables"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
 
-<!--    <ImageView-->
-<!--        android:id="@+id/listitem_image_border"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="80dp"-->
-<!--        android:layout_marginStart="10dp"-->
-<!--        android:layout_marginEnd="5dp"-->
-<!--        android:orientation="vertical"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        android:contentDescription="@string/overview_listitem" />-->
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--        android:id="@+id/clock_frame"-->
-<!--        android:layout_width="80dp"-->
-<!--        android:layout_height="0dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="@+id/listitem_image_border"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/listitem_image_border"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/listitem_image_border">-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/fragment_overview_listitem_information"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            app:layout_constraintStart_toEndOf="@+id/fragment_overview_listitem_producttype">
 
-<!--        <ImageView-->
-<!--            android:id="@+id/listitem_image_clock"-->
-<!--            android:layout_width="37dp"-->
-<!--            android:layout_height="32dp"-->
-<!--            android:layout_marginTop="8dp"-->
-<!--            android:contentDescription="@string/icon_clock"-->
-<!--            app:layout_constraintEnd_toEndOf="@+id/clock_frame"-->
-<!--            app:layout_constraintStart_toStartOf="@+id/clock_frame"-->
-<!--            app:layout_constraintTop_toTopOf="@+id/clock_frame"-->
-<!--            android:src="@drawable/icon_clock2"-->
-<!--            app:tint="#388E3C" />-->
+            <TextView
+                android:id="@+id/fragment_overview_listitem_information_productname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:text="@string/fragment_overview_listitem_information_productname"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent" />
 
-<!--        <TextView-->
-<!--            android:id="@+id/listitem_text_remainingdays"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="10dp"-->
-<!--            android:textSize="16sp"-->
-<!--            android:text="@string/_3_dage"-->
-<!--            app:layout_constraintEnd_toEndOf="@+id/clock_frame"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/listitem_image_clock" />-->
+            <TextView
+                android:id="@+id/fragment_overview_listitem_information_expdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:text="@string/fragment_overview_listitem_information_expdate"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent" />
 
-<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--        android:id="@+id/constraintLayout"-->
-<!--        android:layout_width="197dp"-->
-<!--        android:layout_height="0dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="@+id/listitem_image_border"-->
-<!--        app:layout_constraintStart_toEndOf="@+id/clock_frame"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/listitem_image_border">-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/fragment_overview_listitem_daysleft"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
 
-<!--        <TextView-->
-<!--            android:id="@+id/listitem_text_productname"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="8dp"-->
-<!--            android:layout_marginTop="8dp"-->
-<!--            android:text="@string/ble"-->
-<!--            android:textColor="@color/black"-->
-<!--            android:textStyle="bold"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent" />-->
+            <ImageView
+                android:id="@+id/fragment_overview_listitem_daysleft_image"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:contentDescription="@string/fragment_overview_listitem_daysleft_image"
+                android:src="@drawable/fragment_overview_listitem_daysleft_image"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
 
-<!--        <TextView-->
-<!--            android:id="@+id/listitem_text_productweight"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="8dp"-->
-<!--            android:layout_marginTop="4dp"-->
-<!--            android:text="@string/v_gt_300g"-->
-<!--            android:textColor="@color/black"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/listitem_text_productname" />-->
+            <TextView
+                android:id="@+id/fragment_overview_listitem_daysleft_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginBottom="1dp"
+                android:text="@string/fragment_overview_listitem_daysleft_text"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
 
-<!--        <TextView-->
-<!--            android:id="@+id/listitem_text_expiredate"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="8dp"-->
-<!--            android:layout_marginTop="28dp"-->
-<!--            android:text="@string/udl_bsdato_08_01_2021"-->
-<!--            android:textColor="@color/black"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/listitem_text_productname" />-->
-<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--        android:id="@+id/frameLayout3"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="0dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="@+id/listitem_image_border"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/listitem_image_border"-->
-<!--        app:layout_constraintStart_toEndOf="@+id/constraintLayout"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/listitem_image_border"-->
-<!--        app:layout_constraintVertical_bias="0.533">-->
-
-<!--        <ImageView-->
-<!--            android:id="@+id/listitem_image_foodcategory"-->
-<!--            android:layout_width="50dp"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:contentDescription="@string/icon_foodcategory"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:srcCompat="@drawable/vegetables_temp" />-->
-<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
 

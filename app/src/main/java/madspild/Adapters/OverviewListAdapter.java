@@ -1,24 +1,24 @@
 package madspild.Adapters;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.madspild.R;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import madspild.Models.Overview;
@@ -34,21 +34,40 @@ public class OverviewListAdapter extends ArrayAdapter<Overview> {
 
     @NonNull
     @Override
-    public View getView(int position, View overviewListView, @NonNull ViewGroup parent) {
-        // Get the data item for this position
+    public View getView(int position, View overviewView, @NonNull ViewGroup parent) {
         Overview overview = getItem(position);
-        // Check if an existing view is being reused, otherwise inflate the view
-        if (overviewListView == null) {
-            overviewListView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_overview_listitem, parent, false);
+        if(overview == null) return overviewView;
+
+        if (overviewView == null) {
+            overviewView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_overview_listitem, parent, false);
         }
-        // Lookup view for data population
-        //TextView tvName = (TextView) overviewListView.findViewById(R.id.tvName);
-        //TextView tvHome = (TextView) overviewListView.findViewById(R.id.tvHome);
-        // Populate the data into the template view using the data object
-        //tvName.setText(user.name);
-        //tvHome.setText(user.hometown);
-        // Return the completed view to render on screen
-        return overviewListView;
+        ImageView daysleftImage = overviewView.findViewById(R.id.fragment_overview_listitem_daysleft_image);
+        TextView daysleftText = overviewView.findViewById(R.id.fragment_overview_listitem_daysleft_text);
+        TextView informationProductName = overviewView.findViewById(R.id.fragment_overview_listitem_information_productname);
+        TextView informationExpDate = overviewView.findViewById(R.id.fragment_overview_listitem_information_expdate);
+        ImageView productTypeImage = overviewView.findViewById(R.id.fragment_overview_listitem_producttype_image);
+
+        long diffInMillies = overview.getExpdate().getTime() - new Date().getTime();
+        long diffInDays = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+        String daysleftString = (diffInDays == 1 ? "1 dag" : diffInDays + " dage");
+        daysleftText.setText(daysleftString);
+
+        if(diffInDays < 0){
+            daysleftImage.setColorFilter(Color.RED);
+        }else if(diffInDays < 4){
+            daysleftImage.setColorFilter(Color.YELLOW);
+        }else{
+            daysleftImage.setColorFilter(Color.GREEN);
+        }
+
+        informationProductName.setText(overview.getName());
+
+        String informationExpDateString = "Udløbsdato: " + new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(overview.getExpdate());
+        informationExpDate.setText(informationExpDateString);
+
+        productTypeImage.setImageResource(getProductIcon(position));
+
+        return overviewView;
     }
 
     @Override
@@ -59,27 +78,27 @@ public class OverviewListAdapter extends ArrayAdapter<Overview> {
     private int getProductIcon(int index){
         switch (overviewList.get(index).getProductType()) {
             case FRUIT:
-                return R.drawable.freezer_temp;
+                return R.drawable.fragment_overview_listitem_producttype_image_fruit;
             case DAIRY:
-                return R.drawable.freezer_temp;
+                return R.drawable.fragment_overview_listitem_producttype_image_dairy;
             case BAKERY:
-                return R.drawable.vegetables_temp;
+                return R.drawable.fragment_overview_listitem_producttype_image_bakery;
             case BEVERAGES:
-                return R.drawable.vegetables_temp;
+                return R.drawable.fragment_overview_listitem_producttype_image_beverages;
             case CANNED:
-                return R.drawable.freezer_temp;
+                return R.drawable.fragment_overview_listitem_producttype_image_canned;
             case DRY:
-                return R.drawable.freezer_temp;
+                return R.drawable.fragment_overview_listitem_producttype_image_dry;
             case FROZEN:
-                return R.drawable.freezer_temp;
+                return R.drawable.fragment_overview_listitem_producttype_image_frozen;
             case VEGETABLES:
-                return R.drawable.freezer_temp;
+                return R.drawable.fragment_overview_listitem_producttype_image_vegetables;
             case MEAT:
-                return R.drawable.freezer_temp;
+                return R.drawable.fragment_overview_listitem_producttype_image_meat;
             case OTHER:
-                return R.drawable.freezer_temp;
+                return R.drawable.fragment_overview_listitem_producttype_image_other;
             default:
-                return R.drawable.freezer_temp;
+                return R.drawable.fragment_overview_listitem_producttype_image_other;
         }
     }
 
