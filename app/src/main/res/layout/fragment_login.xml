@@ -76,8 +76,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/login_button"
                 android:layout_marginTop="0dp"
-                android:hint="Ingen bruger endnu? Opret en"
-                android:text="Ingen account endnu? Opret en"
+                android:hint="Ingen bruger? Opret en"
+                android:text="Ingen bruger? Opret en"
                 android:textAlignment="center"
                 android:textColor="@color/white" />
 
