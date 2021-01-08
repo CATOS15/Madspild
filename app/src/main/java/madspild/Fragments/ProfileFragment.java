@@ -4,9 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager2.widget.ViewPager2;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +14,7 @@ import com.example.madspild.R;
 
 import java.util.Objects;
 
-import madspild.Activities.EditprofileActivity;
+import madspild.Activities.EditProfileActivity;
 import madspild.Activities.StartActivity;
 import madspild.Helpers.HttpClientHelper;
 
@@ -29,7 +26,7 @@ public class ProfileFragment extends Fragment {
 
         ImageView settingIcon = view.findViewById(R.id.settingsIcon);
         settingIcon.setOnClickListener((event) -> {
-            Intent intent = new Intent(getActivity(), EditprofileActivity.class);
+            Intent intent = new Intent(getActivity(), EditProfileActivity.class);
             startActivity(intent);
         });
 
