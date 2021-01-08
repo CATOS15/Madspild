@@ -39,7 +39,7 @@ public class OverviewListAdapter extends ArrayAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get Inflate the given views
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View v = inflater.inflate(R.layout.fragment_overview_listitem, parent);
+        View v = inflater.inflate(R.layout.fragment_overview_listitem, null);
 
         if (overviewList.get(position).getDeleted()) {
             v.setVisibility(View.GONE);
@@ -96,7 +96,7 @@ public class OverviewListAdapter extends ArrayAdapter {
         long diff = expdate.getTime() - today.getTime();
         return (int) Math.ceil(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
     }
-    
+
     private int getProductIcon(int index){
         switch (overviewList.get(index).getProductType()) {
             case FRUIT:
