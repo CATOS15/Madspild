@@ -3,14 +3,15 @@ package madspild.Fragments;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -20,23 +21,22 @@ import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
 import com.example.madspild.R;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.zxing.Result;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
-import java.util.UUID;
 
 import madspild.Helpers.HttpClientHelper;
-import madspild.HttpClient.AuthenticationClient;
 import madspild.HttpClient.ProductClient;
 import madspild.Models.Product;
 
 import static java.lang.Long.parseLong;
+import static java.lang.Thread.sleep;
 
 public class ScanFragment extends Fragment {
     private CodeScanner codeScanner;
@@ -46,6 +46,7 @@ public class ScanFragment extends Fragment {
 
     ProductClient productClient;
     Product product;
+    MaterialAlertDialogBuilder dialog;
 
     @Override
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
@@ -57,6 +58,8 @@ public class ScanFragment extends Fragment {
         if(!hasCameraPermission()) {
             requestCameraPermission();
         }
+
+        dialog = new MaterialAlertDialogBuilder(Objects.requireNonNull(getActivity()));
 
         //til at skanne
         final Activity activity = getActivity();
@@ -84,26 +87,42 @@ public class ScanFragment extends Fragment {
                         System.out.println(DataMatrixData);
 
                         //substring numbers: GTIN: 3-16, S/N: 19-29, Batch: 32-37, Expiry: 40-45
-                        Toast.makeText(activity, result.getText(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(activity, result.getText(), Toast.LENGTH_SHORT).show();
 
                         if (DataMatrixData.length() == 45){
                             product = new Product();
                             product = MatrixtoProduct(DataMatrixData);
+                            boolean haha = expDateChecker(product);
+                            System.out.println("testtest" + haha);
 
-                            productClient.createProduct(product, (respObject) -> {
-                                Product product = (Product) respObject;
-                                System.out.println("bananskrald");
-                            }, (respError) -> {
-                                Log.println(Log.ERROR, "du har lavet en fejl", respError);
-                            });
+                            if(expDateChecker(product)){
+                                productClient.createProduct(product, (respObject) -> {
+                                    Product product = (Product) respObject;
+                                    System.out.println("bananskrald");
+                                    new Handler(Looper.getMainLooper()).post(() -> {
+                                        //dialog message
+                                        errorMessageDialog("Success","Produkt tilføjet");
+                                    });
+                                }, (respError) -> {
+                                    //Log.println(Log.ERROR, "du har lavet en fejl", respError);
+                                    new Handler(Looper.getMainLooper()).post(() -> {
+                                        //dialog message
+                                        errorMessageDialog("Fejl",respError);
+                                    });
+                                });
+                            }
+                            else {
+                                //hvis varen er udløbet
+                                errorMessageDialog("Fejl","Varen er udløbet");
+                            }
                         } else{
-                            System.out.println("fejl i barcode");
+                            //System.out.println("fejl i barcode");
+                            errorMessageDialog("Fejl","Fejl i barcode");
                         }
                     }
                 });
             }
         });
-
         return root;
     }
 
@@ -129,6 +148,25 @@ public class ScanFragment extends Fragment {
             codeScanner.releaseResources();
         }
         super.onPause();
+    }
+
+    public void errorMessageDialog(String title, String message){
+        //System.out.println("fejl i barcode");
+
+        dialog.setTitle(title);
+        dialog.setMessage(message);
+        dialog.setPositiveButton("OKAY", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                onResume();
+            }
+        });
+        dialog.show();
+    }
+
+    public boolean expDateChecker(Product product){
+        Date temp = product.getExpdate();
+        return System.currentTimeMillis() > temp.getTime();
     }
 
     //MatrixtoProduct, MtP
