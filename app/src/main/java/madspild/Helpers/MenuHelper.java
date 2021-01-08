@@ -10,7 +10,7 @@ import madspild.Fragments.ScanFragment;
 
 //This is used for mapnings
 public class MenuHelper {
-    public static final int NUM_PAGES = 4;
+    public static final int NUM_PAGES = 3;
 
     public static int getMenuNumberFromId(int id){
         switch (id) {
