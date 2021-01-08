@@ -146,22 +146,22 @@ public class RegisterFragment extends Fragment{
     public boolean validate(User user)
     {
         if (user.getUsername().length() < 4){
-            usernameTextInput.setError("Brugernavn er for kort");
+            usernameTextInput.setError("Brugernavn skal være midnst 4 lang");
             return false;}
         else{usernameTextInput.setError(null);}
         if(user.getPassword().length() < 5 ){
-            passwordTextInput.setError("Password er for kort");
+            passwordTextInput.setError("Password skal være midnst 5 lang");
             return false;}
         else{passwordTextInput.setError(null);}
         if(user.getFirstname().length() < 2 ){
-            firstnameTextInput.setError("Fornavn er for kort");
+            firstnameTextInput.setError("Fornavn skal være midnst 2 lang");
             return false;}
         else{firstnameTextInput.setError(null);}
         if(user.getLastname().length() < 2 ){
-            lastnameTextInput.setError("Efternavn er for kort");
+            lastnameTextInput.setError("Efternavn skal være midnst 2 lang");
             return false;}
         else{lastnameTextInput.setError(null);}
-        if(!(user.getEmail().contains("@")) || (user.getEmail().contains("."))){
+        if(!(user.getEmail().contains("@")) || !(user.getEmail().contains("."))){
             emailTextInput.setError("Email skal indeholde @ og .");
             return false;}
         else{emailTextInput.setError(null);}

@@ -11,17 +11,17 @@
         android:clipChildren="false"
         android:clipToPadding="false"
         android:orientation="vertical"
-        android:padding="24dp"
-        android:paddingTop="16dp">
+        android:paddingTop="6dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp">
 
         <ImageView
-            android:layout_width="208dp"
-            android:layout_height="109dp"
+            android:layout_width="31dp"
+            android:layout_height="40dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="5dp"
             android:contentDescription="@string/ms_imagedescription_logo"
-            android:src="@drawable/orange_madspild"
+            android:src="@drawable/foodservice_icon"
             app:srcCompat="@drawable/brand_icon_text2" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -29,9 +29,9 @@
             android:id="@+id/register_username_text_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/ms_hint_username"
+            android:hint="Brugernavn"
             app:endIconMode="clear_text"
-            android:paddingBottom="15dp">
+            app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -61,8 +61,8 @@
             android:id="@+id/register_firstname_text_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/ms_hint_firstname"
-            android:paddingBottom="15dp">
+            android:hint="Fornavn"
+            app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -76,8 +76,8 @@
             android:id="@+id/register_lastname_text_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/ms_hint_lastname"
-            android:paddingBottom="15dp">
+            android:hint="Efternavn"
+            app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -91,8 +91,8 @@
             android:id="@+id/register_email_text_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/ms_hint_email"
-            android:paddingBottom="15dp">
+            android:hint="Email"
+            app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -106,8 +106,8 @@
             android:id="@+id/register_phone_text_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/ms_hint_phone"
-            android:paddingBottom="15dp">
+            android:hint="Telefon"
+            app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -128,7 +128,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="74dp"
                 android:layout_marginEnd="74dp"
-                android:text="@string/ms_button_login" />
+                android:text="Opret bruger" />
 
             <TextView
                 android:id="@+id/register_already_registered_text"
@@ -136,11 +136,10 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/login_button"
                 android:layout_marginTop="0dp"
-                android:hint="@string/ms_hint_username"
-                android:text="@string/register_already_registered"
+                android:hint="Allerede registreret? Login nu"
+                android:text="Allerede registreret? Login nu"
                 android:textAlignment="center"
                 android:textColor="@color/white" />
-
         </RelativeLayout>
     </LinearLayout>
 </ScrollView>
