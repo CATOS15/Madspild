@@ -6,9 +6,6 @@
             <solid android:color="@color/white" />
             <corners android:radius="10dp"/>
             <size android:width="380dp" android:height="80dp"/>
-            <stroke
-                android:width="2dp"
-                android:color="@color/textInputOutlineColor" />
         </shape>
     </item>
 </layer-list>

@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.TransitionDrawable;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,11 +21,11 @@ import java.util.concurrent.TimeUnit;
 
 import madspild.Models.Overview;
 
-public class OverViewListAdapter extends ArrayAdapter {
+public class OverviewListAdapter extends ArrayAdapter {
 
     List<Overview> overviewList;
 
-    public OverViewListAdapter(Context context, int textViewResourceId, List<Overview> overviewList) {
+    public OverviewListAdapter(Context context, int textViewResourceId, List<Overview> overviewList) {
         super(context, textViewResourceId, overviewList);
         this.overviewList = overviewList;
     }
@@ -36,12 +35,11 @@ public class OverViewListAdapter extends ArrayAdapter {
         return super.getCount();
     }
 
-    @SuppressLint({"ViewHolder", "SetTextI18n"})
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get Inflate the given views
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View v = inflater.inflate(R.layout.gridview_listitem, null);
+        View v = inflater.inflate(R.layout.fragment_overview_listitem, null);
 
         if (overviewList.get(position).getDeleted()) {
             v.setVisibility(View.GONE);
@@ -64,35 +62,18 @@ public class OverViewListAdapter extends ArrayAdapter {
             int dayDiff = getDifferenceDays(overviewList.get(position).getExpdate());
             listitem_text_remainingdays.setText(dayDiff + " dag(e)");
 
-            // Set color of border
-            GradientDrawable gd_border = new GradientDrawable();
             if (dayDiff < 2) {
-                gd_border.setStroke(6, Color.RED);
-                gd_border.setCornerRadius(10);
                 listitem_text_remainingdays.setTextColor(Color.rgb(194, 100, 50));
                 listitem_image_clock.setColorFilter(Color.rgb(194, 100, 50));
             } else if (dayDiff < 4) {
-                gd_border.setStroke(6, Color.YELLOW);
-                gd_border.setCornerRadius(10);
                 listitem_text_remainingdays.setTextColor(Color.rgb(189, 194, 50));
                 listitem_image_clock.setColorFilter(Color.rgb(189, 194, 50));
             } else {
-                gd_border.setStroke(6, Color.rgb(44, 156, 6));
-                gd_border.setCornerRadius(10);
                 listitem_text_remainingdays.setTextColor(Color.rgb(44, 156, 6));
                 listitem_image_clock.setColorFilter(Color.rgb(44, 156, 6));
             }
 
-            if (!overviewList.get(position).getMarked()) {
-                gd_border.setColor(Color.WHITE);
-            } else {
-                gd_border.setColor(Color.RED);
-            }
-
             final Handler handler = new Handler();
-
-
-            listitem_image_border.setBackgroundDrawable(gd_border);
 
             // Set food category
             switch (overviewList.get(position).getProductType()) {

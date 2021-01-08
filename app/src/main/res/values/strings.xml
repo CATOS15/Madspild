@@ -45,6 +45,7 @@
     <string name="button">Button</string>
     <string name="log_out">Log out</string>
     <string name="phone_number">Phone number</string>
+    <string name="overview_listitem">Overview Listitem</string>
 
     <!-- nye ting / andet-->
 </resources>
