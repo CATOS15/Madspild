@@ -36,7 +36,6 @@
     <string name="icon_foodcategory" />
     <string name="udl_bsdato_08_01_2021">Udløbsdato: 08/01/2021</string>
     <string name="_3_dage">3 dage</string>
-    <string name="oversigt">Oversigt</string>
     <string name="image_border">image_border</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -46,6 +45,7 @@
     <string name="log_out">Log out</string>
     <string name="phone_number">Phone number</string>
     <string name="overview_listitem">Overview Listitem</string>
+    <string name="overview_title">Inventar</string>
 
     <!-- nye ting / andet-->
 </resources>

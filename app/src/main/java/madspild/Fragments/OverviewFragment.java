@@ -35,7 +35,7 @@ public class OverviewFragment extends Fragment {
         view = i.inflate(R.layout.fragment_overview, container, false);
 
         OverviewClient overviewClient = new OverviewClient();
-        overviewClient.getUserOverview(null, (respObject) -> {
+        overviewClient.getUserOverview(false, (respObject) -> {
             List<Overview> overviewList = (List<Overview>) respObject;
             // Sort the overview by date
             Collections.sort(overviewList);
@@ -76,6 +76,11 @@ public class OverviewFragment extends Fragment {
 
         ProductClient productClient = new ProductClient();
         productClient.deleteProducts(ids, (respObject) -> {
+            for (Overview overview: overviewList) {
+                if(ids.contains(overview.getProductId())){
+                    overviewList.remove(overview);
+                }
+            }
             new Handler(Looper.getMainLooper()).post(() -> {
                 overViewListAdapter.notifyDataSetChanged();
             });
