@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="editprofile_first_name">Fornavn</string>
+    <string name="editprofile_last_name">Efternavn</string>
+    <string name="editprofile_phone_number">Telefon Nummer</string>
+    <string name="editprofile_e_mail">E-mail</string>
+    <string name="edit_profile">REDIGER PROFIL</string>
+    <string name="editprofile_full_name">Hej Fulde Navn</string>
+    <string name="editprofile_username">Username</string>
+</resources>
