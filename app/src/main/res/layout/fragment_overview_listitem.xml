@@ -9,14 +9,14 @@
         android:id="@+id/listitem_image_border"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:layout_margin="20dp"
-        android:background="@drawable/gridelement_overview_listitem"
-        android:contentDescription="@string/image_border"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="5dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/overview_listitem" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clock_frame"

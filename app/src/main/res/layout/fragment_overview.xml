@@ -14,7 +14,7 @@
         android:text="@string/oversigt"
         android:textColor="@color/green"
         android:textSize="36sp"
-        app:layout_constraintBottom_toBottomOf="@+id/frameLayout"
+        app:layout_constraintBottom_toBottomOf="@+id/overviewContentLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,13 +25,13 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         app:backgroundTint="@color/alertColor"
-        app:layout_constraintBottom_toBottomOf="@+id/frameLayout"
-        app:layout_constraintEnd_toEndOf="@+id/frameLayout"
-        app:layout_constraintStart_toStartOf="@+id/frameLayout"
-        app:layout_constraintTop_toTopOf="@+id/frameLayout" />
+        app:layout_constraintBottom_toBottomOf="@+id/overviewContentLayout"
+        app:layout_constraintEnd_toEndOf="@+id/overviewContentLayout"
+        app:layout_constraintStart_toStartOf="@+id/overviewContentLayout"
+        app:layout_constraintTop_toTopOf="@+id/overviewContentLayout" />
 
     <FrameLayout
-        android:id="@+id/frameLayout"
+        android:id="@+id/overviewContentLayout"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:background="#00FFFFFF"
@@ -49,7 +49,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/overviewContentLayout" />
 
 
 
