@@ -16,13 +16,13 @@
 
         <ImageView
             android:layout_width="264dp"
-            android:layout_height="233dp"
+            android:layout_height="173dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="18dp"
             android:layout_marginBottom="16dp"
-            app:srcCompat="@drawable/brand_icon_text2"
-            android:src="@drawable/orange_madspild"
-            android:contentDescription="@string/ms_imagedescription_logo" />
+            android:contentDescription="@string/ms_imagedescription_logo"
+            android:src="@drawable/foodservice_icon"
+            app:srcCompat="@drawable/brand_icon_text2" />
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.TipTime.TextInputLayout.Filled"

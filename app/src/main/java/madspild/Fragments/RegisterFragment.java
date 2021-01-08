@@ -146,26 +146,26 @@ public class RegisterFragment extends Fragment{
     public boolean validate(User user)
     {
         if (user.getUsername().length() < 4){
-            usernameTextInput.setError("Brugernavn er forkort");
+            usernameTextInput.setError("Brugernavn er for kort");
             return false;}
         else{usernameTextInput.setError(null);}
         if(user.getPassword().length() < 5 ){
-            passwordTextInput.setError("Password er forkort");
+            passwordTextInput.setError("Password er for kort");
             return false;}
         else{passwordTextInput.setError(null);}
         if(user.getFirstname().length() < 2 ){
-            firstnameTextInput.setError("Fornavn er forkort");
+            firstnameTextInput.setError("Fornavn er for kort");
             return false;}
         else{firstnameTextInput.setError(null);}
         if(user.getLastname().length() < 2 ){
-            lastnameTextInput.setError("Efternavn er forkort");
+            lastnameTextInput.setError("Efternavn er for kort");
             return false;}
         else{lastnameTextInput.setError(null);}
-        if(!(user.getEmail().contains("@")) ){
-            emailTextInput.setError("Email skal indeholde @");
+        if(!(user.getEmail().contains("@")) || (user.getEmail().contains("."))){
+            emailTextInput.setError("Email skal indeholde @ og .");
             return false;}
         else{emailTextInput.setError(null);}
-        if(user.getPhone().length() <= 7 || user.getPhone().length() >= 9 || user.getPhone().contains(" ")){
+        if(user.getPhone().length() != 8 || user.getPhone().contains(" ")){
             phoneTextInput.setError("Telefon skal indeholde 8 tal og ingen mellemrum");
             return false;}
         else
