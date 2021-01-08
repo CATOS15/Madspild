@@ -1,44 +1,22 @@
 package madspild.Fragments;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.MainThread;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.madspild.R;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
 
@@ -46,8 +24,6 @@ import madspild.Adapters.OverViewListAdapter;
 import madspild.HttpClient.OverviewClient;
 import madspild.HttpClient.ProductClient;
 import madspild.Models.Overview;
-import madspild.Models.Product;
-import madspild.Models.ProductType;
 
 public class OverviewFragment extends Fragment {
     GridView overviewGrid;
@@ -117,7 +93,7 @@ public class OverviewFragment extends Fragment {
         ProductClient productClient = new ProductClient();
         productClient.deleteProducts(ids, (respObject) -> {
             new Handler(Looper.getMainLooper()).post(() -> {
-                //Toast toast = Toast.makeText(view.getContext(), "Produktet slettet", Toast.LENGTH_LONG);
+                    //Toast toast = Toast.makeText(view.getContext(), "Produktet slettet", Toast.LENGTH_LONG);
                 //toast.show();
             });
 
