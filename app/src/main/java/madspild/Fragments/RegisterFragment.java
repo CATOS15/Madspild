@@ -1,11 +1,16 @@
 package madspild.Fragments;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -16,6 +21,10 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.Objects;
+
+import madspild.Activities.MainActivity;
+import madspild.Helpers.HttpClientHelper;
 import madspild.HttpClient.AuthenticationClient;
 import madspild.Models.User;
 
@@ -34,8 +43,8 @@ public class RegisterFragment extends Fragment{
     TextInputLayout lastnameTextInput; //lastname
     TextInputLayout emailTextInput; //email
     TextInputLayout phoneTextInput; //phone
-    User user;
-
+    Activity activity;
+    String respondAPI;
     AuthenticationClient authenticationClient;
 
 
@@ -46,6 +55,7 @@ public class RegisterFragment extends Fragment{
         authenticationClient = new AuthenticationClient();
         //til at teste login/registrer ved startup af appen
 
+        activity = getActivity();
         usernameTextInput = view.findViewById(R.id.register_username_text_input); //username
         usernameEditText = view.findViewById(R.id.login_username_edit_text);
 
@@ -60,6 +70,7 @@ public class RegisterFragment extends Fragment{
         emailTextInput = view.findViewById(R.id.register_email_text_input); //email
 
         phoneTextInput = view.findViewById(R.id.register_phone_text_input); //email
+
 
 
 
@@ -79,13 +90,25 @@ public class RegisterFragment extends Fragment{
                     user.setId(null);
 
 
-                    if(user.validate())
+                if(validate(user))
                     {
                         authenticationClient.createUser(user, (respObject) -> {
+
+                            new Handler(Looper.getMainLooper()).post(() -> {
+                                Toast.makeText(getActivity(), "Brugeren er blevet oprettet", Toast.LENGTH_SHORT).show();
+                            });
                             System.out.println("User been created");
+
+                            checkUserAccess();
+
                         }, (respError) -> {
+                            new Handler(Looper.getMainLooper()).post(() -> {
+                                Toast.makeText(getActivity(), respError, Toast.LENGTH_SHORT).show();
+                            });
                             Log.println(Log.ERROR, "AUTHENTICATION", respError);
                         });
+
+
                     }
 
                 }
@@ -107,23 +130,53 @@ public class RegisterFragment extends Fragment{
         return view;
     }
 
+
+    private void checkUserAccess(){
+        authenticationClient.getUserInformation((respObject) -> {
+            HttpClientHelper.user = (User) respObject;
+
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            startActivity(intent);
+            Objects.requireNonNull(getActivity()).finish();
+        },(respError) -> {
+            Log.println(Log.ERROR, "AUTHENTICATION", respError);
+        });
+    }
+
     public boolean validate(User user)
     {
         if (user.getUsername().length() < 4){
-//            usernameEditText.setError("Fejl");
+            usernameTextInput.setError("Brugernavn er forkort");
             return false;}
-        if(user.getPassword().length() < 5 ){return false;}
-        if(user.getFirstname().length() < 2 ){return false;}
-        if(user.getLastname().length() < 2 ){return false;}
-        if(!(user.getEmail().contains("@")) ){return false;}
+        else{usernameTextInput.setError(null);}
+        if(user.getPassword().length() < 5 ){
+            passwordTextInput.setError("Password er forkort");
+            return false;}
+        else{passwordTextInput.setError(null);}
+        if(user.getFirstname().length() < 2 ){
+            firstnameTextInput.setError("Fornavn er forkort");
+            return false;}
+        else{firstnameTextInput.setError(null);}
+        if(user.getLastname().length() < 2 ){
+            lastnameTextInput.setError("Efternavn er forkort");
+            return false;}
+        else{lastnameTextInput.setError(null);}
+        if(!(user.getEmail().contains("@")) ){
+            emailTextInput.setError("Email skal indeholde @");
+            return false;}
+        else{emailTextInput.setError(null);}
         if(user.getPhone().length() <= 7 || user.getPhone().length() >= 9 || user.getPhone().contains(" ")){
+            phoneTextInput.setError("Telefon skal indeholde 8 tal og ingen mellemrum");
             return false;}
         else
-        {try{Integer.parseInt(user.getPhone());}
-        catch (Exception e){return false;} }
+        {try{Integer.parseInt(user.getPhone()); phoneTextInput.setError(null);}
+        catch (Exception e){
+            phoneTextInput.setError("Telefon skal indeholde 8 tal og ingen mellemrum");
+            return false;} }
 
         return true;
     }
+
 
 
 

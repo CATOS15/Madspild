@@ -1,32 +1,22 @@
 package madspild.HttpClient;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.type.CollectionType;
 import com.squareup.okhttp.Callback;
-import com.squareup.okhttp.MediaType;
-import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
-import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.List;
 
 import madspild.Helpers.HttpClientHelper;
+import madspild.HttpClient.Config.HttpClient;
 import madspild.Models.Overview;
-import madspild.Models.User;
 
 public class OverviewClient extends HttpClient {
     public void getUserOverview(Boolean deleted, RespCallback respCallback, RespErrorCallback respErrorCallback){
         if(HttpClientHelper.getToken() == null){
             respErrorCallback.onRespErrorCallback("Token mangler!");
         }
-
-        OkHttpClient client = new OkHttpClient();
 
         //deleted = null    ALLE
         //deleted = true    KUN DEM DER ER SLETTET

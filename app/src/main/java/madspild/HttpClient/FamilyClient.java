@@ -1,13 +1,13 @@
 package madspild.HttpClient;
 
 import com.squareup.okhttp.Callback;
-import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
 import java.io.IOException;
 
 import madspild.Helpers.HttpClientHelper;
+import madspild.HttpClient.Config.HttpClient;
 import madspild.Models.Family;
 
 public class FamilyClient extends HttpClient {
@@ -15,8 +15,6 @@ public class FamilyClient extends HttpClient {
         if(HttpClientHelper.getToken() == null){
             respErrorCallback.onRespErrorCallback("Token mangler!");
         }
-
-        OkHttpClient client = new OkHttpClient();
 
         Request request = new Request.Builder()
                 .url(BASE_URL + "/family")
