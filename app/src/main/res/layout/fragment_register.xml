@@ -15,14 +15,26 @@
         android:paddingLeft="24dp"
         android:paddingRight="24dp">
 
-        <ImageView
-            android:layout_width="31dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="5dp"
-            android:contentDescription="@string/ms_imagedescription_logo"
-            android:src="@drawable/foodservice_icon"
-            app:srcCompat="@drawable/brand_icon_text2" />
+<!--        <ImageView-->
+<!--            android:layout_width="31dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            android:layout_marginBottom="5dp"-->
+<!--            android:contentDescription="@string/ms_imagedescription_logo"-->
+<!--            android:src="@drawable/foodservice_icon"-->
+<!--            app:srcCompat="@drawable/brand_icon_text2" />-->
+
+        <TextView
+            android:id="@+id/create_new_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/login_button"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="10dp"
+            android:text="OPRET NY BRUGER"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textColor="@color/white" />
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.TipTime.TextInputLayout.Filled"
