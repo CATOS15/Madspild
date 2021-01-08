@@ -6,9 +6,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import madspild.Fragments.OverviewFragment;
-import madspild.Fragments.ProfileFragment;
-import madspild.Fragments.ScanFragment;
 import madspild.Helpers.MenuHelper;
 
 public class ScreenSlidePagerAdapter extends FragmentStateAdapter {
