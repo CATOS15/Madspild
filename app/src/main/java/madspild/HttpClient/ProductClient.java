@@ -5,7 +5,6 @@ import android.util.Log;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.MediaType;
-import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
@@ -16,6 +15,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 import madspild.Helpers.HttpClientHelper;
+import madspild.HttpClient.Config.HttpClient;
 import madspild.Models.Product;
 
 public class ProductClient extends HttpClient {
@@ -24,8 +24,6 @@ public class ProductClient extends HttpClient {
             if(HttpClientHelper.getToken() == null){
                 respErrorCallback.onRespErrorCallback("Token mangler!");
             }
-
-            OkHttpClient client = new OkHttpClient();
 
             RequestBody body = RequestBody.create(MediaType.parse("application/json"), mapper.writeValueAsString(product));
             Request request = new Request.Builder()
@@ -62,8 +60,6 @@ public class ProductClient extends HttpClient {
                 respErrorCallback.onRespErrorCallback("Token mangler!");
             }
 
-            OkHttpClient client = new OkHttpClient();
-
             RequestBody body = RequestBody.create(MediaType.parse("application/json"), mapper.writeValueAsString(product));
             Request request = new Request.Builder()
                     .url(BASE_URL + "/product")
@@ -98,8 +94,6 @@ public class ProductClient extends HttpClient {
         if(HttpClientHelper.getToken() == null){
             respErrorCallback.onRespErrorCallback("Token mangler!");
         }
-
-        OkHttpClient client = new OkHttpClient();
 
         StringBuilder idsString = new StringBuilder();
         for(int i = 0;i<ids.size();i++){

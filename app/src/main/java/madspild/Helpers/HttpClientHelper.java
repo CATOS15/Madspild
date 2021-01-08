@@ -11,8 +11,27 @@ import madspild.Models.User;
 public class HttpClientHelper {
     private static String token = null;
     private static SharedPreferences sharedPreferences = null;
+    private static boolean loading = false;
+    private static ChangeListener listener;
 
     public static User user;
+
+    public static boolean isLoading() {
+        return loading;
+    }
+
+    public static void setLoading(boolean loading) {
+        HttpClientHelper.loading = loading;
+        if(listener != null) listener.onChange(loading);
+    }
+
+    public static ChangeListener getListener() {
+        return listener;
+    }
+
+    public static void setListener(ChangeListener listener) {
+        HttpClientHelper.listener = listener;
+    }
 
     public static void init(Context context){
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -37,5 +56,10 @@ public class HttpClientHelper {
             if(sharedPreferences != null) token = sharedPreferences.getString("token", null);
         }
         return token;
+    }
+
+
+    public interface ChangeListener{
+        void onChange(boolean loading);
     }
 }

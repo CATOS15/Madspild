@@ -24,6 +24,8 @@
     <color name="GS1textInputOutlineColor">#002C6C</color>
     <color name="GS1textColorPrimary">#FFFFFFFF</color>
 
+    <color name="GS1LightGrayTransparent">#60454545</color>
+
     <!-- general colors -->
     <color name="alertColor">#D32F2F</color>
 
