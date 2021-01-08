@@ -7,8 +7,6 @@ import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.madspild.R;
-
 import madspild.Fragments.LoginFragment;
 import madspild.Helpers.HttpClientHelper;
 

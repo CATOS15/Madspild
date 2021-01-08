@@ -16,7 +16,7 @@ public class StartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
-        FrameLayout loadingContent = findViewById(R.id.loading_content);
+        FrameLayout loadingContent = findViewById(R.id.loading_content_start);
 
         HttpClientHelper.init(getBaseContext());
 
