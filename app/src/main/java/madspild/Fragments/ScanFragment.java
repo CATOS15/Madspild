@@ -22,6 +22,7 @@ import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
 import com.example.madspild.R;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.zxing.Result;
 
 import java.text.DateFormat;
@@ -48,11 +49,12 @@ public class ScanFragment extends Fragment {
     Product product;
     MaterialAlertDialogBuilder dialog;
 
+
+
     @Override
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
         View root = i.inflate(R.layout.fragment_scan, container, false);
         codeScanner = new CodeScanner(Objects.requireNonNull(getActivity()), (CodeScannerView)root.findViewById(R.id.code_scanner_view));
-
         productClient = new ProductClient();
 
         if(!hasCameraPermission()) {
@@ -92,8 +94,6 @@ public class ScanFragment extends Fragment {
                         if (DataMatrixData.length() == 45){
                             product = new Product();
                             product = MatrixtoProduct(DataMatrixData);
-                            boolean haha = expDateChecker(product);
-                            System.out.println("testtest" + haha);
 
                             if(expDateChecker(product)){
                                 productClient.createProduct(product, (respObject) -> {
@@ -101,7 +101,12 @@ public class ScanFragment extends Fragment {
                                     System.out.println("bananskrald");
                                     new Handler(Looper.getMainLooper()).post(() -> {
                                         //dialog message
-                                        errorMessageDialog("Success","Produkt tilføjet");
+                                            //errorMessageDialog("Success","Produkt tilføjet");
+                                        //en snackbar i stedet for
+                                        Snackbar snackbar = Snackbar.make(root,"Produkt tilføjet "+product.getGtin(), 3000);
+                                        snackbar.setAnchorView(R.id.bottom_navigation_view);
+                                        snackbar.show();
+                                        onResume();
                                     });
                                 }, (respError) -> {
                                     //Log.println(Log.ERROR, "du har lavet en fejl", respError);
@@ -155,6 +160,9 @@ public class ScanFragment extends Fragment {
 
         dialog.setTitle(title);
         dialog.setMessage(message);
+        dialog.setOnDismissListener(dialogInterface -> {
+            onResume();
+        });
         dialog.setPositiveButton("OKAY", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
