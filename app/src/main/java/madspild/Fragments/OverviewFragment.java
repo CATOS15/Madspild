@@ -1,13 +1,11 @@
 package madspild.Fragments;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 
@@ -27,7 +25,7 @@ import madspild.Models.Overview;
 
 public class OverviewFragment extends Fragment {
     GridView overviewGrid;
-    Button overview_button_delete;
+    Button overviewButtonDelete;
     View view;
 
     OverviewListAdapter overViewListAdapter;
@@ -51,27 +49,16 @@ public class OverviewFragment extends Fragment {
                 overviewGrid.setAdapter(overViewListAdapter);
                 overviewGrid.setNumColumns(1);
 
-                overviewGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @SuppressLint("SetTextI18n")
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        overviewList.get(position).setMarked(!(overviewList.get(position).getMarked()));
-                        overViewListAdapter.notifyDataSetChanged();
-                    }
+                overviewGrid.setOnItemClickListener((parent, view, position, id) -> {
+                    overviewList.get(position).setMarked(!(overviewList.get(position).getMarked()));
+                    overViewListAdapter.notifyDataSetChanged();
                 });
 
-                overview_button_delete = view.findViewById(R.id.overview_button_delete);
-                overview_button_delete.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-
-                        deleteProductsFromInventory(overviewList);
-                    }
-                });
+                overviewButtonDelete = view.findViewById(R.id.overview_button_delete);
+                overviewButtonDelete.setOnClickListener(v -> deleteProductsFromInventory(overviewList));
             });
         }, (respError) -> {
-            System.out.println("Blah blah fejl " + respError);
+            System.out.println(respError);
         });
 
         return view;
@@ -79,7 +66,6 @@ public class OverviewFragment extends Fragment {
 
 
     public void deleteProductsFromInventory(List<Overview> overviewList){
-        // Set marked product to deleted
         List<UUID> ids = new ArrayList<>();
         for(int i=0;i<overviewList.size();i++){
             if(overviewList.get(i).getMarked()){
@@ -87,19 +73,14 @@ public class OverviewFragment extends Fragment {
                 ids.add(overviewList.get(i).getProductId());
             }
         }
-        // Opdater frontend
-        overViewListAdapter.notifyDataSetChanged();
 
         ProductClient productClient = new ProductClient();
         productClient.deleteProducts(ids, (respObject) -> {
             new Handler(Looper.getMainLooper()).post(() -> {
-                    //Toast toast = Toast.makeText(view.getContext(), "Produktet slettet", Toast.LENGTH_LONG);
-                //toast.show();
+                overViewListAdapter.notifyDataSetChanged();
             });
-
         }, (respError) -> {
-            //Toast toast = Toast.makeText(view.getContext(), "Produktet blev ikke slettet", Toast.LENGTH_LONG);
-            //toast.show();
+            System.out.println(respError);
         });
     }
 

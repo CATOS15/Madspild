@@ -89,6 +89,40 @@ public class AuthenticationClient extends HttpClient {
         }
     }
 
+
+    public void editUser(User user, RespCallback respCallback, RespErrorCallback respErrorCallback){
+        try {
+            String JSON_user = mapper.writeValueAsString(user);
+            RequestBody body = RequestBody.create(MediaType.parse("application/json"), JSON_user);
+            Request request = new Request.Builder()
+                    .url(BASE_URL + "/authentication/editUser")
+                    .header("Authorization", "Bearer " + HttpClientHelper.getToken())
+                    .put(body)
+                    .build();
+
+            client.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Request request, IOException e) {
+                    respErrorCallback.onRespErrorCallback(e.getMessage());
+                }
+
+                @Override
+                public void onResponse(Response response) throws IOException {
+                    String responseBody = response.body().string();
+                    if(response.code() == 200) {
+                        respCallback.onRespCallback("Brugeren blev redigeret");
+                    }else{
+                        respErrorCallback.onRespErrorCallback(responseBody);
+                    }
+                }
+            });
+
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            Log.println(Log.WARN, "JSON", Objects.requireNonNull(e.getMessage()));
+        }
+    }
+
     public void getUserInformation(RespCallback respCallback, RespErrorCallback respErrorCallback){
         if(HttpClientHelper.getToken() == null){
             respErrorCallback.onRespErrorCallback("Token mangler!");
