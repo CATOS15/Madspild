@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment;
 import com.example.madspild.R;
 
 import madspild.Fragments.OverviewFragment;
-import madspild.Fragments.EditProfileFragment;
 import madspild.Fragments.ProfileFragment;
 import madspild.Fragments.ScanFragment;
 
@@ -32,8 +31,6 @@ public class MenuHelper {
                 return R.id.scanMenuItem;
             case 2:
                 return R.id.profileMenuItem;
-            case 3:
-                return R.id.profileMenuItem;
         }
         return R.id.scanMenuItem;
     }
@@ -46,8 +43,6 @@ public class MenuHelper {
                 return new ScanFragment();
             case 2:
                 return new ProfileFragment();
-            case 3:
-                return new EditProfileFragment();
         }
         return new ScanFragment();
     }

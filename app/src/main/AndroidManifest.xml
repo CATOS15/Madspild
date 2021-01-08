@@ -24,6 +24,7 @@
             </intent-filter>
         </activity>
         <activity android:name="madspild.Activities.MainActivity"/>
+        <activity android:name="madspild.Activities.EditprofileActivity"/>
 
     </application>
 

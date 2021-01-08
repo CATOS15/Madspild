@@ -17,6 +17,7 @@ import com.example.madspild.R;
 
 import java.util.Objects;
 
+import madspild.Activities.EditprofileActivity;
 import madspild.Activities.StartActivity;
 import madspild.Helpers.HttpClientHelper;
 
@@ -28,8 +29,8 @@ public class ProfileFragment extends Fragment {
 
         ImageView settingIcon = view.findViewById(R.id.settingsIcon);
         settingIcon.setOnClickListener((event) -> {
-            ViewPager2 viewPager = view.getRootView().findViewById(R.id.view_pager);
-            viewPager.setCurrentItem(3);
+            Intent intent = new Intent(getActivity(), EditprofileActivity.class);
+            startActivity(intent);
         });
 
         view.findViewById(R.id.logout_button).setOnClickListener((event) -> {
