@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
 
@@ -34,21 +33,21 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        pieChart = view.findViewById(R.id.pieChart);
-        ImageView settingIcon = view.findViewById(R.id.settingsIcon);
-        settingIcon.setOnClickListener((event) -> {
+        view.findViewById(R.id.fragment_profile_topbar_button_settings).setOnClickListener((event) -> {
             Intent intent = new Intent(getActivity(), EditProfileActivity.class);
             startActivity(intent);
         });
 
-        view.findViewById(R.id.logout_button).setOnClickListener((event) -> {
+        view.findViewById(R.id.fragment_profile_topbar_button_logout).setOnClickListener((event) -> {
             HttpClientHelper.removeToken();
             Intent intent = new Intent(getActivity(), StartActivity.class);
             startActivity(intent);
             Objects.requireNonNull(getActivity()).finish();
         });
 
+        pieChart = view.findViewById(R.id.fragment_profile_piechart);
         setupPieChart();
+
         return view;
     }
 

@@ -49,5 +49,7 @@
     <string name="fragment_overview_listitem_information_productname">[PRODUCT NAME]</string>
     <string name="fragment_overview_listitem_information_expdate">[UDLØBSDATO]</string>
 
-    <!-- nye ting / andet-->
+    <!-- Profil -->
+    <string name="fragment_profile_topbar_title">Profil</string>
+
 </resources>
