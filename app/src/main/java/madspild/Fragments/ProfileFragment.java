@@ -1,6 +1,7 @@
 package madspild.Fragments;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
@@ -144,24 +146,49 @@ public class ProfileFragment extends Fragment {
     public void setupBarChart()
     {
         List<BarEntry> entries = new ArrayList<>();
+        List<BarEntry> entries2 = new ArrayList<>();
+        List<BarEntry> entries3 = new ArrayList<>();
+        List<BarEntry> entries4 = new ArrayList<>();
+
         entries.add(new BarEntry(1, productTypeHashMap.get(ProductType.MEAT)));
-        entries.add(new BarEntry(2, productTypeHashMap.get(ProductType.FRUIT),"asdf"));
-        entries.add(new BarEntry(3, productTypeHashMap.get(ProductType.DAIRY)));
-        entries.add(new BarEntry(4, productTypeHashMap.get(ProductType.OTHER)));
+        entries2.add(new BarEntry(2, productTypeHashMap.get(ProductType.FRUIT)));
+        entries3.add(new BarEntry(3, productTypeHashMap.get(ProductType.DAIRY)));
+        entries4.add(new BarEntry(4, productTypeHashMap.get(ProductType.OTHER)));
+
+
+
+        List<IBarDataSet> bars = new ArrayList<IBarDataSet>();
+        BarDataSet dataset = new BarDataSet(entries, "" + ProductType.MEAT);
+        dataset.setColor(Color.RED);
+        bars.add(dataset);
+        BarDataSet dataset2 = new BarDataSet(entries2, "" + ProductType.FRUIT);
+        dataset2.setColor(Color.BLUE);
+        bars.add(dataset2);
+        BarDataSet dataset3 = new BarDataSet(entries3, "" + ProductType.DAIRY);
+        dataset3.setColor(Color.GREEN);
+        bars.add(dataset3);
+        BarDataSet dataset4 = new BarDataSet(entries4, "" + ProductType.OTHER);
+        dataset4.setColor(Color.GRAY);
+        bars.add(dataset4);
+
+        BarData data = new BarData(bars);
+
+
+
 
 
 //        BarDataSet dataset = new BarDataSet(entries, "First");
-        BarDataSet dataSet = new BarDataSet(entries, "bars");
-        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+//        BarDataSet dataSet = new BarDataSet(entries, "bars");
+//        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
 
 
-        BarData data = new BarData(dataSet);
+//        BarData data = new BarData(dataSet);
         barChart.setData(data);
         data.setBarWidth(1);
         barChart.setData(data);
         barChart.setFitBars(true);
         barChart.invalidate();
-
+        barChart.getDescription().setEnabled(false);
     }
 
     public void setupPieChart()
