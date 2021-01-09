@@ -2,6 +2,7 @@ package madspild.Models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.util.Comparator;
 import java.util.Date;
 import java.util.UUID;
 
@@ -16,8 +17,7 @@ public class Overview implements Comparable<Overview> {
     @JsonIgnore
     private boolean marked = false;
 
-
-    public boolean getMarked() {
+    public boolean isMarked() {
         return marked;
     }
 
@@ -77,5 +77,4 @@ public class Overview implements Comparable<Overview> {
     public int compareTo(Overview Overview) {
         return getExpdate().compareTo(Overview.getExpdate());
     }
-
 }

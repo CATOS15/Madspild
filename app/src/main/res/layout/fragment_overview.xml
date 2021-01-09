@@ -31,15 +31,16 @@
             style="@style/Widget.MaterialComponents.Button.Icon"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_marginEnd="60dp"
+            android:layout_marginEnd="20dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/fragment_overview_topbar_button_image_delete"
             app:backgroundTint="#FFFFFFFF"
+            android:visibility="invisible"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintRight_toRightOf="parent"  />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/fragment_overview_topbar_button_filter"
+            android:id="@+id/fragment_overview_topbar_button_sort"
             style="@style/Widget.MaterialComponents.Button.Icon"
             android:layout_width="24dp"
             android:layout_height="24dp"

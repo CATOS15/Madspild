@@ -13,8 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.madspild.R;
+import com.google.android.material.button.MaterialButton;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -32,20 +32,40 @@ public class OverviewListAdapter extends ArrayAdapter<Overview> {
         this.overviewList = overviewList;
     }
 
+    private void setVisibilityDeleteIcon(ViewGroup parent){
+        boolean visible = false;
+        for (Overview overview : overviewList) {
+            if(overview.isMarked()){
+                visible = overview.isMarked();
+                break;
+            }
+        }
+        MaterialButton overviewButtonSort = ((ConstraintLayout) parent.getParent()).findViewById(R.id.fragment_overview_topbar_button_sort);
+        overviewButtonSort.setVisibility(visible ? View.INVISIBLE : View.VISIBLE);
+
+        MaterialButton overviewButtonDelete = ((ConstraintLayout) parent.getParent()).findViewById(R.id.fragment_overview_topbar_button_delete);
+        overviewButtonDelete.setVisibility(visible ? View.VISIBLE : View.INVISIBLE);
+    }
+
     @NonNull
     @Override
     public View getView(int position, View overviewView, @NonNull ViewGroup parent) {
         Overview overview = getItem(position);
-        if(overview == null) return overviewView;
 
         if (overviewView == null) {
             overviewView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_overview_listitem, parent, false);
         }
+        if(overview == null) return overviewView;
+
+        ConstraintLayout listitem = overviewView.findViewById(R.id.fragment_overview_listitem);
         ImageView daysleftImage = overviewView.findViewById(R.id.fragment_overview_listitem_daysleft_image);
         TextView daysleftText = overviewView.findViewById(R.id.fragment_overview_listitem_daysleft_text);
         TextView informationProductName = overviewView.findViewById(R.id.fragment_overview_listitem_information_productname);
         TextView informationExpDate = overviewView.findViewById(R.id.fragment_overview_listitem_information_expdate);
         ImageView productTypeImage = overviewView.findViewById(R.id.fragment_overview_listitem_producttype_image);
+
+        listitem.setBackgroundResource(R.drawable.fragment_overview_listitem_default);
+        setVisibilityDeleteIcon(parent);
 
         long diffInMillies = overview.getExpdate().getTime() - new Date().getTime();
         long diffInDays = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
@@ -66,6 +86,16 @@ public class OverviewListAdapter extends ArrayAdapter<Overview> {
         informationExpDate.setText(informationExpDateString);
 
         productTypeImage.setImageResource(getProductIcon(position));
+
+        overviewView.setOnClickListener((view) -> {
+            overview.setMarked(!overview.isMarked());
+            if(overview.isMarked()){
+                listitem.setBackgroundResource(R.drawable.fragment_overview_listitem_marked);
+            }else{
+                listitem.setBackgroundResource(R.drawable.fragment_overview_listitem_default);
+            }
+            setVisibilityDeleteIcon(parent);
+        });
 
         return overviewView;
     }
@@ -101,7 +131,6 @@ public class OverviewListAdapter extends ArrayAdapter<Overview> {
                 return R.drawable.fragment_overview_listitem_producttype_image_other;
         }
     }
-
 }
 
 
