@@ -45,6 +45,7 @@ public class MainActivity extends FragmentActivity {
         initEvents();
 
         FrameLayout loadingContent = findViewById(R.id.loading_content_main);
+        loadingContent.bringToFront();
         HttpClientHelper.setListener(loading -> {
             new Handler(Looper.getMainLooper()).post(() -> {
                 loadingContent.setVisibility(loading ? View.VISIBLE : View.INVISIBLE);

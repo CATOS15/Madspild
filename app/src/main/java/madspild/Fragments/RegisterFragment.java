@@ -30,7 +30,7 @@ import madspild.Models.User;
 
 public class RegisterFragment extends Fragment{
 
-    MaterialButton loginbutton;
+    MaterialButton createUserButton;
     TextInputLayout usernameTextInput; //username
     TextInputEditText usernameEditText;
 
@@ -61,7 +61,7 @@ public class RegisterFragment extends Fragment{
 
         passwordTextInput = view.findViewById(R.id.register_password_text_input); //password
         passwordEditText = view.findViewById(R.id.login_password_edit_text);
-        loginbutton = view.findViewById(R.id.login_button);
+        createUserButton = view.findViewById(R.id.login_button);
 
        firstnameTextInput = view.findViewById(R.id.register_firstname_text_input); //firstname
 
@@ -74,7 +74,7 @@ public class RegisterFragment extends Fragment{
 
 
 
-        loginbutton.setOnClickListener(new View.OnClickListener() {
+        createUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -105,7 +105,6 @@ public class RegisterFragment extends Fragment{
                             new Handler(Looper.getMainLooper()).post(() -> {
                                 Toast.makeText(getActivity(), respError, Toast.LENGTH_SHORT).show();
                             });
-                            Log.println(Log.ERROR, "AUTHENTICATION", respError);
                         });
 
 

@@ -5,17 +5,13 @@
     android:layout_height="match_parent"
     tools:context="madspild.Activities.StartActivity">
     <FrameLayout
-        android:id="@+id/container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-    <FrameLayout
         android:id="@+id/loading_content_start"
         android:visibility="invisible"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/GS1LightGrayTransparent"
-        android:clickable="false">
+        android:clickable="true"
+        android:focusable="true">
         <ProgressBar
             android:id="@+id/loading_spinner"
             android:layout_width="wrap_content"
@@ -24,4 +20,9 @@
             android:indeterminateTint="@color/GS1Orange"
             android:layout_gravity="center" />
     </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </FrameLayout>
