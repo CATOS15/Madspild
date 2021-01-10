@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
@@ -42,9 +43,15 @@ public class ProfileFragment extends Fragment {
     OverviewClient overviewClient;
     List<Overview> overviewList;
     HashMap<ProductType,Integer> productTypeHashMap;
+    TextView amountTitle;
+    TextView amount;
+    TextView amountWasteTitle;
+    TextView amountWaste;
+    TextView username;
+    View view;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_profile, container, false);
+        view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         view.findViewById(R.id.fragment_profile_topbar_button_settings).setOnClickListener((event) -> {
             Intent intent = new Intent(getActivity(), EditProfileActivity.class);
@@ -59,13 +66,27 @@ public class ProfileFragment extends Fragment {
         });
 
         productTypeHashMap = new HashMap<>();
+        overviewList = new ArrayList<>();
+
         pieChart = view.findViewById(R.id.fragment_profile_piechart);
         barChart = view.findViewById(R.id.fragment_profile_barChart);
+        amountTitle = view.findViewById(R.id.fragment_profile_amountTitle);
+        amount = view.findViewById(R.id.fragment_profile_amount);
+        amountWasteTitle = view.findViewById(R.id.fragment_profile_amountWasteTitle);
+        amountWaste = view.findViewById(R.id.fragment_profile_amountWaste);
 
+        amountTitle.setText("Antal vare i alt");
+        amount.setText("Antal");
+
+        amountWasteTitle.setText("Antal vare Udløbet");
+        amountWaste.setText("Udløbet");
+
+//        username.setText(HttpClientHelper.user.getFirstname());
 
 //        getOverview();
 //        setupPieChart();
 //        setupBarChart();
+
 
 
 
@@ -89,7 +110,7 @@ public class ProfileFragment extends Fragment {
         pieChart.setData(pieData);
         pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
         pieDataSet.setSliceSpace(5);
-
+        pieChart.setRotationEnabled(false);
         //end visual
 
 
@@ -102,10 +123,12 @@ public class ProfileFragment extends Fragment {
 
     public void getOverview()
     {
+
         overviewClient = new OverviewClient();
 
         overviewClient.getUserOverview(false, (respObject) -> {
            overviewList = (List<Overview>) respObject;
+
         }, (respError) -> {
             System.out.println(respError);
         });
@@ -125,7 +148,6 @@ public class ProfileFragment extends Fragment {
         //end dummy data
 
 
-
         for (int i = 0; i <overviewList.size() ; i++) {
 
             if(productTypeHashMap.containsKey(overviewList.get(i).getProductType()))
@@ -135,11 +157,9 @@ public class ProfileFragment extends Fragment {
             else
             {
                 productTypeHashMap.put(overviewList.get(i).getProductType(), 1);
-
             }
 
         }
-
     }
 
 
@@ -197,9 +217,6 @@ public class ProfileFragment extends Fragment {
         //https://weeklycoding.com/mpandroidchart-documentation/
 
 
-
-
-
         ArrayList<PieEntry> entries = new ArrayList<>();
         entries.add(new PieEntry(productTypeHashMap.get(ProductType.MEAT),"" + ProductType.MEAT));
         entries.add(new PieEntry(productTypeHashMap.get(ProductType.FRUIT),"" + ProductType.FRUIT));
@@ -220,7 +237,7 @@ public class ProfileFragment extends Fragment {
         pieChart.setData(pieData);
         pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
         pieDataSet.setSliceSpace(5);
-
+        pieChart.setRotationEnabled(false);
 
     }
 
