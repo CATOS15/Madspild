@@ -60,8 +60,26 @@
         android:layout_width="211dp"
         android:layout_height="193dp"
         android:layout_margin="5dp"
-        app:layout_constraintStart_toStartOf="@+id/fragment_profile_topbar"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_profile_topbar"
-        />
+        android:layout_marginStart="140dp"
+        android:layout_marginEnd="275dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.26999998" />
+
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/fragment_profile_barChart"
+        android:layout_width="211dp"
+        android:layout_height="193dp"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="140dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_profile_piechart"
+        app:layout_constraintVertical_bias="0.37" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
