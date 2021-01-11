@@ -62,10 +62,10 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        view.findViewById(R.id.fragment_profile_topbar_button_settings).setOnClickListener((event) -> {
-            Intent intent = new Intent(getActivity(), EditProfileActivity.class);
-            startActivity(intent);
-        });
+//        view.findViewById(R.id.fragment_profile_topbar_button_settings).setOnClickListener((event) -> {
+//            Intent intent = new Intent(getActivity(), EditProfileActivity.class);
+//            startActivity(intent);
+//        });
 
         view.findViewById(R.id.fragment_profile_topbar_button_logout).setOnClickListener((event) -> {
             HttpClientHelper.removeToken();
@@ -88,13 +88,13 @@ public class ProfileFragment extends Fragment {
 //        changegraph = view.findViewById(R.id.fragment_profile_changegraph);
 
 //        txtgraph.setText("Skift graf");
-        statetxtgraph.setText("Antal vare");
+//        statetxtgraph.setText("Antal vare");
 //        changegraph.setText("Skift");
 
-        amountTitle.setText("Antal vare");
+        amountTitle.setText("Totalt antal produkter");
         amount.setText("Antal");
 
-        amountWasteTitle.setText("Antal Udløbet");
+        amountWasteTitle.setText("Produkter udløbet");
         amountWaste.setText("Udløbet");
 
         getOverview();
