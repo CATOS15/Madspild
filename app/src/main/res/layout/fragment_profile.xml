@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
 <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -59,34 +59,17 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.github.mikephil.charting.charts.PieChart
-        android:id="@+id/fragment_profile_piechart"
-        android:layout_width="211dp"
-        android:layout_height="193dp"
-        android:layout_margin="5dp"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="84dp"
-        android:layout_marginEnd="275dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.525"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_profile_amountWaste"
-        app:layout_constraintVertical_bias="0.19999999" />
-
     <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/fragment_profile_barChart"
-        android:layout_width="211dp"
-        android:layout_height="193dp"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="140dp"
+        android:layout_width="365dp"
+        android:layout_height="345dp"
+        android:layout_marginTop="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_profile_piechart"
-        app:layout_constraintVertical_bias="0.23" />
+        app:layout_constraintTop_toBottomOf="@+id/fragment_profile_amountWaste"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/fragment_profile_amountWaste"
