@@ -3,6 +3,8 @@ package madspild.Fragments;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -128,7 +130,9 @@ public class ProfileFragment extends Fragment {
 
         overviewClient.getUserOverview(false, (respObject) -> {
            overviewList = (List<Overview>) respObject;
+            new Handler(Looper.getMainLooper()).post(() -> {
 
+            });
         }, (respError) -> {
             System.out.println(respError);
         });
