@@ -9,7 +9,9 @@ import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -48,6 +50,11 @@ public class ProfileFragment extends Fragment {
     TextView amountWaste;
     TextView username;
     View view;
+    TextView txtgraph;
+    TextView statetxtgraph;
+    Button changegraph;
+
+
     int highestProduct = 0;
     int expireAmount = 0;
 
@@ -76,11 +83,18 @@ public class ProfileFragment extends Fragment {
         amountWasteTitle = view.findViewById(R.id.fragment_profile_amountWasteTitle);
         amountWaste = view.findViewById(R.id.fragment_profile_amountWaste);
         username = view.findViewById(R.id.fragment_profile_username);
+        txtgraph = view.findViewById(R.id.fragment_profile_change_txtgraph);
+        statetxtgraph = view.findViewById(R.id.fragment_profile_statetxtgraph);
+        changegraph = view.findViewById(R.id.fragment_profile_changegraph);
 
-        amountTitle.setText("Antal vare i alt");
+        txtgraph.setText("Skift graf");
+        statetxtgraph.setText("Antal vare");
+        changegraph.setText("Skift");
+
+        amountTitle.setText("Antal vare");
         amount.setText("Antal");
 
-        amountWasteTitle.setText("Antal vare Udløbet");
+        amountWasteTitle.setText("Antal Udløbet");
         amountWaste.setText("Udløbet");
 
         getOverview();
