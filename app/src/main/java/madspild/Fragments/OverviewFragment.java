@@ -1,5 +1,6 @@
 package madspild.Fragments;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -12,11 +13,13 @@ import android.widget.GridView;
 import androidx.fragment.app.Fragment;
 
 import com.example.madspild.R;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 import madspild.Adapters.OverviewListAdapter;
@@ -33,10 +36,13 @@ public class OverviewFragment extends Fragment {
     OverviewClient overviewClient;
     OverviewListAdapter overviewListAdapter;
     OverviewSorting overviewSorting = OverviewSorting.BYDATE;
+    MaterialAlertDialogBuilder dialog;
 
     @Override
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
         view = i.inflate(R.layout.fragment_overview, container, false);
+
+        dialog = new MaterialAlertDialogBuilder(Objects.requireNonNull(getActivity()));
 
         overviewClient = new OverviewClient();
         overviewClient.getUserOverview(false, (respObject) -> {
@@ -58,7 +64,10 @@ public class OverviewFragment extends Fragment {
             sortOverviewList(overviewList);
             initOverviewListAdapter(overviewList);
         }, (respError) -> {
-            System.out.println(respError);
+            new Handler(Looper.getMainLooper()).post(() -> {
+                //dialog message
+                errorMessageDialog("Fejl",respError);
+            });
         });
     }
 
@@ -124,4 +133,20 @@ public class OverviewFragment extends Fragment {
         });
     }
 
+    public void errorMessageDialog(String title, String message){
+        //System.out.println("fejl i barcode");
+
+        dialog.setTitle(title);
+        dialog.setMessage(message);
+        dialog.setOnDismissListener(dialogInterface -> {
+            onResume();
+        });
+        dialog.setPositiveButton("OKAY", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                onResume();
+            }
+        });
+        dialog.show();
+    }
 }
