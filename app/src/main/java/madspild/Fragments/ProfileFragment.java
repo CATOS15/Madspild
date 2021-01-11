@@ -1,5 +1,6 @@
 package madspild.Fragments;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -14,20 +15,16 @@ import androidx.fragment.app.Fragment;
 
 import com.example.madspild.R;
 import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.PieData;
-import com.github.mikephil.charting.data.PieDataSet;
-import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
-import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
@@ -41,7 +38,6 @@ import madspild.Models.ProductType;
 
 
 public class ProfileFragment extends Fragment {
-    PieChart pieChart;
     BarChart barChart;
     OverviewClient overviewClient;
     List<Overview> overviewList;
@@ -53,6 +49,8 @@ public class ProfileFragment extends Fragment {
     TextView username;
     View view;
     int highestProduct = 0;
+    int expireAmount = 0;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_profile, container, false);
@@ -72,12 +70,12 @@ public class ProfileFragment extends Fragment {
         productTypeHashMap = new HashMap<>();
         overviewList = new ArrayList<>();
 
-//        pieChart = view.findViewById(R.id.fragment_profile_piechart);
         barChart = view.findViewById(R.id.fragment_profile_barChart);
         amountTitle = view.findViewById(R.id.fragment_profile_amountTitle);
         amount = view.findViewById(R.id.fragment_profile_amount);
         amountWasteTitle = view.findViewById(R.id.fragment_profile_amountWasteTitle);
         amountWaste = view.findViewById(R.id.fragment_profile_amountWaste);
+        username = view.findViewById(R.id.fragment_profile_username);
 
         amountTitle.setText("Antal vare i alt");
         amount.setText("Antal");
@@ -85,42 +83,7 @@ public class ProfileFragment extends Fragment {
         amountWasteTitle.setText("Antal vare Udløbet");
         amountWaste.setText("Udløbet");
 
-//        username.setText(HttpClientHelper.user.getFirstname());
-
         getOverview();
-//        setupPieChart();
-//        setupBarChart();
-
-
-
-
-        //Visual until fixes
-
-
-//        ArrayList<PieEntry> entries = new ArrayList<>();
-//        entries.add(new PieEntry(100f,"Uge 1"));
-//        entries.add(new PieEntry(10f,"Uge 2"));
-//        entries.add(new PieEntry(30f,"Uge 3"));
-//
-////        pieChart.setUsePercentValues(true);
-//        Description description = new Description();
-//        description.setText("Dummy data");
-//        pieChart.setDescription(description);
-//        PieDataSet pieDataSet = new PieDataSet(entries,"");
-//        pieChart.setHoleRadius(30f);
-//        pieChart.setTransparentCircleAlpha(0);
-//        pieChart.setDrawEntryLabels(true);
-//        PieData pieData = new PieData(pieDataSet);
-//        pieChart.setData(pieData);
-//        pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-//        pieDataSet.setSliceSpace(5);
-//        pieChart.setRotationEnabled(false);
-        //end visual
-
-
-
-
-
 
         return view;
     }
@@ -141,21 +104,34 @@ public class ProfileFragment extends Fragment {
                         productTypeHashMap.put(overviewList.get(i).getProductType(), productTypeHashMap.get(overviewList.get(i).getProductType()) + 1);
                         if(productTypeHashMap.get(overviewList.get(i).getProductType()) > highestProduct)
                             highestProduct = productTypeHashMap.get(overviewList.get(i).getProductType());
+
                     }
                     else
                     {
                         productTypeHashMap.put(overviewList.get(i).getProductType(), 1);
                     }
+                    if(overviewList.get(i).getExpdate().before(new Date()))
+                        expireAmount++;
 
                 }
-//                setupPieChart();
+
+                ((Activity)getContext()).runOnUiThread(new Runnable() {
+                    public void run() {
+                        amount.setText(overviewList.size() + "");
+                        amountWaste.setText(expireAmount + "");
+                        username.setText(HttpClientHelper.user.getUsername() + "");
+
+                    }
+                });
+
                 setupBarChart();
+
             });
         }, (respError) -> {
             System.out.println(respError);
         });
-    }
 
+    }
 
     public void setupBarChart()
     {
@@ -251,21 +227,13 @@ public class ProfileFragment extends Fragment {
 
         }
 
-
-
         BarData data = new BarData(bars);
-
-//        BarDataSet dataSet = new BarDataSet(entries, "bars");
-//        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-//        BarData data = new BarData(dataSet);
-
 
         barChart.setData(data);
 
         data.setBarWidth(0.5f);
 
         barChart.setData(data);
-//        barChart.setFitBars(true);
         Description description = new Description();
         description.setText("Antal typer vare");
         barChart.setDescription(description);
@@ -289,36 +257,6 @@ public class ProfileFragment extends Fragment {
         x.setAxisMinValue(0);
         x.setAxisMaxValue(5);
 
-
-    }
-
-    public void setupPieChart()
-    {
-        //https://github.com/PhilJay/MPAndroidChart
-        //https://weeklycoding.com/mpandroidchart-documentation/
-
-
-        ArrayList<PieEntry> entries = new ArrayList<>();
-        entries.add(new PieEntry(productTypeHashMap.get(ProductType.MEAT),"" + ProductType.MEAT));
-        entries.add(new PieEntry(productTypeHashMap.get(ProductType.FRUIT),"" + ProductType.FRUIT));
-        entries.add(new PieEntry(productTypeHashMap.get(ProductType.DAIRY),"" + ProductType.DAIRY));
-        entries.add(new PieEntry(productTypeHashMap.get(ProductType.OTHER),"" + ProductType.OTHER));
-
-
-
-//        pieChart.setUsePercentValues(true);
-        Description description = new Description();
-        description.setText("Antal typer vare");
-        pieChart.setDescription(description);
-        PieDataSet pieDataSet = new PieDataSet(entries,"");
-        pieChart.setHoleRadius(30f);
-        pieChart.setTransparentCircleAlpha(0);
-        pieChart.setDrawEntryLabels(true);
-        PieData pieData = new PieData(pieDataSet);
-        pieChart.setData(pieData);
-        pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-        pieDataSet.setSliceSpace(5);
-        pieChart.setRotationEnabled(false);
 
     }
 
