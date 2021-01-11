@@ -51,5 +51,6 @@
 
     <!-- Profil -->
     <string name="fragment_profile_topbar_title">Profil</string>
+    <string name="save_changes_button">GEM ÆNDRINGER</string>
 
 </resources>

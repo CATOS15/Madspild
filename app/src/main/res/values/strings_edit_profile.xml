@@ -7,4 +7,7 @@
     <string name="edit_profile">REDIGER PROFIL</string>
     <string name="editprofile_full_name">Hej Fulde Navn</string>
     <string name="editprofile_username">Username</string>
+    <string name="show_profile_page">Show profile page</string>
+    <string name="goto_edit_profile_button">Edit Profile</string>
+    <string name="cancel_button">FORTRYD</string>
 </resources>
