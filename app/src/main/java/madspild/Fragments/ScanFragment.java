@@ -173,8 +173,14 @@ public class ScanFragment extends Fragment {
     }
 
     public boolean expDateChecker(Product product){
-        Date temp = product.getExpdate();
-        return System.currentTimeMillis() > temp.getTime();
+        Date productExpiryDate = product.getExpdate();
+
+        DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss",Locale.ENGLISH);
+        Date currentdate = new Date();
+        System.out.println(df.format(currentdate));
+        System.out.println(df.format(productExpiryDate));
+
+        return currentdate.getTime() < productExpiryDate.getTime();
     }
 
     //MatrixtoProduct, MtP
