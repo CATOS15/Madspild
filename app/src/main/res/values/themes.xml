@@ -18,6 +18,16 @@
         <item name="boxBackgroundColor">@color/white</item>
     </style>
 
+    <style name="Theme.GS1.OutlinedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/editprofile_inputfield_colorstates</item>
+        <item name="android:textColorHint">@color/editprofile_inputfield_colorstates</item>
+
+    </style>
+
+    <style name="Theme.GS1.OutlinedBox.InputText" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:textColor">@color/editprofile_inputfield_colorstates</item>
+    </style>
+
     <style name="Theme.GS1" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/GS1Blue</item>

@@ -2,7 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_login">
+    android:background="@color/white">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -12,15 +12,17 @@
         android:padding="24dp"
         android:paddingTop="16dp">
 
-        <ImageView
-            android:layout_width="170dp"
-            android:layout_height="170dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="18dp"
-            android:layout_marginBottom="8dp"
-            android:contentDescription="@string/ms_imagedescription_logo"
-            app:srcCompat="@drawable/icon_profile"
-            app:tint="@color/GS1LightGray" />
+        <TextView
+            android:id="@+id/fragment_show_profile_titel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="10dp"
+            android:text="PROFILOPLYSNINGER"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="18dp"/>
 
         <TextView
             android:id="@+id/editprofile_text_username"
@@ -34,8 +36,15 @@
             android:textColor="@color/GS1Peach"
             android:textSize="24sp" />
 
+        <LinearLayout
+            android:id="@+id/editprofile_linearlayout_inputfields"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.TipTime.TextInputLayout.Filled"
+            style="@style/Theme.GS1.OutlinedBox"
             android:id="@+id/editprofile_text_firstname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -43,6 +52,7 @@
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
+                style="@style/Theme.GS1.OutlinedBox.InputText"
                 android:id="@+id/editprofile_edit_firstname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -51,7 +61,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.TipTime.TextInputLayout.Filled"
+            style="@style/Theme.GS1.OutlinedBox"
             android:id="@+id/editprofile_text_lastname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -59,6 +69,7 @@
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
+                style="@style/Theme.GS1.OutlinedBox.InputText"
                 android:id="@+id/editprofile_edit_lastname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -67,7 +78,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.TipTime.TextInputLayout.Filled"
+            style="@style/Theme.GS1.OutlinedBox"
             android:id="@+id/editprofile_text_phonenumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -75,6 +86,7 @@
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
+                style="@style/Theme.GS1.OutlinedBox.InputText"
                 android:id="@+id/editprofile_edit_phonenumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -83,7 +95,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.TipTime.TextInputLayout.Filled"
+            style="@style/Theme.GS1.OutlinedBox"
             android:id="@+id/editprofile_text_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -91,12 +103,15 @@
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
+                style="@style/Theme.GS1.OutlinedBox.InputText"
                 android:id="@+id/editprofile_edit_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"

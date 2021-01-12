@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,19 +31,21 @@ import madspild.Models.User;
 
 public class ShowProfileFragment extends Fragment {
     TextInputLayout editprofile_text_firstname; //fornavn
-    //TextInputEditText editprofile_edit_firstname;
+    TextInputEditText editprofile_edit_firstname;
 
     TextInputLayout editprofile_text_lastname; //efternavn
-    //TextInputEditText editprofile_edit_lastname;
+    TextInputEditText editprofile_edit_lastname;
 
     TextInputLayout editprofile_text_phonenumber; //telefon nummer
-    //TextInputEditText editprofile_edit_phonenumber;
+    TextInputEditText editprofile_edit_phonenumber;
 
     TextInputLayout editprofile_text_email; //e-mail
-    //TextInputEditText editprofile_edit_email;
+    TextInputEditText editprofile_edit_email;
 
     TextView editprofile_text_username; //brugernavn
     Button goto_editprofile_button;
+
+    LinearLayout editprofile_linearlayout_inputfields;
 
 
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
@@ -50,20 +53,22 @@ public class ShowProfileFragment extends Fragment {
 
         //Henter views
         editprofile_text_firstname = view.findViewById(R.id.editprofile_text_firstname);
-        //editprofile_edit_firstname = view.findViewById(R.id.editprofile_edit_firstname);
+        editprofile_edit_firstname = view.findViewById(R.id.editprofile_edit_firstname);
 
         editprofile_text_lastname = view.findViewById(R.id.editprofile_text_lastname);
-       // editprofile_edit_lastname = view.findViewById(R.id.editprofile_edit_lastname);
+       editprofile_edit_lastname = view.findViewById(R.id.editprofile_edit_lastname);
 
         editprofile_text_phonenumber = view.findViewById(R.id.editprofile_text_phonenumber);
-        //editprofile_edit_phonenumber = view.findViewById(R.id.editprofile_edit_phonenumber);
+        editprofile_edit_phonenumber = view.findViewById(R.id.editprofile_edit_phonenumber);
 
         editprofile_text_email = view.findViewById(R.id.editprofile_text_email);
-        //editprofile_edit_email = view.findViewById(R.id.editprofile_edit_email);
+        editprofile_edit_email = view.findViewById(R.id.editprofile_edit_email);
 
         editprofile_text_username = view.findViewById(R.id.editprofile_text_username);
 
         goto_editprofile_button = view.findViewById(R.id.goto_editprofile_button);
+
+        editprofile_linearlayout_inputfields = view.findViewById(R.id.editprofile_linearlayout_inputfields);
 
         //Sæt brugerinfo
         editprofile_text_firstname.getEditText().setText(HttpClientHelper.user.getFirstname());
@@ -71,6 +76,12 @@ public class ShowProfileFragment extends Fragment {
         editprofile_text_phonenumber.getEditText().setText(HttpClientHelper.user.getPhone());
         editprofile_text_email.getEditText().setText(HttpClientHelper.user.getEmail());
         editprofile_text_username.setText(HttpClientHelper.user.getUsername());
+
+        for ( int j = 0; j < editprofile_linearlayout_inputfields.getChildCount();  j++ ){
+            View textfield = editprofile_linearlayout_inputfields.getChildAt(j);
+            textfield.setEnabled(false);
+        }
+
 
         goto_editprofile_button.setOnClickListener(new View.OnClickListener() {
             @Override
