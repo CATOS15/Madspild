@@ -62,9 +62,6 @@ public class ScanFragment extends Fragment {
 
         dialog = new MaterialAlertDialogBuilder(Objects.requireNonNull(getActivity()));
 
-        Snackbar snackbar = Snackbar.make(root,"Produkt tilføjet ", 10000);
-        snackbar.show();
-
         //til at skanne
         final Activity activity = getActivity();
         codeScanner.setDecodeCallback(new DecodeCallback() {

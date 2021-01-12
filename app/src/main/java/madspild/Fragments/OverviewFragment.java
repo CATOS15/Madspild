@@ -1,4 +1,4 @@
-package madspild.Fragments;
+ package madspild.Fragments;
 
 import android.content.DialogInterface;
 import android.os.Bundle;

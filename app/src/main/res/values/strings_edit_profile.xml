@@ -10,4 +10,6 @@
     <string name="show_profile_page">Show profile page</string>
     <string name="goto_edit_profile_button">Edit Profile</string>
     <string name="cancel_button">FORTRYD</string>
+    <string name="profiloplysninger">PROFILOPLYSNINGER</string>
+    <string name="profiloplyninger">Profiloplyninger</string>
 </resources>
