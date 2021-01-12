@@ -50,8 +50,6 @@ public class ScanFragment extends Fragment {
     Product product;
     MaterialAlertDialogBuilder dialog;
 
-
-
     @Override
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
         View root = i.inflate(R.layout.fragment_scan, container, false);
@@ -63,6 +61,9 @@ public class ScanFragment extends Fragment {
         }
 
         dialog = new MaterialAlertDialogBuilder(Objects.requireNonNull(getActivity()));
+
+        Snackbar snackbar = Snackbar.make(root,"Produkt tilføjet ", 10000);
+        snackbar.show();
 
         //til at skanne
         final Activity activity = getActivity();
@@ -96,7 +97,7 @@ public class ScanFragment extends Fragment {
                             product = new Product();
                             product = MatrixtoProduct(DataMatrixData);
 
-                            if(!tilbagekaldtBatchTest(product)){
+                            if(tilbagekaldtBatchTest(product)){
                                 errorMessageDialog("Fare","Denne batch er blevet tilbagekaldt, kontakt medarbejder");
                             }
 
@@ -111,6 +112,8 @@ public class ScanFragment extends Fragment {
                                         Snackbar snackbar = Snackbar.make(root,"Produkt tilføjet "+product.getGtin(), 3000);
                                         snackbar.setAnchorView(R.id.bottom_navigation_view);
                                         snackbar.show();
+
+                                        //showProductAddedSnackbar(root.getRootView(), product);
                                         onResume();
                                     });
                                 }, (respError) -> {
@@ -160,12 +163,22 @@ public class ScanFragment extends Fragment {
         super.onPause();
     }
 
+    /*
+    //forsøg på at fikse snackbar
+    public void showProductAddedSnackbar(View root, Product product){
+        Snackbar snackbar = Snackbar.make(root,"Produkt tilføjet "+product.getGtin(), 3000);
+        snackbar.setAnchorView(R.id.bottom_navigation_view);
+        snackbar.show();
+        return;
+    }
+     */
+
     public boolean tilbagekaldtBatchTest(Product TestonBatch){
         String BatchNo = TestonBatch.getBatchnumber();
         ArrayList<String> TilbagekaldteBatches = new ArrayList<String>();
-        TilbagekaldteBatches.add("210417"); //frosne ærter
-        TilbagekaldteBatches.add("210118"); //kidney bønner
-        TilbagekaldteBatches.add("210127"); //coca cola
+        TilbagekaldteBatches.add("003GS7"); //frosne ærter
+        TilbagekaldteBatches.add("003GS8"); //kidney bønner
+        TilbagekaldteBatches.add("002GS6"); //coca cola
 
         return TilbagekaldteBatches.contains(BatchNo);
     }
