@@ -271,6 +271,10 @@ public class ProfileFragment extends Fragment {
         Description description = new Description();
         description.setText("Chart af totalt antal");
         barChart.setDescription(description);
+//        barChart.setTouchEnabled(false);
+        barChart.setPinchZoom(false);
+        barChart.setScaleEnabled(false);
+        barChart.setDoubleTapToZoomEnabled(false);
 
 
     }
