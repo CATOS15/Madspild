@@ -62,10 +62,10 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_profile, container, false);
 
-//        view.findViewById(R.id.fragment_profile_topbar_button_settings).setOnClickListener((event) -> {
-//            Intent intent = new Intent(getActivity(), EditProfileActivity.class);
-//            startActivity(intent);
-//        });
+        view.findViewById(R.id.fragment_profile_topbar_button_settings).setOnClickListener((event) -> {
+            Intent intent = new Intent(getActivity(), EditProfileActivity.class);
+            startActivity(intent);
+        });
 
         view.findViewById(R.id.fragment_profile_topbar_button_logout).setOnClickListener((event) -> {
             HttpClientHelper.removeToken();
@@ -259,6 +259,7 @@ public class ProfileFragment extends Fragment {
         bottomAxis.setLabelCount(bars.size());
 
         barChart.getXAxis().setSpaceMax(1);
+        barChart.setNestedScrollingEnabled(false);
 
         barChart.setFitBars(true);
         barChart.setDragEnabled(true);
