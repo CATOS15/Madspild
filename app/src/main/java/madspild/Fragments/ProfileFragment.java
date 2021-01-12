@@ -17,13 +17,19 @@ import androidx.fragment.app.Fragment;
 
 import com.example.madspild.R;
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -150,127 +156,121 @@ public class ProfileFragment extends Fragment {
     public void setupBarChart()
     {
 
-        List<BarEntry> entries1 = new ArrayList<>();
-        List<BarEntry> entries2 = new ArrayList<>();
-        List<BarEntry> entries3 = new ArrayList<>();
-        List<BarEntry> entries4 = new ArrayList<>();
-        List<BarEntry> entries5 = new ArrayList<>();
-        List<BarEntry> entries6 = new ArrayList<>();
-        List<BarEntry> entries7 = new ArrayList<>();
-        List<BarEntry> entries8 = new ArrayList<>();
-        List<BarEntry> entries9 = new ArrayList<>();
-        List<BarEntry> entries10 = new ArrayList<>();
-
-
-
-        List<IBarDataSet> bars = new ArrayList<IBarDataSet>();
-
+        //data for values
+        ArrayList<BarEntry> valueSet = new ArrayList<>();
         if(productTypeHashMap.get(ProductType.BEVERAGES) != null)
         {
-            entries1.add(new BarEntry(0.5f, productTypeHashMap.get(ProductType.BEVERAGES)));
-            BarDataSet dataset1 = new BarDataSet(entries1, "" + ProductType.BEVERAGES);
-            dataset1.setColor(Color.RED);
-            bars.add(dataset1);
+            BarEntry entry = new BarEntry(0f, productTypeHashMap.get(ProductType.BEVERAGES));
+            valueSet.add(entry);
         }
         if(productTypeHashMap.get(ProductType.BAKERY) != null)
         {
-            entries2.add(new BarEntry(1f, productTypeHashMap.get(ProductType.BAKERY)));
-            BarDataSet dataset2 = new BarDataSet(entries2, "" + ProductType.BAKERY);
-            dataset2.setColor(Color.BLUE);
-            bars.add(dataset2);
+            BarEntry entry = (new BarEntry(1f, productTypeHashMap.get(ProductType.BAKERY)));
+            valueSet.add(entry);
+
         }
         if(productTypeHashMap.get(ProductType.CANNED) != null)
         {
-            BarDataSet dataset3 = new BarDataSet(entries3, "" + ProductType.CANNED);
-            dataset3.setColor(Color.GREEN);
-            bars.add(dataset3);
-            entries3.add(new BarEntry(1.5f, productTypeHashMap.get(ProductType.CANNED)));
+            BarEntry entry = (new BarEntry(2f, productTypeHashMap.get(ProductType.CANNED)));
+            valueSet.add(entry);
 
         }
         if(productTypeHashMap.get(ProductType.DAIRY) != null)
         {
-            entries4.add(new BarEntry(2f, productTypeHashMap.get(ProductType.DAIRY)));
-            BarDataSet dataset4 = new BarDataSet(entries4, "" + ProductType.DAIRY);
-            dataset4.setColor(Color.GRAY);
-            bars.add(dataset4);
+            BarEntry entry = (new BarEntry(3f, productTypeHashMap.get(ProductType.DAIRY)));
+            valueSet.add(entry);
+
         }
         if(productTypeHashMap.get(ProductType.DRY) != null)
         {
-            entries5.add(new BarEntry(2.5f, productTypeHashMap.get(ProductType.DRY)));
-            BarDataSet dataset5 = new BarDataSet(entries5, "" + ProductType.DRY);
-            dataset5.setColor(Color.MAGENTA);
-            bars.add(dataset5);
+            BarEntry entry = (new BarEntry(4f, productTypeHashMap.get(ProductType.DRY)));
+            valueSet.add(entry);
+
         }
         if(productTypeHashMap.get(ProductType.FROZEN) != null)
         {
-            entries6.add(new BarEntry(3f, productTypeHashMap.get(ProductType.FROZEN)));
-            BarDataSet dataset6 = new BarDataSet(entries6, "" + ProductType.FROZEN);
-            dataset6.setColor(Color.YELLOW);
-            bars.add(dataset6);
+            BarEntry entry = (new BarEntry(5f, productTypeHashMap.get(ProductType.FROZEN)));
+            valueSet.add(entry);
         }
         if(productTypeHashMap.get(ProductType.MEAT) != null)
         {
-            BarDataSet dataset7 = new BarDataSet(entries7, "" + ProductType.MEAT);
-            dataset7.setColor(Color.CYAN);
-            bars.add(dataset7);
-            entries7.add(new BarEntry(3.5f, productTypeHashMap.get(ProductType.MEAT)));
-
+            BarEntry entry = (new BarEntry(6f, productTypeHashMap.get(ProductType.MEAT)));
+            valueSet.add(entry);
         }
         if(productTypeHashMap.get(ProductType.FRUIT) != null)
         {
-            BarDataSet dataset8 = new BarDataSet(entries8, "" + ProductType.FRUIT);
-            dataset8.setColor(Color.LTGRAY);
-            bars.add(dataset8);
-            entries8.add(new BarEntry(4f, productTypeHashMap.get(ProductType.FRUIT)));
-
+            BarEntry entry = (new BarEntry(7f, productTypeHashMap.get(ProductType.FRUIT)));
+            valueSet.add(entry);
         }
         if(productTypeHashMap.get(ProductType.VEGETABLES) != null)
         {
-            BarDataSet dataset9 = new BarDataSet(entries9, "" + ProductType.VEGETABLES);
-            dataset9.setColor(Color.DKGRAY);
-            bars.add(dataset9);
-            entries9.add(new BarEntry(4.5f, productTypeHashMap.get(ProductType.VEGETABLES)));
-
+            BarEntry entry = (new BarEntry(8f, productTypeHashMap.get(ProductType.VEGETABLES)));
+            valueSet.add(entry);
         }
         if(productTypeHashMap.get(ProductType.OTHER) != null)
         {
-            entries10.add(new BarEntry(5f, productTypeHashMap.get(ProductType.OTHER)));
-            BarDataSet dataset10 = new BarDataSet(entries10, "" + ProductType.OTHER);
-            dataset10.setColor(Color.BLACK);
-            bars.add(dataset10);
-
+            BarEntry entry = (new BarEntry(9f, productTypeHashMap.get(ProductType.OTHER)));
+            valueSet.add(entry);
         }
 
-        BarData data = new BarData(bars);
 
-        barChart.setData(data);
+        //data for label name
+        ArrayList<String> products = new ArrayList<>();
+        products.add(""+ProductType.BEVERAGES);
+        products.add(""+ProductType.BAKERY);
+        products.add(""+ProductType.CANNED);
+        products.add(""+ProductType.DAIRY);
+        products.add(""+ProductType.DRY);
+        products.add(""+ProductType.FROZEN);
+        products.add(""+ProductType.MEAT);
+        products.add(""+ProductType.FRUIT);
+        products.add(""+ProductType.VEGETABLES);
+        products.add(""+ProductType.OTHER);
 
-        data.setBarWidth(0.5f);
+        BarData data = new BarData();
+        BarDataSet bds = new BarDataSet(valueSet, " ");
+        String[] xAxisLabels = products.toArray(new String[0]);
+        bds.setStackLabels(xAxisLabels);
+        data.addDataSet(bds);
+        data.setDrawValues(true);
+        data.setBarWidth(0.4f);
 
+        XAxis xaxis = barChart.getXAxis();
+
+        xaxis.setDrawGridLines(false);
+        xaxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xaxis.setGranularity(1f);
+        xaxis.setDrawLabels(true);
+        xaxis.setDrawAxisLine(false);
+
+        xaxis.setValueFormatter(new IndexAxisValueFormatter(products));
+        xaxis.setLabelCount(products.size());
+
+
+
+        YAxis yAxisLeft = barChart.getAxisLeft();
+        yAxisLeft.setEnabled(false);
+        barChart.getAxisLeft().setAxisMinimum(0);
+
+
+
+        YAxis yAxisRight = barChart.getAxisRight();
+        yAxisRight.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART);
+        yAxisRight.setDrawGridLines(false);
+        yAxisRight.setDrawAxisLine(false);
+
+        yAxisRight.setDrawLabels(false);
+
+        Legend legend = barChart.getLegend();
+        legend.setEnabled(false);
+
+
+        barChart.setDrawValueAboveBar(true);
+        barChart.setFitBars(true);
         barChart.setData(data);
         Description description = new Description();
-        description.setText("Antal typer vare");
+        description.setText("Chart af totalt antal");
         barChart.setDescription(description);
-
-        barChart.getDescription().setEnabled(false);
-        barChart.setMaxVisibleValueCount(20);
-
-        XAxis bottomAxis = barChart.getXAxis();
-        bottomAxis.setLabelCount(bars.size());
-
-        barChart.getXAxis().setSpaceMax(1);
-        barChart.setNestedScrollingEnabled(false);
-
-        barChart.setFitBars(true);
-        barChart.setDragEnabled(true);
-        barChart.setVisibleXRange(0,overviewList.size());
-        YAxis y = barChart.getAxisLeft();
-        y.setAxisMaxValue(highestProduct + 5);
-        y.setAxisMinValue(0);
-
-        XAxis x = barChart.getXAxis();
-        x.setAxisMinValue(0);
-        x.setAxisMaxValue(5);
 
 
     }
