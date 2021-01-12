@@ -28,6 +28,7 @@ import com.google.zxing.Result;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
@@ -95,7 +96,11 @@ public class ScanFragment extends Fragment {
                             product = new Product();
                             product = MatrixtoProduct(DataMatrixData);
 
-                            if(expDateChecker(product)){
+                            if(!tilbagekaldtBatchTest(product)){
+                                errorMessageDialog("Fare","Denne batch er blevet tilbagekaldt, kontakt medarbejder");
+                            }
+
+                            else if(expDateChecker(product)){
                                 productClient.createProduct(product, (respObject) -> {
                                     Product product = (Product) respObject;
                                     System.out.println("bananskrald");
@@ -155,6 +160,16 @@ public class ScanFragment extends Fragment {
         super.onPause();
     }
 
+    public boolean tilbagekaldtBatchTest(Product TestonBatch){
+        String BatchNo = TestonBatch.getBatchnumber();
+        ArrayList<String> TilbagekaldteBatches = new ArrayList<String>();
+        TilbagekaldteBatches.add("210417"); //frosne ærter
+        TilbagekaldteBatches.add("210118"); //kidney bønner
+        TilbagekaldteBatches.add("210127"); //coca cola
+
+        return TilbagekaldteBatches.contains(BatchNo);
+    }
+
     public void errorMessageDialog(String title, String message){
         //System.out.println("fejl i barcode");
 
@@ -173,8 +188,14 @@ public class ScanFragment extends Fragment {
     }
 
     public boolean expDateChecker(Product product){
-        Date temp = product.getExpdate();
-        return System.currentTimeMillis() > temp.getTime();
+        Date productExpiryDate = product.getExpdate();
+
+        DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss",Locale.ENGLISH);
+        Date currentdate = new Date();
+        System.out.println(df.format(currentdate));
+        System.out.println(df.format(productExpiryDate));
+
+        return currentdate.getTime() < productExpiryDate.getTime();
     }
 
     //MatrixtoProduct, MtP
