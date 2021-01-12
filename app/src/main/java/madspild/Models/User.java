@@ -85,20 +85,4 @@ public class User {
         this.admin = admin;
     }
 
-
-    public boolean validate()
-    {
-        if (getUsername().length() < 4){return false;}
-        if(getPassword().length() < 5 ){return false;}
-        if(getFirstname().length() < 2 ){return false;}
-        if(getLastname().length() < 2 ){return false;}
-        if(!(getEmail().contains("@")) ){return false;}
-        if(getPhone().length() <= 7 || getPhone().length() >= 9 || getPhone().contains(" ")){
-            return false;}
-        else
-        {try{Integer.parseInt(getPhone());}
-        catch (Exception e){return false;} }
-
-        return true;
-    }
 }
