@@ -80,9 +80,6 @@ public class ProfileFragment extends Fragment {
             Objects.requireNonNull(getActivity()).finish();
         });
 
-        productTypeHashMap = new HashMap<>();
-        overviewList = new ArrayList<>();
-
         barChart = view.findViewById(R.id.fragment_profile_barChart);
         amountTitle = view.findViewById(R.id.fragment_profile_amountTitle);
         amount = view.findViewById(R.id.fragment_profile_amount);
@@ -108,10 +105,19 @@ public class ProfileFragment extends Fragment {
         return view;
     }
 
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getOverview();
+    }
+
     public void getOverview()
     {
-
+        overviewList = new ArrayList<>();
         overviewClient = new OverviewClient();
+        productTypeHashMap = new HashMap<>();
+        expireAmount = 0;
 
         overviewClient.getUserOverview(false, (respObject) -> {
            overviewList = (List<Overview>) respObject;
