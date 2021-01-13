@@ -53,7 +53,7 @@ public class ScanFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
         View root = i.inflate(R.layout.fragment_scan, container, false);
-        codeScanner = new CodeScanner(Objects.requireNonNull(getActivity()), (CodeScannerView)root.findViewById(R.id.code_scanner_view));
+        codeScanner = new CodeScanner(Objects.requireNonNull(getActivity()), (CodeScannerView)root.findViewById(R.id.fragment_scan_codescanner));
         productClient = new ProductClient();
 
         if(!hasCameraPermission()) {
@@ -107,7 +107,7 @@ public class ScanFragment extends Fragment {
                                             //errorMessageDialog("Success","Produkt tilføjet");
                                         //en snackbar i stedet for
                                         Snackbar snackbar = Snackbar.make(root,"Produkt tilføjet "+product.getGtin(), 3000);
-                                        snackbar.setAnchorView(R.id.bottom_navigation_view);
+                                        snackbar.setAnchorView(R.id.activity_main_viewpager_navigation);
                                         snackbar.show();
 
                                         //showProductAddedSnackbar(root.getRootView(), product);

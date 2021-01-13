@@ -55,7 +55,7 @@ public class LoginFragment extends Fragment {
           passwordTextInput = (TextInputLayout)view.findViewById(R.id.login_password_text_input); //password
           passwordEditText = (TextInputEditText)view.findViewById(R.id.login_password_edit_text);
 
-        loginButton = view.findViewById(R.id.login_button);
+        loginButton = view.findViewById(R.id.activity_start_createuser);
         loginCreateAcountText = view.findViewById(R.id.login_create_account_text);
 
         //usernameTextInput.getEditText().setText("testtest");
@@ -92,7 +92,7 @@ public class LoginFragment extends Fragment {
             Fragment fragment = new RegisterFragment();
             FragmentManager fragmentManager = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.container, fragment);
+            fragmentTransaction.replace(R.id.activity_start_container, fragment);
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         });

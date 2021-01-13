@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_login">
+    android:background="@drawable/activity_login_gradient">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,33 +15,23 @@
         android:paddingLeft="24dp"
         android:paddingRight="24dp">
 
-<!--        <ImageView-->
-<!--            android:layout_width="31dp"-->
-<!--            android:layout_height="40dp"-->
-<!--            android:layout_gravity="center_horizontal"-->
-<!--            android:layout_marginBottom="5dp"-->
-<!--            android:contentDescription="@string/ms_imagedescription_logo"-->
-<!--            android:src="@drawable/foodservice_icon"-->
-<!--            app:srcCompat="@drawable/brand_icon_text2" />-->
-
         <TextView
-            android:id="@+id/create_new_user"
+            android:id="@+id/activity_start_createnewuser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/login_button"
             android:layout_marginTop="0dp"
             android:layout_marginBottom="10dp"
-            android:text="OPRET NY BRUGER"
+            android:text="@string/activity_start_createnewuser"
             android:textStyle="bold"
             android:textAlignment="center"
             android:textColor="@color/white" />
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.TipTime.TextInputLayout.Filled"
-            android:id="@+id/register_username_text_input"
+            android:id="@+id/activity_start_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Brugernavn"
+            android:hint="@string/activity_start_username"
             app:endIconMode="clear_text"
             app:errorEnabled="true">
 
@@ -54,15 +44,14 @@
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.TipTime.TextInputLayout.Filled"
-            android:id="@+id/register_password_text_input"
+            android:id="@+id/activity_start_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/ms_hint_password"
+            android:hint="@string/activity_start_password"
             app:endIconMode="password_toggle"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/password_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword" />
@@ -70,10 +59,10 @@
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.TipTime.TextInputLayout.Filled"
-            android:id="@+id/register_firstname_text_input"
+            android:id="@+id/activity_start_firstname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Fornavn"
+            android:hint="@string/activity_start_firstname"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -85,10 +74,10 @@
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.TipTime.TextInputLayout.Filled"
-            android:id="@+id/register_lastname_text_input"
+            android:id="@+id/activity_start_lastname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Efternavn"
+            android:hint="@string/activity_start_lastname"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -100,10 +89,10 @@
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.TipTime.TextInputLayout.Filled"
-            android:id="@+id/register_email_text_input"
+            android:id="@+id/activity_start_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email"
+            android:hint="@string/activity_start_email"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -115,10 +104,10 @@
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.TipTime.TextInputLayout.Filled"
-            android:id="@+id/register_phone_text_input"
+            android:id="@+id/activity_start_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Telefon"
+            android:hint="@string/activity_start_phone"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -133,23 +122,23 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/login_button"
+                android:id="@+id/activity_start_createuser"
                 android:layout_width="215dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="74dp"
                 android:layout_marginEnd="74dp"
-                android:text="Opret bruger" />
+                android:text="@string/activity_start_createuser" />
 
             <TextView
-                android:id="@+id/register_already_registered_text"
+                android:id="@+id/activity_start_alreadyregistrered"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/login_button"
+                android:layout_below="@+id/activity_start_createuser"
                 android:layout_marginTop="0dp"
-                android:hint="Allerede registreret? Login nu"
-                android:text="Allerede registreret? Login nu"
+                android:hint="@string/activity_start_alreadyregistrered"
+                android:text="@string/activity_start_alreadyregistrered"
                 android:textAlignment="center"
                 android:textColor="@color/white" />
         </RelativeLayout>

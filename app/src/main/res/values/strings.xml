@@ -1,46 +1,10 @@
 <resources>
-
-
     <string name="appname">C2 Madspild</string>
 
-    <string name="overview">Overview</string>
-    <string name="scan">Scan</string>
-    <string name="profile">Profil</string>
-
-    <string name="txt_overview">Herinde kan du se en oversigt over dine produkter</string>
-    <string name="txt_profile">Herinde kan du se din profil</string>
-
-    <!--overview values -->
-    <string name="temp_image">temp-image</string>
-    <string name="beskrivelse">beskrivelse</string>
-    <string name="overskrift">overskrift</string>
-    <string name="your_name">Your Name</string>
-    <string name="full_name">Full Name</string>
-    <string name="e_mail">E-mail</string>
-    <string name="password">Password</string>
-
-
-    <!--random -->
-    <string name="ms_button_next">Next</string>
-    <string name="ms_button_cancel">Cancel</string>
-    <string name="ms_filter_title">Filter</string>
-    <string name="ms_search_title">Search</string>
-    <string name="ms_product_title">Title</string>
-    <string name="ms_product_description">Secondary text</string>
-    <string name="list_element" />
-    <string name="_1_dag">1 dag</string>
-    <string name="ble">Æble</string>
-    <string name="v_gt_300g">Vægt: 300g</string>
-    <string name="udl_bsdato_07_01_2021">Udløbsdato: 07/01/2021</string>
-    <string name="icon_foodcategory" />
-    <string name="udl_bsdato_08_01_2021">Udløbsdato: 08/01/2021</string>
-    <string name="image_border">image_border</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="trashcan">trashcan</string>
-    <string name="slet">Slet</string>
-    <string name="button">Button</string>
-    <string name="log_out">Log out</string>
-    <string name="phone_number">Phone number</string>
+    <!-- Navigation -->
+    <string name="fragment_navigation_overview">Overview</string>
+    <string name="fragment_navigation_scan">Scan</string>
+    <string name="fragment_navigation_profile">Profil</string>
 
     <!-- Overview -->
     <string name="fragment_overview_topbar_title">Inventar</string>
@@ -51,7 +15,4 @@
 
     <!-- Profil -->
     <string name="fragment_profile_topbar_title">Profil</string>
-    <string name="save_changes_button">GEM ÆNDRINGER</string>
-    <string name="editprofile_button_save_informfation">Gen oplysninger</string>
-
 </resources>

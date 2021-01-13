@@ -71,8 +71,8 @@ public class EditProfileActivity extends AppCompatActivity {
         editprofile_text_username = findViewById(R.id.editprofile_text_username);
 
         editprofile_button_edit = findViewById(R.id.editprofile_button_edit);
-        editprofile_button_cancel = findViewById(R.id.editprofile_button_cancel);
-        editprofile_button_save = findViewById(R.id.editprofile_button_save);
+        editprofile_button_cancel = findViewById(R.id.activity_editprofile_cancel);
+        editprofile_button_save = findViewById(R.id.activity_editprofile_save);
         editprofile_button_backbutton = findViewById(R.id.editprofile_button_backbutton);
 
         editprofile_linearlayout_inputfields = findViewById(R.id.editprofile_linearlayout_inputfields);

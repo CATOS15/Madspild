@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="editprofile_first_name">Fornavn</string>
-    <string name="editprofile_last_name">Efternavn</string>
-    <string name="editprofile_phone_number">Telefon Nummer</string>
-    <string name="editprofile_e_mail">E-mail</string>
-    <string name="edit_profile">REDIGER PROFIL</string>
-    <string name="editprofile_full_name">Hej Fulde Navn</string>
-    <string name="editprofile_username">Username</string>
-    <string name="show_profile_page">Show profile page</string>
-    <string name="goto_edit_profile_button">Edit Profile</string>
-    <string name="cancel_button">FORTRYD</string>
-    <string name="profiloplysninger">PROFILOPLYSNINGER</string>
-    <string name="profiloplyninger">Profiloplyninger</string>
+    <string name="activity_editprofile_firstname">Fornavn</string>
+    <string name="activity_editprofile_lastname">Efternavn</string>
+    <string name="activity_editprofile_phonenumber">Telefon Nummer</string>
+    <string name="activity_editprofile_email">E-mail</string>
+    <string name="activity_editprofile_editprofiletext">REDIGER PROFIL</string>
+    <string name="activity_editprofile_fullname">Hej Fulde Navn</string>
+    <string name="activity_editprofile_username">Username</string>
+    <string name="activity_editprofile_showprofile">Show profile page</string>
+    <string name="activity_editprofile_cancel">FORTRYD</string>
+    <string name="activity_editprofile_save">Gem</string>
+    <string name="activity_editprofile_changeinformation">Rediger oplysninger</string>
+    <string name="activity_editprofile_profilinformation">Profiloplyninger</string>
 </resources>

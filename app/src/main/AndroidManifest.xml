@@ -7,7 +7,7 @@
 
     <application
         android:allowBackup="false"
-        android:icon="@drawable/madspild_icon"
+        android:icon="@drawable/logo"
         android:label="@string/appname"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"

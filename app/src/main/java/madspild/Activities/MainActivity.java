@@ -35,16 +35,16 @@ public class MainActivity extends FragmentActivity {
 
         setContentView(R.layout.activity_main);
 
-        viewPager = findViewById(R.id.view_pager);
-        navigation = findViewById(R.id.bottom_navigation_view);
+        viewPager = findViewById(R.id.activity_main_viewpager);
+        navigation = findViewById(R.id.activity_main_viewpager_navigation);
 
-        navigation.setSelectedItemId(R.id.scanMenuItem);
+        navigation.setSelectedItemId(R.id.fragment_navigation_scan);
         viewPager.setAdapter(new ScreenSlidePagerAdapter(this));
         viewPager.setCurrentItem(1);
 
         initEvents();
 
-        FrameLayout loadingContent = findViewById(R.id.loading_content_main);
+        FrameLayout loadingContent = findViewById(R.id.activity_main_loading);
         loadingContent.bringToFront();
         HttpClientHelper.setListener(loading -> {
             new Handler(Looper.getMainLooper()).post(() -> {

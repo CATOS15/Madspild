@@ -16,7 +16,7 @@ public class StartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
-        FrameLayout loadingContent = findViewById(R.id.loading_content_start);
+        FrameLayout loadingContent = findViewById(R.id.activity_start_loading);
         loadingContent.bringToFront();
 
         HttpClientHelper.init(getBaseContext());
@@ -24,7 +24,7 @@ public class StartActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.container, new LoginFragment())
+                    .replace(R.id.activity_start_container, new LoginFragment())
                     .commit();
         }
 

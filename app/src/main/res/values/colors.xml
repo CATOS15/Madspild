@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- green theme -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="green">#1B5E20</color>
@@ -25,16 +24,6 @@
     <color name="GS1textColorPrimary">#FFFFFFFF</color>
     <color name="GS1Rasperry">#f05386</color>
     <color name="GS1Candy">#D21404</color>
-
     <color name="GS1LightGrayTransparent">#60454545</color>
 
-    <!-- general colors -->
-
 </resources>
-<!--
-<resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
-</resources>
- -->

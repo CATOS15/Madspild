@@ -25,7 +25,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginStart="16dp"
-                android:background="@drawable/editprofile_topbar_backbutton_image"
+                android:background="@drawable/activity_editprofile_topbar_backbutton_image"
                 app:backgroundTint="#FFFFFFFF"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -49,8 +49,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
                 android:layout_marginBottom="16dp"
-                android:hint="@string/ms_hint_username"
-                android:text="@string/profiloplyninger"
+                android:hint="@string/activity_start_username"
+                android:text="@string/activity_editprofile_profilinformation"
                 android:textAlignment="center"
                 android:textColor="@color/GS1Blue"
                 android:textSize="24sp" />
@@ -67,7 +67,7 @@
                     android:id="@+id/editprofile_text_firstname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/editprofile_first_name"
+                    android:hint="@string/activity_editprofile_firstname"
                     app:errorEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -84,7 +84,7 @@
                     android:id="@+id/editprofile_text_lastname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/editprofile_last_name"
+                    android:hint="@string/activity_editprofile_lastname"
                     app:errorEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -101,7 +101,7 @@
                     android:id="@+id/editprofile_text_phonenumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/editprofile_phone_number"
+                    android:hint="@string/activity_editprofile_phonenumber"
                     app:errorEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -118,7 +118,7 @@
                     android:id="@+id/editprofile_text_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/e_mail"
+                    android:hint="@string/activity_editprofile_email"
                     app:errorEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -142,10 +142,10 @@
                     android:visibility="gone">
                     <Button
                         style="@style/Theme.Button.EditProfile.Cancel"
-                        android:id="@+id/editprofile_button_cancel"
+                        android:id="@+id/activity_editprofile_cancel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="fortryd"
+                        android:text="@string/activity_editprofile_cancel"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         android:layout_weight="1"
@@ -153,15 +153,16 @@
                         android:layout_marginEnd="5dp"/>
 
                     <Button
-                        android:id="@+id/editprofile_button_save"
+                        android:id="@+id/activity_editprofile_save"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="gem"
+                        android:text="@string/activity_editprofile_save"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         android:layout_weight="1"
                         android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"/>
+                        android:layout_marginEnd="5dp"
+                        tools:ignore="ButtonStyle" />
                 </TableRow>
 
                 <TableRow
@@ -173,7 +174,7 @@
                         android:id="@+id/editprofile_button_edit"
                         android:layout_width="215dp"
                         android:layout_height="wrap_content"
-                        android:text="Rediger oplyninger"
+                        android:text="@string/activity_editprofile_changeinformation"
                         android:layout_gravity="center_horizontal"
                         />
                 </TableRow>

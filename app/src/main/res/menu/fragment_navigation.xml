@@ -4,15 +4,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/overviewMenuItem"
-        android:icon="@drawable/icon_overview"
-        android:title="@string/overview" />
+        android:id="@+id/fragment_navigation_overview"
+        android:icon="@drawable/fragment_navigation_overview"
+        android:title="@string/fragment_navigation_overview" />
     <item
-        android:id="@+id/scanMenuItem"
-        android:icon="@drawable/icon_scan"
-        android:title="@string/scan" />
+        android:id="@+id/fragment_navigation_scan"
+        android:icon="@drawable/fragment_navigation_scan"
+        android:title="@string/fragment_navigation_scan" />
     <item
-        android:id="@+id/profileMenuItem"
-        android:icon="@drawable/icon_profile"
-        android:title="@string/profile" />
+        android:id="@+id/fragment_navigation_profile"
+        android:icon="@drawable/fragment_navigation_profile"
+        android:title="@string/fragment_navigation_profile" />
 </menu>

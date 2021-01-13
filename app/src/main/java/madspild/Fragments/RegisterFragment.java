@@ -51,25 +51,25 @@ public class RegisterFragment extends Fragment{
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
         View view = i.inflate(R.layout.fragment_register, container, false);
 
-        register_already_registered_text = view.findViewById(R.id.register_already_registered_text);
+        register_already_registered_text = view.findViewById(R.id.activity_start_alreadyregistrered);
         authenticationClient = new AuthenticationClient();
         //til at teste login/registrer ved startup af appen
 
         activity = getActivity();
-        usernameTextInput = view.findViewById(R.id.register_username_text_input); //username
+        usernameTextInput = view.findViewById(R.id.activity_start_username); //username
         usernameEditText = view.findViewById(R.id.login_username_edit_text);
 
-        passwordTextInput = view.findViewById(R.id.register_password_text_input); //password
+        passwordTextInput = view.findViewById(R.id.activity_start_password); //password
         passwordEditText = view.findViewById(R.id.login_password_edit_text);
-        createUserButton = view.findViewById(R.id.login_button);
+        createUserButton = view.findViewById(R.id.activity_start_createuser);
 
-       firstnameTextInput = view.findViewById(R.id.register_firstname_text_input); //firstname
+       firstnameTextInput = view.findViewById(R.id.activity_start_firstname); //firstname
 
-      lastnameTextInput = view.findViewById(R.id.register_lastname_text_input); //lastname
+      lastnameTextInput = view.findViewById(R.id.activity_start_lastname); //lastname
 
-        emailTextInput = view.findViewById(R.id.register_email_text_input); //email
+        emailTextInput = view.findViewById(R.id.activity_start_email); //email
 
-        phoneTextInput = view.findViewById(R.id.register_phone_text_input); //email
+        phoneTextInput = view.findViewById(R.id.activity_start_phone); //email
 
 
 
@@ -120,7 +120,7 @@ public class RegisterFragment extends Fragment{
                 Fragment fragment = new LoginFragment();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.container, fragment);
+                fragmentTransaction.replace(R.id.activity_start_container, fragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }

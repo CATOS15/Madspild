@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Profile/Signup-->
-    <string name="ms_imagedescription_logo">Logo</string>
-    <string name="ms_button_login">login</string>
+    <string name="activity_start_logo">Logo</string>
+    <string name="activity_start_login">Log ind</string>
 
-    <string name="ms_hint_username">Username</string>
-    <string name="ms_hint_password">Password</string>
-    <string name="ms_error_password">Password must contain at least 8 characters.</string>
-    <string name="ms_error_username_empty">Username is empty.</string>
+    <string name="activity_start_firstname">Fornavn</string>
+    <string name="activity_start_lastname">Efternavn</string>
+    <string name="activity_start_email">Email</string>
+    <string name="activity_start_phone">Telefon</string>
+    <string name="activity_start_username">Brugernavn</string>
+    <string name="activity_start_password">Password</string>
 
-    <string name="ms_hint_lastname">lastname</string>
-    <string name="ms_hint_firstname">firstname</string>
-    <string name="ms_hint_email">email</string>
-    <string name="ms_hint_phone">phone</string>
+    <string name="activity_start_error_password_leastcharacters">Password skal indeholde mindst 8 karakterer</string>
+    <string name="activity_start_error_username_empty">Brugernavnet er tomt</string>
 
-    <string name="login_no_account_yet">No account yet? Create one</string>
-    <string name="register_already_registered">Already registered? Login</string>
+
+    <string name="activity_start_createnewuser">OPRET NY BRUGER</string>
+    <string name="activity_start_createuser">Opret bruger</string>
+
+    <string name="activity_start_noaccountyet">Ingen bruger? Opret en</string>
+    <string name="activity_start_alreadyregistrered">Har du allerede en bruger? Login</string>
 </resources>

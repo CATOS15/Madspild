@@ -14,11 +14,11 @@ public class MenuHelper {
 
     public static int getMenuNumberFromId(int id){
         switch (id) {
-            case R.id.overviewMenuItem:
+            case R.id.fragment_navigation_overview:
                 return 0;
-            case R.id.scanMenuItem:
+            case R.id.fragment_navigation_scan:
                 return 1;
-            case R.id.profileMenuItem:
+            case R.id.fragment_navigation_profile:
                 return 2;
         }
         return 1;
@@ -26,13 +26,13 @@ public class MenuHelper {
     public static int getMenuIdFromNumber(int number){
         switch (number) {
             case 0:
-                return R.id.overviewMenuItem;
+                return R.id.fragment_navigation_overview;
             case 1:
-                return R.id.scanMenuItem;
+                return R.id.fragment_navigation_scan;
             case 2:
-                return R.id.profileMenuItem;
+                return R.id.fragment_navigation_profile;
         }
-        return R.id.scanMenuItem;
+        return R.id.fragment_navigation_scan;
     }
 
     public static Fragment getMenuFragmentFromNumber(int number){
