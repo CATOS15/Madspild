@@ -56,9 +56,7 @@ public class ProfileFragment extends Fragment {
     TextView amountWaste;
     TextView username;
     View view;
-//    TextView txtgraph;
     TextView statetxtgraph;
-//    Button changegraph;
 
 
     int highestProduct = 0;
@@ -86,13 +84,8 @@ public class ProfileFragment extends Fragment {
         amountWasteTitle = view.findViewById(R.id.fragment_profile_amountWasteTitle);
         amountWaste = view.findViewById(R.id.fragment_profile_amountWaste);
         username = view.findViewById(R.id.fragment_profile_username);
-//        txtgraph = view.findViewById(R.id.fragment_profile_change_txtgraph);
         statetxtgraph = view.findViewById(R.id.fragment_profile_statetxtgraph);
-//        changegraph = view.findViewById(R.id.fragment_profile_changegraph);
 
-//        txtgraph.setText("Skift graf");
-//        statetxtgraph.setText("Antal vare");
-//        changegraph.setText("Skift");
 
         amountTitle.setText("Totalt antal produkter");
         amount.setText("Antal");
@@ -156,6 +149,8 @@ public class ProfileFragment extends Fragment {
         }, (respError) -> {
             System.out.println(respError);
         });
+        barChart.invalidate();
+        barChart.refreshDrawableState();
 
     }
 
@@ -277,10 +272,9 @@ public class ProfileFragment extends Fragment {
         Description description = new Description();
         description.setText("Chart af totalt antal");
         barChart.setDescription(description);
-//        barChart.setTouchEnabled(false);
-        barChart.setPinchZoom(false);
-        barChart.setScaleEnabled(false);
-        barChart.setDoubleTapToZoomEnabled(false);
+        barChart.setTouchEnabled(false);
+        barChart.invalidate();
+        barChart.refreshDrawableState();
 
 
     }

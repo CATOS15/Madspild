@@ -74,18 +74,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fragment_profile_amountWaste"
         app:layout_constraintVertical_bias="0.0" />
-<!--    <com.github.mikephil.charting.charts.BarChart-->
-<!--        android:id="@+id/fragment_profile_barChart"-->
-<!--        android:layout_width="358dp"-->
-<!--        android:layout_height="301dp"-->
-<!--        android:layout_marginTop="25dp"-->
-<!--        android:layout_marginBottom="10dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.491"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/fragment_profile_amountWaste"-->
-<!--        app:layout_constraintVertical_bias="0.0" />-->
 
     <TextView
         android:id="@+id/fragment_profile_amountWaste"
@@ -165,7 +153,6 @@
         app:layout_constraintVertical_bias="0.00999999" />
 
 
-
     <TextView
         android:id="@+id/fragment_profile_statetxtgraph"
         android:layout_width="193dp"
@@ -179,35 +166,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fragment_profile_amount" />
 
-    <!--    <Button-->
-    <!--        android:id="@+id/fragment_profile_changegraph"-->
-    <!--        android:layout_width="83dp"-->
-    <!--        android:layout_height="37dp"-->
-    <!--        android:layout_marginStart="30dp"-->
-    <!--        android:layout_marginTop="30dp"-->
-    <!--        android:layout_marginBottom="328dp"-->
-    <!--        android:background="@color/GS1Blue"-->
-    <!--        android:textColor="@color/white"-->
-    <!--        android:text="Button"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintHorizontal_bias="0.27"-->
-    <!--        app:layout_constraintStart_toEndOf="@+id/fragment_profile_amountWaste"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/fragment_profile_username" />-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/fragment_profile_change_txtgraph"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="16dp"-->
-<!--        android:layout_marginBottom="1dp"-->
-<!--        android:text="TextView"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/button"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.875"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/fragment_profile_username"-->
-<!--        app:layout_constraintVertical_bias="0.0" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
