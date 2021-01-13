@@ -111,6 +111,7 @@ public class ProfileFragment extends Fragment {
         overviewClient = new OverviewClient();
         productTypeHashMap = new HashMap<>();
         expireAmount = 0;
+        highestProduct = 0;
 
         overviewClient.getUserOverview(false, (respObject) -> {
            overviewList = (List<Overview>) respObject;
