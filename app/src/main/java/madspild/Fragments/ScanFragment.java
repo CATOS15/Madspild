@@ -49,6 +49,7 @@ public class ScanFragment extends Fragment {
     ProductClient productClient;
     Product product;
     MaterialAlertDialogBuilder dialog;
+    Snackbar snackbar;
 
     @Override
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
@@ -106,7 +107,7 @@ public class ScanFragment extends Fragment {
                                         //dialog message
                                             //errorMessageDialog("Success","Produkt tilføjet");
                                         //en snackbar i stedet for
-                                        Snackbar snackbar = Snackbar.make(root,"Produkt tilføjet "+product.getGtin(), 3000);
+                                        snackbar = Snackbar.make(root,"Produkt tilføjet "+product.getGtin(), 3000);
                                         snackbar.setAnchorView(R.id.activity_main_viewpager_navigation);
                                         snackbar.show();
 
@@ -154,6 +155,9 @@ public class ScanFragment extends Fragment {
 
     @Override
     public void onPause() {
+        if(snackbar!= null){
+            snackbar.dismiss();
+        }
         if(hasCameraPermission()) {
             codeScanner.releaseResources();
         }

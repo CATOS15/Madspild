@@ -1,20 +1,36 @@
 package madspild.Activities;
 
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.SystemClock;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RemoteViews;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
 import com.example.madspild.R;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+
+import java.util.Calendar;
+import java.util.Date;
 
 import madspild.Helpers.HttpClientHelper;
 import madspild.HttpClient.AuthenticationClient;
@@ -50,6 +66,8 @@ public class EditProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editprofile);
+
+        createnotification();
 
         // Hide keyboard
         getWindow().setSoftInputMode(
@@ -126,7 +144,9 @@ public class EditProfileActivity extends AppCompatActivity {
                             showButton(true,false,false);
                         });
                     }, (respError) -> {
-                        System.out.println(respError);
+                        new Handler(Looper.getMainLooper()).post(() -> {
+                            Toast.makeText(getApplicationContext(), respError, Toast.LENGTH_SHORT).show();
+                        });
                     });
                 }
             }
@@ -186,6 +206,60 @@ public class EditProfileActivity extends AppCompatActivity {
         editprofile_text_lastname.getEditText().setText(HttpClientHelper.user.getLastname());
         editprofile_text_phonenumber.getEditText().setText(HttpClientHelper.user.getPhone());
         editprofile_text_email.getEditText().setText(HttpClientHelper.user.getEmail());
+    }
+
+    public void createnotification(){
+        Intent intent = new Intent(this, MainActivity.class);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, opretNotifKanal(this))
+            .setContentIntent(PendingIntent.getActivity(this, 0, intent, 0))
+            .setSmallIcon(R.drawable.fragment_navigation_scan)
+            //.setSubText("Madspild") //Tekst øverst til højre for ikonet
+            .setContentTitle("Du har udløbede madvarer") //Tekst der vises hele tiden
+            .setColor(Color.parseColor("#002C6C"))
+            //.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.logo))
+            //Tekst når notif ikke er ekspanderet. Kun 1 linje, resten skæres væk
+            .setContentText("Gå ind og få et overblik over dine madvarer")
+            .setStyle(new NotificationCompat.BigTextStyle()
+                    //Tekst når notifikationen er ekspanderet. Teksten kan strække sig over flere linjer.
+                    .bigText("Gå ind og få et overblik over dine madvarer"))
+            .setVibrate(new long[]{0, 100, 300, 400, 500, 510, 550, 560, 600, 610, 650, 610, -1});
+
+        NotificationManager notificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(42, builder.build());
+        /*
+        // elementer til hvis der skal være timer på notifikationen
+        AlarmManager alarmMgr = null;
+        PendingIntent alarmIntent;
+
+        alarmMgr = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
+        alarmIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+
+        // Set the alarm to start at approximately 2:00 p.m.
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, 12);
+        calendar.set(Calendar.MINUTE, 59);
+        calendar.set(Calendar.SECOND, 0);
+
+
+        // With setInexactRepeating(), you have to use one of the AlarmManager interval
+        // constants--in this case, AlarmManager.INTERVAL_DAY.
+        alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+                AlarmManager.INTERVAL_DAY, alarmIntent);
+
+        //setInexactRepeating()
+         */
+    }
+
+    public static String opretNotifKanal(Context ctx) {
+        String KANALID = "kanal_id";
+        // Fra API 26 skal man bruge en NotificationChannel
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel kanal = new NotificationChannel(KANALID, "kanalnavn", NotificationManager.IMPORTANCE_DEFAULT);
+            kanal.setDescription("En notifikationskanal for AndroidElementer (setDescription)");
+            ctx.getSystemService(NotificationManager.class).createNotificationChannel(kanal);
+        }
+        return KANALID;
     }
 
 }
