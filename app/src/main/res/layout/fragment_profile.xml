@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
 <androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/frameLayout2"
+    android:id="@+id/fragment_profile_framelayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:context="madspild.Fragments.ProfileFragment">
@@ -140,8 +140,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="19dp"
-        android:hint="@string/activity_start_username"
-        android:text="@string/activity_editprofile_username"
+        android:hint="@string/fragment_profile_username"
+        android:text="@string/fragment_profile_username"
         android:textColor="@color/GS1Blue"
         android:layout_marginStart="20dp"
         android:textSize="24sp"

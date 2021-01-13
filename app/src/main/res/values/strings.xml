@@ -15,4 +15,5 @@
 
     <!-- Profil -->
     <string name="fragment_profile_topbar_title">Profil</string>
+    <string name="fragment_profile_username">Brugernavn</string>
 </resources>
