@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.madspild.R;
@@ -236,7 +237,8 @@ public class ProfileFragment extends Fragment {
         data.addDataSet(bds);
         data.setDrawValues(true);
         data.setBarWidth(0.4f);
-
+        int color = ContextCompat.getColor(getContext(), R.color.GS1Blue);
+        bds.setColor(color);
         XAxis xaxis = barChart.getXAxis();
 
         xaxis.setDrawGridLines(false);
