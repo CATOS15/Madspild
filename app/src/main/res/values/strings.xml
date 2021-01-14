@@ -2,7 +2,7 @@
     <string name="appname">C2 Madspild</string>
 
     <!-- Navigation -->
-    <string name="fragment_navigation_overview">Overview</string>
+    <string name="fragment_navigation_overview">Inventar</string>
     <string name="fragment_navigation_scan">Scan</string>
     <string name="fragment_navigation_profile">Profil</string>
 
