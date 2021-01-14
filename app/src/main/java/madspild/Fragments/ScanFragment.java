@@ -43,11 +43,10 @@ import static java.lang.Thread.sleep;
 public class ScanFragment extends Fragment {
     private CodeScanner codeScanner;
 
-    public static final String SHARED_PREFS = "sharedPrefs";
-    public static final String DataMatrixDataPref = "DataMatrixData";
-
     ProductClient productClient;
     Product product;
+
+    //Material design elementer til fejl/bekræftelses beskeder
     MaterialAlertDialogBuilder dialog;
     Snackbar snackbar;
 
@@ -61,6 +60,7 @@ public class ScanFragment extends Fragment {
             requestCameraPermission();
         }
 
+        //Material design dialog til fejl beskeder
         dialog = new MaterialAlertDialogBuilder(Objects.requireNonNull(getActivity()));
 
         //til at skanne
@@ -74,50 +74,46 @@ public class ScanFragment extends Fragment {
 
                     @Override
                     public void run() {
-                        /*
-                        //hvad er det her???
-                        product.setDataMatrixData(result.getText());
-                        pc.addProduct(this.context, whatever);
-                        */
-
                         //get Datamatrix data from result (from the scanner)
                         String DataMatrixData = result.getText();
-                        saveData(DataMatrixData);
 
                         //clean up string from weird symbols
                         DataMatrixData = DataMatrixData.replaceAll("[^a-zA-Z0-9]", "");
                         System.out.println(DataMatrixData);
 
-                        //substring numbers: GTIN: 3-16, S/N: 19-29, Batch: 32-37, Expiry: 40-45
-                        //Toast.makeText(activity, result.getText(), Toast.LENGTH_SHORT).show();
-
+                        //En række af tjek på den skannede stregkode
+                        //længden af dataen, varen er tilbagekaldt, varen for gammel og om den er succesfuldt gemt til profilen
                         if (DataMatrixData.length() == 45){
                             product = new Product();
                             product = MatrixtoProduct(DataMatrixData);
 
-                            if(tilbagekaldtBatchTest(product)){
+                            //specifik ekstra check ønsket af projektstiller
+                            if(specielScanEnFisk(product)){
+                                errorMessageDialog("Success","Fisk er blevet tilføjet til systemet");
+                            }
+
+                            else if(tilbagekaldtBatchTest(product)){
                                 errorMessageDialog("Fare","Denne batch er blevet tilbagekaldt, kontakt medarbejder");
                             }
 
                             else if(expDateChecker(product)){
                                 productClient.createProduct(product, (respObject) -> {
                                     Product product = (Product) respObject;
-                                    System.out.println("bananskrald");
                                     new Handler(Looper.getMainLooper()).post(() -> {
                                         //dialog message
-                                            //errorMessageDialog("Success","Produkt tilføjet");
+                                        //errorMessageDialog("Success","Produkt tilføjet");
+
                                         //en snackbar i stedet for
-                                        snackbar = Snackbar.make(root,"Produkt tilføjet "+product.getGtin(), 3000);
+                                        snackbar = Snackbar.make(root,"Produkt tilføjet ", 3000);
                                         snackbar.setAnchorView(R.id.activity_main_viewpager_navigation);
                                         snackbar.show();
 
-                                        //showProductAddedSnackbar(root.getRootView(), product);
                                         onResume();
                                     });
                                 }, (respError) -> {
                                     //Log.println(Log.ERROR, "du har lavet en fejl", respError);
                                     new Handler(Looper.getMainLooper()).post(() -> {
-                                        //dialog message
+                                        //dialog message, ex: varen er allerede skannet
                                         errorMessageDialog("Fejl",respError);
                                     });
                                 });
@@ -127,7 +123,7 @@ public class ScanFragment extends Fragment {
                                 errorMessageDialog("Fejl","Varen er udløbet");
                             }
                         } else{
-                            //System.out.println("fejl i barcode");
+                            //for kort eller forkert data
                             errorMessageDialog("Fejl","Fejl i barcode");
                         }
                     }
@@ -135,13 +131,6 @@ public class ScanFragment extends Fragment {
             }
         });
         return root;
-    }
-
-    public void saveData(String DataMatrixData) {
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(DataMatrixDataPref, DataMatrixData);
-        editor.apply();
     }
 
     @Override
@@ -155,7 +144,7 @@ public class ScanFragment extends Fragment {
 
     @Override
     public void onPause() {
-        if(snackbar!= null){
+        if(snackbar != null){
             snackbar.dismiss();
         }
         if(hasCameraPermission()) {
@@ -164,16 +153,13 @@ public class ScanFragment extends Fragment {
         super.onPause();
     }
 
-    /*
-    //forsøg på at fikse snackbar
-    public void showProductAddedSnackbar(View root, Product product){
-        Snackbar snackbar = Snackbar.make(root,"Produkt tilføjet "+product.getGtin(), 3000);
-        snackbar.setAnchorView(R.id.bottom_navigation_view);
-        snackbar.show();
-        return;
+    public boolean specielScanEnFisk(Product product){
+        String fiskegtin = product.getGtin();
+        String fiskeSerienummer = product.getSerialnumber();
+        return fiskegtin.equals("12345678912345") && fiskeSerienummer.equals("54321543215");
     }
-     */
 
+    //et sæt af varer til simulering af tilbagekaldte varer udfra batchnr.
     public boolean tilbagekaldtBatchTest(Product TestonBatch){
         String BatchNo = TestonBatch.getBatchnumber();
         ArrayList<String> TilbagekaldteBatches = new ArrayList<String>();
@@ -184,9 +170,9 @@ public class ScanFragment extends Fragment {
         return TilbagekaldteBatches.contains(BatchNo);
     }
 
+    //dialog bokse med fejlbeskeder
     public void errorMessageDialog(String title, String message){
         //System.out.println("fejl i barcode");
-
         dialog.setTitle(title);
         dialog.setMessage(message);
         dialog.setOnDismissListener(dialogInterface -> {
@@ -201,6 +187,7 @@ public class ScanFragment extends Fragment {
         dialog.show();
     }
 
+    //checker for om dato er for gammel
     public boolean expDateChecker(Product product){
         Date productExpiryDate = product.getExpdate();
 
@@ -212,9 +199,9 @@ public class ScanFragment extends Fragment {
         return currentdate.getTime() < productExpiryDate.getTime();
     }
 
-    //MatrixtoProduct, MtP
+    //MatrixtoProduct, MtP. tager dataen og mapper det til vores product object
     public Product MatrixtoProduct(String DataMatrixString){
-
+        //substring numbers: GTIN: 3-16, S/N: 19-29, Batch: 32-37, Expiry: 40-45
         DateFormat format = new SimpleDateFormat("yyMMdd", Locale.ENGLISH);
         Date date = null;
         try {
@@ -239,41 +226,6 @@ public class ScanFragment extends Fragment {
         MtPproduct.setDeleted(false);
 
         return MtPproduct;
-    }
-
-    public Product MatrixtoProductSpecial(){
-        /*
-        //making a char array for datamatrix data
-        // Creating array of string length
-        char[] DataMatrixArr = new char[DataMatrixData.length()];
-
-        // Copy character by character into array
-        for (int i = 0; i < DataMatrixData.length(); i++) {
-            DataMatrixArr[i] = DataMatrixData.charAt(i);
-        }
-
-        boolean done = false;
-        int dmC = 0; //DataMatrixCounter
-
-        while (!done){
-            if (dmC>DataMatrixArr.length){
-                done = true;
-                continue;
-            }
-
-            if(DataMatrixArr[dmC] == 0 && DataMatrixArr[dmC+1] == 1){
-                dmC+=14;
-            }
-
-
-            else{
-                dmC++;
-            }
-        }
-
-        String temp;
-         */
-        return product;
     }
 
     private boolean hasCameraPermission(){
