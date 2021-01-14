@@ -58,11 +58,6 @@ public class LoginFragment extends Fragment {
         loginButton = view.findViewById(R.id.activity_start_createuser);
         loginCreateAcountText = view.findViewById(R.id.login_create_account_text);
 
-        //usernameTextInput.getEditText().setText("testtest");
-        //passwordTextInput.getEditText().setText("testtest");
-
-        usernameTextInput.getEditText().setText("missekat");
-        passwordTextInput.getEditText().setText("missekat");
         initEvents();
 
         return view;
@@ -74,8 +69,8 @@ public class LoginFragment extends Fragment {
         loginButton.setOnClickListener(view -> {
 
 
-            String username = usernameTextInput.getEditText().getText().toString();
-            String password = passwordTextInput.getEditText().getText().toString();
+            String username = Objects.requireNonNull(usernameTextInput.getEditText()).getText().toString();
+            String password = Objects.requireNonNull(passwordTextInput.getEditText()).getText().toString();
 
             authenticationClient.login(username, password, (respObject) -> {
                 checkUserAccess();
