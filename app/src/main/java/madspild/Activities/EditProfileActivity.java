@@ -97,7 +97,7 @@ public class EditProfileActivity extends AppCompatActivity {
         activity_editprofile_toolbar = findViewById(R.id.activity_editprofile_toolbar);
 
         // Set backbutton
-        activity_editprofile_toolbar.setNavigationIcon(R.drawable.icon_backarrow);
+        activity_editprofile_toolbar.setNavigationIcon(R.drawable.fragment_profile_topbar_button_image_back);
         activity_editprofile_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

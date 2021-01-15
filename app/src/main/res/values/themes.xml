@@ -49,7 +49,7 @@
 
         <item name="windowActionModeOverlay">true</item>
         <item name="android:actionModeStyle">@style/Widget.App.ActionMode</item>
-        <item name="android:actionModeCloseDrawable">@drawable/baseline_clear_white_48</item>
+        <item name="android:actionModeCloseDrawable">@drawable/fragment_overview_topbar_button_image_stop</item>
         <item name="actionBarTheme">@style/ThemeOverlay.MaterialComponents.Dark.ActionBar</item>
 
     </style>

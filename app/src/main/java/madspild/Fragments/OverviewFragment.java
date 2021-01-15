@@ -37,7 +37,6 @@ import madspild.Models.OverviewSorting;
 
 public class OverviewFragment extends Fragment {
     GridView overviewGrid;
-    Button overviewButtonDelete, overviewButtonSort;
     View view;
 
     OverviewClient overviewClient;
@@ -45,10 +44,6 @@ public class OverviewFragment extends Fragment {
     OverviewSorting overviewSorting = OverviewSorting.BYDATE;
     MaterialAlertDialogBuilder dialog;
     MaterialToolbar topbarView;
-
-    ActionMode actionMode = null;
-    boolean isActionMode = false;
-    int numberOfMarked = 0;
     List<Overview> overviewList;
 
     @Override
@@ -71,29 +66,26 @@ public class OverviewFragment extends Fragment {
         });
 
         // Topbar button handler handler
-        topbarView.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.fragment_overview_topbar_view_menu_sortby_date:
-                        overviewSorting = OverviewSorting.BYDATE;
-                        sortOverviewList(overviewList);
-                        return true;
-                    case R.id.fragment_overview_topbar_view_menu_sortby_alphabet:
-                        overviewSorting = OverviewSorting.BYNAME;
-                        sortOverviewList(overviewList);
-                        return true;
-                    default:
-                        return false;
-                }
-            };
+        topbarView.setOnMenuItemClickListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.fragment_overview_topbar_view_menu_sortby_date:
+                    overviewSorting = OverviewSorting.BYDATE;
+                    sortOverviewList(overviewList);
+                    return true;
+                case R.id.fragment_overview_topbar_view_menu_sortby_alphabet:
+                    overviewSorting = OverviewSorting.BYNAME;
+                    sortOverviewList(overviewList);
+                    return true;
+                default:
+                    return false;
+            }
         });
 
         return view;
     }
 
     // Action mode
-    private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
+    private final ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
         @Override
         public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
             MenuInflater menuInflater = actionMode.getMenuInflater();
@@ -119,9 +111,8 @@ public class OverviewFragment extends Fragment {
 
         @Override
         public void onDestroyActionMode(ActionMode mode) {
-            int count = 0;
             overviewListAdapter.resetListColor();
-            actionMode = null;
+            overviewListAdapter.resetTopbar();
         }
     };
 
@@ -146,9 +137,11 @@ public class OverviewFragment extends Fragment {
                 for (Overview overviewToRemove: overviewsToRemove) {
                     overviewListAdapter.remove(overviewToRemove);
                 }
+                overviewListAdapter.resetTopbar();
             });
         }, (respError) -> {
             System.out.println(respError);
+            overviewListAdapter.resetTopbar();
         });
     }
 
@@ -175,69 +168,31 @@ public class OverviewFragment extends Fragment {
             initOverviewListAdapter(overviewList);
         }, (respError) -> {
             new Handler(Looper.getMainLooper()).post(() -> {
-                //dialog message
                 errorMessageDialog("Fejl",respError);
             });
         });
     }
 
     public void errorMessageDialog(String title, String message){
-        //System.out.println("fejl i barcode");
-
         dialog.setTitle(title);
         dialog.setMessage(message);
         dialog.setOnDismissListener(dialogInterface -> {
             onResume();
         });
-        dialog.setPositiveButton("OKAY", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                onResume();
-            }
-        });
         dialog.show();
     }
-
-
 
     private void initOverviewListAdapter(List<Overview> overviewList){
         new Handler(Looper.getMainLooper()).post(() -> {
             // OverViewListApdater
             overviewListAdapter = new OverviewListAdapter(getActivity(),R.layout.fragment_overview_listitem, overviewList);
 
+            overviewListAdapter.initTopbar(mActionModeCallback, topbarView);
+
             // Insert in grid
             overviewGrid = view.findViewById(R.id.overviewGrid);
             overviewGrid.setAdapter(overviewListAdapter);
             overviewGrid.setNumColumns(1);
-
-            // Trigger
-            overviewListAdapter.registerDataSetObserver(new DataSetObserver() {
-                @Override
-                public void onChanged() {
-                    List<Overview> changedList = overviewListAdapter.getAllItems();
-                    int count = 0;
-                    for (int i=0;i<changedList.size();i++){
-                        if(changedList.get(i).isMarked()){
-                            count++;
-                            if(actionMode == null) {
-                                actionMode = topbarView.startActionMode(mActionModeCallback);
-                            }
-                        }
-                    }
-                    numberOfMarked = count;
-                    if(numberOfMarked == 0 && actionMode != null){
-                        actionMode.finish();
-                        actionMode = null;
-
-                    } else if (actionMode != null) {
-                        String selectTitle = numberOfMarked + " valgt";
-                        actionMode.setTitle(selectTitle);
-                    }
-                }
-            });
         });
     }
-
-
-
 }

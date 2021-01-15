@@ -38,6 +38,10 @@ import madspild.Models.Overview;
 public class OverviewListAdapter extends ArrayAdapter<Overview> {
 
     List<Overview> overviewList;
+    ActionMode actionMode = null;
+    ActionMode.Callback mActionModeCallback;
+    View topbarView;
+    int itemsSelectedCounter = 0;
 
     public OverviewListAdapter(Context context, int textViewResourceId, List<Overview> overviewList) {
         super(context, textViewResourceId, overviewList);
@@ -95,13 +99,30 @@ public class OverviewListAdapter extends ArrayAdapter<Overview> {
             boolean isMarked = overview.isMarked();
             overview.setMarked(!isMarked);
             selectColorChange(listitem,overview.isMarked());
+            if(overview.isMarked()) itemsSelectedCounter++; else itemsSelectedCounter--;
+            if(itemsSelectedCounter > 0){
+                if(actionMode == null) actionMode = topbarView.startActionMode(mActionModeCallback);
+                String selectTitle = itemsSelectedCounter + " valgt";
+                actionMode.setTitle(selectTitle);
+            }else{
+                actionMode.finish();
+                actionMode = null;
+            }
             notifyDataSetChanged();
         });
 
         return overviewView;
     }
 
-
+    public void initTopbar(ActionMode.Callback mActionModeCallback, View topbarView){
+        this.topbarView = topbarView;
+        this.mActionModeCallback = mActionModeCallback;
+    }
+    public void resetTopbar(){
+        actionMode.finish();
+        actionMode = null;
+        this.itemsSelectedCounter = 0;
+    }
 
     private int getProductIcon(int index){
         switch (overviewList.get(index).getProductType()) {

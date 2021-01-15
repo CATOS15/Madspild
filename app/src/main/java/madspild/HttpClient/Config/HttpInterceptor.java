@@ -27,7 +27,7 @@ public class HttpInterceptor implements Interceptor {
                     public void run() {
                         if(showLoading) HttpClientHelper.setLoading(true);
                     }
-                },500);
+                },300);
 
         Response response = chain.proceed(request);
         showLoading = false;

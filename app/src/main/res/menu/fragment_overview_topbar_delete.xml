@@ -4,8 +4,8 @@
 
     <item
         android:id="@+id/fragment_overview_topbar_icon_delete"
-        android:icon="@drawable/baseline_delete_outline_white_48"
-        android:contentDescription="@string/delete_item"
+        android:icon="@drawable/fragment_overview_topbar_button_image_delete"
+        android:contentDescription="@string/fragment_overview_topbar_icon_delete"
         app:showAsAction="ifRoom"
-        android:title="@string/delete" />
+        android:title="@string/fragment_overview_topbar_icon_delete" />
 </menu>

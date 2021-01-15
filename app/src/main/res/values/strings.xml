@@ -14,15 +14,13 @@
     <string name="fragment_overview_listitem_daysleft_text">[-xxx dage]</string>
     <string name="fragment_overview_listitem_information_productname">[PRODUCT NAME]</string>
     <string name="fragment_overview_listitem_information_expdate">[UDLØBSDATO]</string>
-
+    <string name="fragment_overview_topbar_icon_delete">Slet produkt</string>
+    <string name="fragment_overview_topbar_view_menu_sortby_date">Sorter efter dato</string>
+    <string name="fragment_overview_topbar_view_menu_sortby_alphabet">Sorter efter alfabetet</string>
 
     <!-- Profil -->
     <string name="fragment_profile_topbar_title">Profil</string>
     <string name="fragment_profile_username">Brugernavn</string>
-    <string name="cancel_delete">Cancel delete</string>
-    <string name="delete_item">Delete item</string>
-    <string name="cancel">Cancel</string>
-    <string name="delete">Delete</string>
-    <string name="efter_dato">Efter Dato</string>
-    <string name="efter_alfabettet">Efter alfabetet</string>
+    <string name="fragment_profile_topbar_button_editprofile">Rediger profil</string>
+    <string name="fragment_profile_topbar_button_logout">Log ud</string>
 </resources>

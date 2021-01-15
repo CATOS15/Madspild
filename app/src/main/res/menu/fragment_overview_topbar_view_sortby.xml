@@ -5,14 +5,14 @@
     <group>
         <item
             android:id="@+id/fragment_overview_topbar_view_menu_sortby_date"
-            android:contentDescription="@string/efter_dato"
+            android:contentDescription="@string/fragment_overview_topbar_view_menu_sortby_date"
             app:showAsAction="never"
-            android:title="@string/efter_dato" />
+            android:title="@string/fragment_overview_topbar_view_menu_sortby_date" />
         <item
             android:id="@+id/fragment_overview_topbar_view_menu_sortby_alphabet"
-            android:contentDescription="@string/efter_alfabettet"
+            android:contentDescription="@string/fragment_overview_topbar_view_menu_sortby_alphabet"
             app:showAsAction="never"
-            android:title="@string/efter_alfabettet" />
+            android:title="@string/fragment_overview_topbar_view_menu_sortby_alphabet" />
     </group>
 
 
