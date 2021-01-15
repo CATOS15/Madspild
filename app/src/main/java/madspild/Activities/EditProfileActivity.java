@@ -161,7 +161,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
                             // Snackbar confirmation
                             String respMessage = respObject.toString();
-                            Snackbar snackbar = Snackbar.make(getCurrentFocus(),respMessage, 3000);
+                            Snackbar snackbar = Snackbar.make(getWindow().getDecorView().findViewById(android.R.id.content),respMessage, 3000);
                             snackbar.show();
                         });
                     }, (respError) -> {
