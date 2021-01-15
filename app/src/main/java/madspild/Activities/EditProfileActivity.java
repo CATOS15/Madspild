@@ -149,7 +149,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 tempUser.setEmail(editprofile_edit_email.getText().toString());
 
 
-                if(validate(HttpClientHelper.user)){
+                if(validate(tempUser)){
                     AuthenticationClient authenticationClient = new AuthenticationClient();
                     authenticationClient.editUser(tempUser, (respObject) -> {
                         new Handler(Looper.getMainLooper()).post(() -> {
@@ -217,7 +217,7 @@ public class EditProfileActivity extends AppCompatActivity {
         {try{Integer.parseInt(user.getPhone()); editprofile_text_phonenumber.setError(null);}
         catch (Exception e){
             editprofile_text_phonenumber.setError("Telefon skal indeholde 8 tal og ingen mellemrum");
-            return false;} }
+             return false;} }
 
         return true;
     }
