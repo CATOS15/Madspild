@@ -45,7 +45,24 @@
         <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+
+
+        <item name="windowActionModeOverlay">true</item>
+        <item name="android:actionModeStyle">@style/Widget.App.ActionMode</item>
+        <item name="android:actionModeCloseDrawable">@drawable/baseline_clear_white_48</item>
+        <item name="actionBarTheme">@style/ThemeOverlay.MaterialComponents.Dark.ActionBar</item>
+
+    </style>
+
+    <style name="Widget.App.ActionMode" parent="Widget.AppCompat.ActionMode">
+        <item name="android:titleTextStyle">?attr/textAppearanceHeadline6</item>
+        <item name="android:subtitleTextStyle">?attr/textAppearanceSubtitle1</item>
+        <item name="actionModeBackground">@color/material_grey_900</item>
+    </style>
+
+
+    <style name="Fragment.Profile.Toolbar" parent="Theme.GS1">
+        <item name="android:textColorSecondary">@color/white</item>
     </style>
 
     <style name="Widget.GS1.TextInputLayout.Filled" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.Dense">

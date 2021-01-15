@@ -1,18 +1,25 @@
- package madspild.Fragments;
+package madspild.Fragments;
 
 import android.content.DialogInterface;
+import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.view.ActionMode;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridView;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import com.example.madspild.R;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
@@ -37,74 +44,86 @@ public class OverviewFragment extends Fragment {
     OverviewListAdapter overviewListAdapter;
     OverviewSorting overviewSorting = OverviewSorting.BYDATE;
     MaterialAlertDialogBuilder dialog;
+    MaterialToolbar topbarView;
+
+    ActionMode actionMode = null;
+    boolean isActionMode = false;
+    int numberOfMarked = 0;
+    List<Overview> overviewList;
 
     @Override
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
         view = i.inflate(R.layout.fragment_overview, container, false);
 
         dialog = new MaterialAlertDialogBuilder(Objects.requireNonNull(getActivity()));
+        topbarView = view.findViewById(R.id.fragment_overview_topbar_view);
 
         overviewClient = new OverviewClient();
         overviewClient.getUserOverview(false, (respObject) -> {
-            List<Overview> overviewList = (List<Overview>) respObject;
-            sortOverviewList(overviewList);
-            initOverviewListAdapter(overviewList);
+            new Handler(Looper.getMainLooper()).post(() -> {
+                overviewList = (List<Overview>) respObject;
+                sortOverviewList(overviewList);
+                initOverviewListAdapter(overviewList);
+            });
+
         }, (respError) -> {
             System.out.println(respError);
+        });
+
+        // Topbar button handler handler
+        topbarView.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.fragment_overview_topbar_view_menu_sortby_date:
+                        overviewSorting = OverviewSorting.BYDATE;
+                        sortOverviewList(overviewList);
+                        return true;
+                    case R.id.fragment_overview_topbar_view_menu_sortby_alphabet:
+                        overviewSorting = OverviewSorting.BYNAME;
+                        sortOverviewList(overviewList);
+                        return true;
+                    default:
+                        return false;
+                }
+            };
         });
 
         return view;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        overviewClient.getUserOverview(false, (respObject) -> {
-            List<Overview> overviewList = (List<Overview>) respObject;
-            sortOverviewList(overviewList);
-            initOverviewListAdapter(overviewList);
-        }, (respError) -> {
-            new Handler(Looper.getMainLooper()).post(() -> {
-                //dialog message
-                errorMessageDialog("Fejl",respError);
-            });
-        });
-    }
-
-    private void initOverviewListAdapter(List<Overview> overviewList){
-        new Handler(Looper.getMainLooper()).post(() -> {
-            // OverViewListApdater
-            overviewListAdapter = new OverviewListAdapter(getActivity(),R.layout.fragment_overview_listitem, overviewList);
-
-            // Insert in grid
-            overviewGrid = view.findViewById(R.id.overviewGrid);
-            overviewGrid.setAdapter(overviewListAdapter);
-            overviewGrid.setNumColumns(1);
-
-            overviewButtonDelete = view.findViewById(R.id.fragment_overview_topbar_button_delete);
-            overviewButtonDelete.setOnClickListener(v -> deleteProductsFromInventory(overviewList));
-
-            overviewButtonSort = view.findViewById(R.id.fragment_overview_topbar_button_sort);
-            overviewButtonSort.setOnClickListener((view) -> {
-                overviewSorting = (overviewSorting == OverviewSorting.BYDATE ? OverviewSorting.BYNAME : OverviewSorting.BYDATE);
-                sortOverviewList(overviewList);
-            });
-        });
-    }
-
-
-    private void sortOverviewList(List<Overview> overviewList){
-        if(overviewSorting == OverviewSorting.BYDATE) {
-            Comparator<Overview> compareByDate = (Overview o1, Overview o2) -> o1.getExpdate().compareTo(o2.getExpdate());
-            Collections.sort(overviewList, compareByDate);
-        }else if(overviewSorting == OverviewSorting.BYNAME){
-            Comparator<Overview> compareByName = (Overview o1, Overview o2) -> o1.getName().compareTo(o2.getName());
-            Collections.sort(overviewList, compareByName);
+    // Action mode
+    private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
+        @Override
+        public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
+            MenuInflater menuInflater = actionMode.getMenuInflater();
+            menuInflater.inflate(R.menu.fragment_overview_topbar_delete,menu);
+            return true;
         }
-        new Handler(Looper.getMainLooper()).post(() -> {
-            if (overviewListAdapter != null) overviewListAdapter.notifyDataSetChanged();
-        });
-    }
+
+        @Override
+        public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
+            return false;
+        }
+
+
+        @Override
+        public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
+            if (menuItem.getItemId() == R.id.fragment_overview_topbar_icon_delete){
+                deleteProductsFromInventory(overviewListAdapter.getAllItems());
+                return true;
+            }
+
+            return false;
+        }
+
+        @Override
+        public void onDestroyActionMode(ActionMode mode) {
+            int count = 0;
+            overviewListAdapter.resetListColor();
+            actionMode = null;
+        }
+    };
 
     private void deleteProductsFromInventory(List<Overview> overviewList){
         List<UUID> ids = new ArrayList<>();
@@ -133,6 +152,35 @@ public class OverviewFragment extends Fragment {
         });
     }
 
+    private void sortOverviewList(List<Overview> overviewList){
+        if(overviewSorting == OverviewSorting.BYDATE) {
+            Comparator<Overview> compareByDate = (Overview o1, Overview o2) -> o1.getExpdate().compareTo(o2.getExpdate());
+            Collections.sort(overviewList, compareByDate);
+        }else if(overviewSorting == OverviewSorting.BYNAME){
+            Comparator<Overview> compareByName = (Overview o1, Overview o2) -> o1.getName().compareTo(o2.getName());
+            Collections.sort(overviewList, compareByName);
+        }
+        new Handler(Looper.getMainLooper()).post(() -> {
+            if (overviewListAdapter != null) overviewListAdapter.notifyDataSetChanged();
+        });
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        overviewClient.getUserOverview(false, (respObject) -> {
+            overviewList = (List<Overview>) respObject;
+            sortOverviewList(overviewList);
+            initOverviewListAdapter(overviewList);
+        }, (respError) -> {
+            new Handler(Looper.getMainLooper()).post(() -> {
+                //dialog message
+                errorMessageDialog("Fejl",respError);
+            });
+        });
+    }
+
     public void errorMessageDialog(String title, String message){
         //System.out.println("fejl i barcode");
 
@@ -149,4 +197,47 @@ public class OverviewFragment extends Fragment {
         });
         dialog.show();
     }
+
+
+
+    private void initOverviewListAdapter(List<Overview> overviewList){
+        new Handler(Looper.getMainLooper()).post(() -> {
+            // OverViewListApdater
+            overviewListAdapter = new OverviewListAdapter(getActivity(),R.layout.fragment_overview_listitem, overviewList);
+
+            // Insert in grid
+            overviewGrid = view.findViewById(R.id.overviewGrid);
+            overviewGrid.setAdapter(overviewListAdapter);
+            overviewGrid.setNumColumns(1);
+
+            // Trigger
+            overviewListAdapter.registerDataSetObserver(new DataSetObserver() {
+                @Override
+                public void onChanged() {
+                    List<Overview> changedList = overviewListAdapter.getAllItems();
+                    int count = 0;
+                    for (int i=0;i<changedList.size();i++){
+                        if(changedList.get(i).isMarked()){
+                            count++;
+                            if(actionMode == null) {
+                                actionMode = topbarView.startActionMode(mActionModeCallback);
+                            }
+                        }
+                    }
+                    numberOfMarked = count;
+                    if(numberOfMarked == 0 && actionMode != null){
+                        actionMode.finish();
+                        actionMode = null;
+
+                    } else if (actionMode != null) {
+                        String selectTitle = numberOfMarked + " valgt";
+                        actionMode.setTitle(selectTitle);
+                    }
+                }
+            });
+        });
+    }
+
+
+
 }

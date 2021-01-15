@@ -17,6 +17,7 @@ public class Overview implements Comparable<Overview> {
     @JsonIgnore
     private boolean marked = false;
 
+
     public boolean isMarked() {
         return marked;
     }

@@ -1,10 +1,21 @@
 package madspild.Adapters;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.TransitionDrawable;
+import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,6 +27,7 @@ import com.example.madspild.R;
 import com.google.android.material.button.MaterialButton;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -32,20 +44,6 @@ public class OverviewListAdapter extends ArrayAdapter<Overview> {
         this.overviewList = overviewList;
     }
 
-    private void setVisibilityDeleteIcon(ViewGroup parent){
-        boolean visible = false;
-        for (Overview overview : overviewList) {
-            if(overview.isMarked()){
-                visible = overview.isMarked();
-                break;
-            }
-        }
-        MaterialButton overviewButtonSort = ((ConstraintLayout) parent.getParent()).findViewById(R.id.fragment_overview_topbar_button_sort);
-        overviewButtonSort.setVisibility(visible ? View.INVISIBLE : View.VISIBLE);
-
-        MaterialButton overviewButtonDelete = ((ConstraintLayout) parent.getParent()).findViewById(R.id.fragment_overview_topbar_button_delete);
-        overviewButtonDelete.setVisibility(visible ? View.VISIBLE : View.INVISIBLE);
-    }
 
     @NonNull
     @Override
@@ -63,9 +61,8 @@ public class OverviewListAdapter extends ArrayAdapter<Overview> {
         TextView informationProductName = overviewView.findViewById(R.id.fragment_overview_listitem_information_productname);
         TextView informationExpDate = overviewView.findViewById(R.id.fragment_overview_listitem_information_expdate);
         ImageView productTypeImage = overviewView.findViewById(R.id.fragment_overview_listitem_producttype_image);
+        View fragment_overview_view_divider = overviewView.findViewById(R.id.fragment_overview_view_divider);
 
-        listitem.setBackgroundResource(R.drawable.fragment_overview_listitem_default);
-        setVisibilityDeleteIcon(parent);
 
         long diffInMillies = overview.getExpdate().getTime() - new Date().getTime();
         long diffInDays = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
@@ -73,37 +70,38 @@ public class OverviewListAdapter extends ArrayAdapter<Overview> {
         daysleftText.setText(daysleftString);
 
         if(diffInDays < 0){
-            daysleftImage.setColorFilter(Color.RED);
+            daysleftImage.setColorFilter(getContext().getResources().getColor(R.color.newRed));
         }else if(diffInDays < 4){
-            daysleftImage.setColorFilter(Color.YELLOW);
+            daysleftImage.setColorFilter(getContext().getResources().getColor(R.color.newYellow));
         }else{
-            daysleftImage.setColorFilter(Color.GREEN);
+            daysleftImage.setColorFilter(getContext().getResources().getColor(R.color.newGreen));
         }
 
+        // Set text and image
         informationProductName.setText(overview.getName());
-
         String informationExpDateString = "Udløbsdato: " + new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(overview.getExpdate());
         informationExpDate.setText(informationExpDateString);
-
         productTypeImage.setImageResource(getProductIcon(position));
 
+        // Set divider
+        if(overviewList.size()-1 != position){
+            fragment_overview_view_divider.setVisibility(View.VISIBLE);
+        }
+
+        // Set init colors
+        selectColorChange(listitem,overview.isMarked());
+
         overviewView.setOnClickListener((view) -> {
-            overview.setMarked(!overview.isMarked());
-            if(overview.isMarked()){
-                listitem.setBackgroundResource(R.drawable.fragment_overview_listitem_marked);
-            }else{
-                listitem.setBackgroundResource(R.drawable.fragment_overview_listitem_default);
-            }
-            setVisibilityDeleteIcon(parent);
+            boolean isMarked = overview.isMarked();
+            overview.setMarked(!isMarked);
+            selectColorChange(listitem,overview.isMarked());
+            notifyDataSetChanged();
         });
 
         return overviewView;
     }
 
-    @Override
-    public int getCount() {
-        return super.getCount();
-    }
+
 
     private int getProductIcon(int index){
         switch (overviewList.get(index).getProductType()) {
@@ -131,6 +129,47 @@ public class OverviewListAdapter extends ArrayAdapter<Overview> {
                 return R.drawable.fragment_overview_listitem_producttype_image_other;
         }
     }
-}
 
+    public void selectColorChange(ConstraintLayout view, boolean isMarked){
+        ValueAnimator colorAnimation;
+        int colorWhite = getContext().getResources().getColor(R.color.white);
+        int colorBlue = getContext().getResources().getColor(R.color.blueSelect);
+        ColorDrawable currentColor = (ColorDrawable) view.getBackground();
+
+        if(!isMarked && currentColor.getColor() != colorWhite){
+            colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorBlue, colorWhite);
+        } else if (isMarked && currentColor.getColor() != colorBlue){
+            colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorWhite, colorBlue);
+        } else{
+            return;
+        }
+
+        colorAnimation.setDuration(100); // milliseconds
+        colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animator) {
+                view.setBackgroundColor((int) animator.getAnimatedValue());
+            }
+        });
+        colorAnimation.start();
+    }
+
+
+    public List<Overview> getAllItems() {
+        ArrayList<Overview> result = new ArrayList<>();
+        for (int i = 0; i < getCount(); i++) {
+            result.add(getItem(i));
+        }
+        return result;
+    }
+
+    public void resetListColor(){
+        for (int i = 0; i < overviewList.size(); i++) {
+            if(overviewList.get(i).isMarked()){
+                overviewList.get(i).setMarked(false);
+            }
+        }
+        notifyDataSetChanged();
+    }
+}
 

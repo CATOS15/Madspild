@@ -8,12 +8,21 @@
 
     <!-- Overview -->
     <string name="fragment_overview_topbar_title">Inventar</string>
+    <string name="fragment_overview_topbar_sortby_date">Dato</string>
+    <string name="fragment_overview_topbar_sortby_alphabet">Alfabetisk</string>
     <string name="fragment_overview_listitem_daysleft_image" />
     <string name="fragment_overview_listitem_daysleft_text">[-xxx dage]</string>
     <string name="fragment_overview_listitem_information_productname">[PRODUCT NAME]</string>
     <string name="fragment_overview_listitem_information_expdate">[UDLØBSDATO]</string>
 
+
     <!-- Profil -->
     <string name="fragment_profile_topbar_title">Profil</string>
     <string name="fragment_profile_username">Brugernavn</string>
+    <string name="cancel_delete">Cancel delete</string>
+    <string name="delete_item">Delete item</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+    <string name="efter_dato">Efter Dato</string>
+    <string name="efter_alfabettet">Efter alfabetet</string>
 </resources>

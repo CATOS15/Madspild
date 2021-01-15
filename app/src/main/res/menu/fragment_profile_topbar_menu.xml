@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/fragment_profile_topbar_button_editprofile"
+        android:icon="@drawable/icon_settings"
+        android:contentDescription="@string/delete_item"
+        app:showAsAction="ifRoom"
+        android:title="@string/delete" />
+    <item
+        android:id="@+id/fragment_profile_topbar_button_logout"
+        android:icon="@drawable/icon_logout"
+        android:contentDescription="@string/delete_item"
+        app:showAsAction="ifRoom"
+        android:title="@string/delete" />
+</menu>

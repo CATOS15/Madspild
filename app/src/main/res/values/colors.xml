@@ -10,6 +10,12 @@
     <color name="blue_light">#81D4FA</color>
     <color name="textInputOutlineColor">#1B5E20</color>
     <color name="textColorPrimary">#FFFFFFFF</color>
+    <color name="ourRed">#fb3434</color>
+    <color name="blueSelect">#4F0277BD</color>
+
+    <color name="newGreen">#2E7D32</color>
+    <color name="newYellow">#9E9D24</color>
+    <color name="newRed">#D84315</color>
 
     <!-- gs1 theme -->
     <color name="GS1Blue">#002C6C</color>
@@ -25,5 +31,8 @@
     <color name="GS1Rasperry">#f05386</color>
     <color name="GS1Candy">#D21404</color>
     <color name="GS1LightGrayTransparent">#60454545</color>
+    <color name="GS1Forest">#00B74F</color>
+
+
 
 </resources>

@@ -2,23 +2,21 @@ package madspild.Fragments;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.madspild.R;
 import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
@@ -26,11 +24,8 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
-import com.github.mikephil.charting.formatter.ValueFormatter;
-import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
-import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.android.material.appbar.MaterialToolbar;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -57,7 +52,7 @@ public class ProfileFragment extends Fragment {
     TextView amountWaste;
     TextView username;
     View view;
-    TextView statetxtgraph;
+    MaterialToolbar fragment_overview_topbar_view;
 
 
     int highestProduct = 0;
@@ -67,10 +62,13 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_profile, container, false);
 
+        /*
         view.findViewById(R.id.fragment_profile_topbar_button_settings).setOnClickListener((event) -> {
             Intent intent = new Intent(getActivity(), EditProfileActivity.class);
             startActivity(intent);
         });
+        */
+
 
         view.findViewById(R.id.fragment_profile_topbar_button_logout).setOnClickListener((event) -> {
             HttpClientHelper.removeToken();
@@ -79,14 +77,13 @@ public class ProfileFragment extends Fragment {
             Objects.requireNonNull(getActivity()).finish();
         });
 
+        fragment_overview_topbar_view = view.findViewById(R.id.fragment_overview_topbar_view);
         barChart = view.findViewById(R.id.fragment_profile_barChart);
         amountTitle = view.findViewById(R.id.fragment_profile_amountTitle);
         amount = view.findViewById(R.id.fragment_profile_amount);
         amountWasteTitle = view.findViewById(R.id.fragment_profile_amountWasteTitle);
         amountWaste = view.findViewById(R.id.fragment_profile_amountWaste);
         username = view.findViewById(R.id.fragment_profile_username);
-        statetxtgraph = view.findViewById(R.id.fragment_profile_statetxtgraph);
-
 
         amountTitle.setText("Totalt antal produkter");
         amount.setText("Antal");
@@ -95,6 +92,26 @@ public class ProfileFragment extends Fragment {
         amountWaste.setText("Udløbet");
 
         getOverview();
+
+        fragment_overview_topbar_view.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.fragment_profile_topbar_button_editprofile:
+                        Intent intentEdit = new Intent(getActivity(), EditProfileActivity.class);
+                        startActivity(intentEdit);
+                        return true;
+                    case R.id.fragment_profile_topbar_button_logout:
+                        HttpClientHelper.removeToken();
+                        Intent intentStart = new Intent(getActivity(), StartActivity.class);
+                        startActivity(intentStart);
+                        Objects.requireNonNull(getActivity()).finish();
+                        return true;
+                    default:
+                        return false;
+                }
+            };
+        });
 
         return view;
     }

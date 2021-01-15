@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -21,7 +22,7 @@ import madspild.Helpers.HttpClientHelper;
 import madspild.Helpers.MenuHelper;
 
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends AppCompatActivity {
     private int lastPagePosition = 1;
     private Stack<Integer> pageStack = new Stack<>();
 

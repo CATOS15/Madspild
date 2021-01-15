@@ -1,23 +1,19 @@
 package madspild.Activities;
 
-import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.SystemClock;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.RemoteViews;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,11 +22,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 
 import com.example.madspild.R;
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-
-import java.util.Calendar;
-import java.util.Date;
 
 import madspild.Helpers.HttpClientHelper;
 import madspild.HttpClient.AuthenticationClient;
@@ -62,6 +57,8 @@ public class EditProfileActivity extends AppCompatActivity {
     TableRow editprofile_tablerow_buttons_edit;
     TableRow editprofile_tablerow_buttons_cancelsave;
 
+    MaterialToolbar activity_editprofile_toolbar;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,12 +88,22 @@ public class EditProfileActivity extends AppCompatActivity {
         editprofile_button_edit = findViewById(R.id.editprofile_button_edit);
         editprofile_button_cancel = findViewById(R.id.activity_editprofile_cancel);
         editprofile_button_save = findViewById(R.id.activity_editprofile_save);
-        editprofile_button_backbutton = findViewById(R.id.editprofile_button_backbutton);
 
         editprofile_linearlayout_inputfields = findViewById(R.id.editprofile_linearlayout_inputfields);
 
         editprofile_tablerow_buttons_edit = findViewById(R.id.editprofile_tablerow_buttons_edit);
         editprofile_tablerow_buttons_cancelsave = findViewById(R.id.editprofile_tablerow_buttons_cancelsave);
+
+        activity_editprofile_toolbar = findViewById(R.id.activity_editprofile_toolbar);
+
+        // Set backbutton
+        activity_editprofile_toolbar.setNavigationIcon(R.drawable.icon_backarrow);
+        activity_editprofile_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         // Diable input fields
         for ( int j = 0; j < editprofile_linearlayout_inputfields.getChildCount();  j++ ){
@@ -107,12 +114,6 @@ public class EditProfileActivity extends AppCompatActivity {
         //Sæt brugerinfo
         getSetUser();
 
-        editprofile_button_backbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
 
         editprofile_button_edit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,16 +133,36 @@ public class EditProfileActivity extends AppCompatActivity {
         editprofile_button_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                HttpClientHelper.user.setFirstname(editprofile_edit_firstname.getText().toString());
-                HttpClientHelper.user.setLastname(editprofile_edit_lastname.getText().toString());
-                HttpClientHelper.user.setPhone(editprofile_edit_phonenumber.getText().toString());
-                HttpClientHelper.user.setEmail(editprofile_edit_email.getText().toString());
+                User tempUser = new User();
+                tempUser.setFirstname(HttpClientHelper.user.getFirstname());
+                tempUser.setLastname(HttpClientHelper.user.getLastname());
+                tempUser.setEmail(HttpClientHelper.user.getEmail());
+                tempUser.setPhone(HttpClientHelper.user.getPhone());
+                tempUser.setFamilyid(HttpClientHelper.user.getFamilyid());
+                tempUser.setId(HttpClientHelper.user.getId());
+                tempUser.setUsername(HttpClientHelper.user.getUsername());
+                tempUser.setPassword(HttpClientHelper.user.getPassword());
+
+                tempUser.setFirstname(editprofile_edit_firstname.getText().toString());
+                tempUser.setLastname(editprofile_edit_lastname.getText().toString());
+                tempUser.setPhone(editprofile_edit_phonenumber.getText().toString());
+                tempUser.setEmail(editprofile_edit_email.getText().toString());
+
 
                 if(validate(HttpClientHelper.user)){
                     AuthenticationClient authenticationClient = new AuthenticationClient();
-                    authenticationClient.editUser(HttpClientHelper.user, (respObject) -> {
+                    authenticationClient.editUser(tempUser, (respObject) -> {
                         new Handler(Looper.getMainLooper()).post(() -> {
                             showButton(true,false,false);
+                            HttpClientHelper.user.setFirstname(tempUser.getFirstname());
+                            HttpClientHelper.user.setLastname(tempUser.getLastname());
+                            HttpClientHelper.user.setPhone(tempUser.getPhone());
+                            HttpClientHelper.user.setEmail(tempUser.getEmail());
+
+                            // Snackbar confirmation
+                            String respMessage = respObject.toString();
+                            Snackbar snackbar = Snackbar.make(getCurrentFocus(),respMessage, 3000);
+                            snackbar.show();
                         });
                     }, (respError) -> {
                         new Handler(Looper.getMainLooper()).post(() -> {
