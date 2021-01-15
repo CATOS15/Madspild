@@ -61,6 +61,7 @@
                     android:gravity="center"
                     android:textColor="@color/GS1Blue"
                     android:textSize="15sp"
+                    android:text="@string/fragment_profile_amountTitle"
                     android:layout_weight="1"/>
 
                 <TextView
@@ -69,6 +70,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:textColor="@color/GS1Blue"
+                    android:text="@string/fragment_profile_amountWasteTitle"
                     android:textSize="15sp"
                     android:layout_weight="1"
                     />

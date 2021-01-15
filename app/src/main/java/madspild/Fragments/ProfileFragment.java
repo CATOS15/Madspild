@@ -62,14 +62,6 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        /*
-        view.findViewById(R.id.fragment_profile_topbar_button_settings).setOnClickListener((event) -> {
-            Intent intent = new Intent(getActivity(), EditProfileActivity.class);
-            startActivity(intent);
-        });
-        */
-
-
         view.findViewById(R.id.fragment_profile_topbar_button_logout).setOnClickListener((event) -> {
             HttpClientHelper.removeToken();
             Intent intent = new Intent(getActivity(), StartActivity.class);
@@ -85,32 +77,23 @@ public class ProfileFragment extends Fragment {
         amountWaste = view.findViewById(R.id.fragment_profile_amountWaste);
         username = view.findViewById(R.id.fragment_profile_username);
 
-        amountTitle.setText("Totalt antal produkter");
-        amount.setText("Antal");
-
-        amountWasteTitle.setText("Produkter udløbet");
-        amountWaste.setText("Udløbet");
-
         getOverview();
 
-        fragment_overview_topbar_view.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.fragment_profile_topbar_button_editprofile:
-                        Intent intentEdit = new Intent(getActivity(), EditProfileActivity.class);
-                        startActivity(intentEdit);
-                        return true;
-                    case R.id.fragment_profile_topbar_button_logout:
-                        HttpClientHelper.removeToken();
-                        Intent intentStart = new Intent(getActivity(), StartActivity.class);
-                        startActivity(intentStart);
-                        Objects.requireNonNull(getActivity()).finish();
-                        return true;
-                    default:
-                        return false;
-                }
-            };
+        fragment_overview_topbar_view.setOnMenuItemClickListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.fragment_profile_topbar_button_editprofile:
+                    Intent intentEdit = new Intent(getActivity(), EditProfileActivity.class);
+                    startActivity(intentEdit);
+                    return true;
+                case R.id.fragment_profile_topbar_button_logout:
+                    HttpClientHelper.removeToken();
+                    Intent intentStart = new Intent(getActivity(), StartActivity.class);
+                    startActivity(intentStart);
+                    Objects.requireNonNull(getActivity()).finish();
+                    return true;
+                default:
+                    return false;
+            }
         });
 
         return view;

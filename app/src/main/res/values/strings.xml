@@ -23,4 +23,6 @@
     <string name="fragment_profile_username">Brugernavn</string>
     <string name="fragment_profile_topbar_button_editprofile">Rediger profil</string>
     <string name="fragment_profile_topbar_button_logout">Log ud</string>
+    <string name="fragment_profile_amountTitle">Totalt antal produkter</string>
+    <string name="fragment_profile_amountWasteTitle">Produkter udløbet</string>
 </resources>
