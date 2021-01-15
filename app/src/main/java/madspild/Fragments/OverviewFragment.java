@@ -1,7 +1,5 @@
 package madspild.Fragments;
 
-import android.content.DialogInterface;
-import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -12,15 +10,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.GridView;
 
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import com.example.madspild.R;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -45,6 +42,7 @@ public class OverviewFragment extends Fragment {
     MaterialAlertDialogBuilder dialog;
     MaterialToolbar topbarView;
     List<Overview> overviewList;
+    Snackbar overview_snackbar;
 
     @Override
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
@@ -138,10 +136,14 @@ public class OverviewFragment extends Fragment {
                     overviewListAdapter.remove(overviewToRemove);
                 }
                 overviewListAdapter.resetTopbar();
+                overview_snackbar = Snackbar.make(view,respObject.toString(), 3000);
+                overview_snackbar.show();
             });
         }, (respError) -> {
             System.out.println(respError);
             overviewListAdapter.resetTopbar();
+            overview_snackbar = Snackbar.make(view,respError.toString(), 3000);
+            overview_snackbar.show();
         });
     }
 
@@ -166,11 +168,24 @@ public class OverviewFragment extends Fragment {
             overviewList = (List<Overview>) respObject;
             sortOverviewList(overviewList);
             initOverviewListAdapter(overviewList);
+            super.onPause();
         }, (respError) -> {
             new Handler(Looper.getMainLooper()).post(() -> {
                 errorMessageDialog("Fejl",respError);
             });
         });
+    }
+
+    @Override
+    public void onPause() {
+        if(overview_snackbar != null){
+            overview_snackbar.dismiss();
+        }
+
+        if(overviewListAdapter != null){
+            overviewListAdapter.resetTopbar();
+        }
+        super.onPause();
     }
 
     public void errorMessageDialog(String title, String message){

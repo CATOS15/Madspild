@@ -1,21 +1,13 @@
 package madspild.Adapters;
 
 import android.animation.ArgbEvaluator;
-import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.Color;
-import android.graphics.ColorFilter;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.TransitionDrawable;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,7 +16,6 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.madspild.R;
-import com.google.android.material.button.MaterialButton;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -119,7 +110,9 @@ public class OverviewListAdapter extends ArrayAdapter<Overview> {
         this.mActionModeCallback = mActionModeCallback;
     }
     public void resetTopbar(){
-        actionMode.finish();
+        if(actionMode != null) {
+            actionMode.finish();
+        }
         actionMode = null;
         this.itemsSelectedCounter = 0;
     }
