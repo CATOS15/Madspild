@@ -6,12 +6,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
@@ -33,6 +31,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
+import io.sentry.Sentry;
 import madspild.Activities.EditProfileActivity;
 import madspild.Activities.StartActivity;
 import madspild.Helpers.HttpClientHelper;
@@ -150,6 +149,7 @@ public class ProfileFragment extends Fragment {
             });
         }, (respError) -> {
             System.out.println(respError);
+            Sentry.captureMessage("Error - failed retreiving inventory of user");
         });
         barChart.invalidate();
         barChart.refreshDrawableState();

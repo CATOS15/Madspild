@@ -26,6 +26,10 @@ android {
     }
 }
 
+repositories {
+    jcenter()
+}
+
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'androidx.appcompat:appcompat:1.2.0'
@@ -46,4 +50,5 @@ dependencies {
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
     implementation 'com.mikhaellopez:circularimageview:4.2.0'
+    implementation 'io.sentry:sentry-android:3.1.0'
 }

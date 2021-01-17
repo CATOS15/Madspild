@@ -23,6 +23,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Objects;
 
+import io.sentry.Sentry;
 import madspild.Activities.MainActivity;
 import madspild.Helpers.HttpClientHelper;
 import madspild.HttpClient.AuthenticationClient;
@@ -104,6 +105,7 @@ public class RegisterFragment extends Fragment{
                         }, (respError) -> {
                             new Handler(Looper.getMainLooper()).post(() -> {
                                 Toast.makeText(getActivity(), respError, Toast.LENGTH_SHORT).show();
+                                Sentry.captureMessage("Error - failed creating a new user");
                             });
                         });
 
@@ -139,6 +141,7 @@ public class RegisterFragment extends Fragment{
             Objects.requireNonNull(getActivity()).finish();
         },(respError) -> {
             Log.println(Log.ERROR, "AUTHENTICATION", respError);
+            Sentry.captureMessage("Error - failed retreiving user information");
         });
     }
 

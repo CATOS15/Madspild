@@ -1,6 +1,5 @@
 package madspild.Activities;
 
-import com.example.madspild.R;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -8,6 +7,9 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.madspild.R;
+
 import madspild.Fragments.LoginFragment;
 import madspild.Helpers.HttpClientHelper;
 

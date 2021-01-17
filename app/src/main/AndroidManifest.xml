@@ -26,6 +26,7 @@
         <activity android:name="madspild.Activities.MainActivity"/>
         <activity android:name="madspild.Activities.EditProfileActivity"/>
 
+        <meta-data android:name="io.sentry.dsn" android:value="https://e23c6bc19ef143a7871c18c37c5b4bac@o505986.ingest.sentry.io/5595222" />
     </application>
 
 </manifest>

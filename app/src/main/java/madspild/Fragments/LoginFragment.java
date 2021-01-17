@@ -22,6 +22,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Objects;
 
+import io.sentry.Sentry;
 import madspild.Activities.MainActivity;
 import madspild.Helpers.HttpClientHelper;
 import madspild.HttpClient.AuthenticationClient;
@@ -80,6 +81,7 @@ public class LoginFragment extends Fragment {
             }, (respError) -> {
                 new Handler(Looper.getMainLooper()).post(() -> {
                     Toast.makeText(getActivity(), respError, Toast.LENGTH_SHORT).show();
+                    Sentry.captureMessage("Error - failed logging in user");
                 });
             });
 
@@ -105,6 +107,7 @@ public class LoginFragment extends Fragment {
             Objects.requireNonNull(getActivity()).finish();
         },(respError) -> {
             Log.println(Log.ERROR, "AUTHENTICATION", respError);
+            Sentry.captureMessage("Error - failed at checking user access");
         });
     }
 

@@ -4,7 +4,6 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -33,12 +32,10 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
 
+import io.sentry.Sentry;
 import madspild.Helpers.HttpClientHelper;
 import madspild.HttpClient.ProductClient;
 import madspild.Models.Product;
-
-import static java.lang.Long.parseLong;
-import static java.lang.Thread.sleep;
 
 public class ScanFragment extends Fragment {
     private CodeScanner codeScanner;
@@ -115,6 +112,7 @@ public class ScanFragment extends Fragment {
                                     new Handler(Looper.getMainLooper()).post(() -> {
                                         //dialog message, ex: varen er allerede skannet
                                         errorMessageDialog("Fejl",respError);
+                                        Sentry.captureMessage("Error - failed adding product to inventory of user");
                                     });
                                 });
                             }

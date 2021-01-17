@@ -27,6 +27,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import io.sentry.Sentry;
 import madspild.Helpers.HttpClientHelper;
 import madspild.HttpClient.AuthenticationClient;
 import madspild.Models.User;
@@ -167,6 +168,7 @@ public class EditProfileActivity extends AppCompatActivity {
                     }, (respError) -> {
                         new Handler(Looper.getMainLooper()).post(() -> {
                             Toast.makeText(getApplicationContext(), respError, Toast.LENGTH_SHORT).show();
+                            Sentry.captureMessage("Error - failed editing user");
                         });
                     });
                 }

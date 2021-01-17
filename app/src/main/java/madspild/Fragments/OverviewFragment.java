@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+import io.sentry.Sentry;
 import madspild.Adapters.OverviewListAdapter;
 import madspild.HttpClient.OverviewClient;
 import madspild.HttpClient.ProductClient;
@@ -61,6 +62,7 @@ public class OverviewFragment extends Fragment {
 
         }, (respError) -> {
             System.out.println(respError);
+            Sentry.captureMessage("Error - failed retreiving inventory of user");
         });
 
         // Topbar button handler handler
@@ -144,6 +146,7 @@ public class OverviewFragment extends Fragment {
             overviewListAdapter.resetTopbar();
             overview_snackbar = Snackbar.make(view,respError.toString(), 3000);
             overview_snackbar.show();
+            Sentry.captureMessage("Error - failed deleting product from inventory of user");
         });
     }
 
@@ -172,6 +175,7 @@ public class OverviewFragment extends Fragment {
         }, (respError) -> {
             new Handler(Looper.getMainLooper()).post(() -> {
                 errorMessageDialog("Fejl",respError);
+                Sentry.captureMessage("Error - failed retreiving inventory of user");
             });
         });
     }
