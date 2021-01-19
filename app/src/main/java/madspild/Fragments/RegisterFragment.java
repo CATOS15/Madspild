@@ -148,19 +148,19 @@ public class RegisterFragment extends Fragment{
     public boolean validate(User user)
     {
         if (user.getUsername().length() < 4){
-            usernameTextInput.setError("Brugernavn skal være midnst 4 lang");
+            usernameTextInput.setError("Brugernavn skal være mindst 4 lang");
             return false;}
         else{usernameTextInput.setError(null);}
         if(user.getPassword().length() < 5 ){
-            passwordTextInput.setError("Password skal være midnst 5 lang");
+            passwordTextInput.setError("Password skal være mindst 5 lang");
             return false;}
         else{passwordTextInput.setError(null);}
         if(user.getFirstname().length() < 2 ){
-            firstnameTextInput.setError("Fornavn skal være midnst 2 lang");
+            firstnameTextInput.setError("Fornavn skal være mindst 2 lang");
             return false;}
         else{firstnameTextInput.setError(null);}
         if(user.getLastname().length() < 2 ){
-            lastnameTextInput.setError("Efternavn skal være midnst 2 lang");
+            lastnameTextInput.setError("Efternavn skal være mindst 2 lang");
             return false;}
         else{lastnameTextInput.setError(null);}
         if(!(user.getEmail().contains("@")) || !(user.getEmail().contains("."))){

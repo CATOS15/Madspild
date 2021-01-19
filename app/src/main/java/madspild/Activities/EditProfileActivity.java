@@ -201,11 +201,11 @@ public class EditProfileActivity extends AppCompatActivity {
     public boolean validate(User user)
     {
         if(user.getFirstname().length() < 2 ){
-            editprofile_text_firstname.setError("Fornavn skal være midnst 2 lang");
+            editprofile_text_firstname.setError("Fornavn skal være mindst 2 lang");
             return false;}
         else{editprofile_text_firstname.setError(null);}
         if(user.getLastname().length() < 2 ){
-            editprofile_text_lastname.setError("Efternavn skal være midnst 2 lang");
+            editprofile_text_lastname.setError("Efternavn skal være mindst 2 lang");
             return false;}
         else{editprofile_text_lastname.setError(null);}
         if(!(user.getEmail().contains("@")) || !(user.getEmail().contains("."))){
