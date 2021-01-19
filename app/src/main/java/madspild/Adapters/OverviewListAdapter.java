@@ -65,11 +65,11 @@ public class OverviewListAdapter extends ArrayAdapter<Overview> {
         daysleftText.setText(daysleftString);
 
         if(diffInDays < 0){
-            daysleftImage.setColorFilter(getContext().getResources().getColor(R.color.newRed));
+            daysleftImage.setColorFilter(getContext().getResources().getColor(R.color.TimeRed));
         }else if(diffInDays < 4){
-            daysleftImage.setColorFilter(getContext().getResources().getColor(R.color.newYellow));
+            daysleftImage.setColorFilter(getContext().getResources().getColor(R.color.TimeYellow));
         }else{
-            daysleftImage.setColorFilter(getContext().getResources().getColor(R.color.newGreen));
+            daysleftImage.setColorFilter(getContext().getResources().getColor(R.color.TimeGreen));
         }
 
         // Set text and image

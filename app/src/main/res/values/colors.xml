@@ -13,9 +13,9 @@
     <color name="ourRed">#fb3434</color>
     <color name="blueSelect">#4F0277BD</color>
 
-    <color name="newGreen">#2E7D32</color>
-    <color name="newYellow">#9E9D24</color>
-    <color name="newRed">#D84315</color>
+    <color name="TimeGreen">#2E7D32</color>
+    <color name="TimeYellow">#9E9D24</color>
+    <color name="TimeRed">#D84315</color>
 
     <!-- gs1 theme -->
     <color name="GS1Blue">#002C6C</color>
