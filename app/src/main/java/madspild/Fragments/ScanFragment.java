@@ -75,14 +75,22 @@ public class ScanFragment extends Fragment {
                         String DataMatrixData = result.getText();
 
                         //clean up string from weird symbols
-                        DataMatrixData = DataMatrixData.replaceAll("[^a-zA-Z0-9]", "");
+                        //DataMatrixData = DataMatrixData.replaceAll("[^a-zA-Z0-9]", "");
                         System.out.println(DataMatrixData);
 
                         //En række af tjek på den skannede stregkode
                         //længden af dataen, varen er tilbagekaldt, varen for gammel og om den er succesfuldt gemt til profilen
-                        if (DataMatrixData.length() == 45){
+                        if (DataMatrixData.length() > 32){
                             product = new Product();
-                            product = MatrixtoProduct(DataMatrixData);
+
+                            //ordner enten gruppe c2 stregkode eller officiel gs1 stregkode
+                            String DataMatrixData2 = DataMatrixData.replaceAll("[^a-zA-Z0-9]", "");
+
+                            if(DataMatrixData2.length() == 45 && DataMatrixData2.substring(16, 18).equals("21")){
+                                product = MatrixtoProduct(DataMatrixData);
+                            } else {
+                                product = MatrixtoProductV2(DataMatrixData);
+                            }
 
                             //specifik ekstra check ønsket af projektstiller
                             if(specielScanEnFisk(product)){
@@ -94,6 +102,7 @@ public class ScanFragment extends Fragment {
                             }
 
                             else if(expDateChecker(product)){
+                            //else if(true){
                                 productClient.createProduct(product, (respObject) -> {
                                     Product product = (Product) respObject;
                                     new Handler(Looper.getMainLooper()).post(() -> {
@@ -222,6 +231,42 @@ public class ScanFragment extends Fragment {
         MtPproduct.setGtin(DataMatrixString.substring(2,16));
         MtPproduct.setFamilyid(HttpClientHelper.user.getFamilyid());
         MtPproduct.setDeleted(false);
+
+        return MtPproduct;
+    }
+
+    public Product MatrixtoProductV2(String DataMatrixString){
+        //substring numbers: GTIN: 3-16, S/N: 19-29, Batch: 32-37, Expiry: 40-45
+        int lengthOfString = DataMatrixString.length();
+
+        Product MtPproduct= new Product();
+        DateFormat format = new SimpleDateFormat("yyMMdd", Locale.ENGLISH);
+        Date date = null;
+
+        //gtin, expiry date, family id, deleted
+        try {
+            date = format.parse(DataMatrixString.substring(19, 25));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        MtPproduct.setExpdate(date);
+        MtPproduct.setGtin(DataMatrixString.substring(3,17));
+        MtPproduct.setFamilyid(HttpClientHelper.user.getFamilyid());
+        MtPproduct.setDeleted(false);
+
+        //batch, serienummer
+        int startOfSerieNummer = DataMatrixString.substring(2, lengthOfString - 1).indexOf("\u001D");
+
+        if (startOfSerieNummer != -1){
+            //with serienummer
+            MtPproduct.setBatchnumber(DataMatrixString.substring(27,startOfSerieNummer+2));
+            MtPproduct.setSerialnumber(DataMatrixString.substring(startOfSerieNummer+3,lengthOfString));
+        } else {
+            //without serienummer
+            MtPproduct.setBatchnumber(DataMatrixString.substring(27,lengthOfString));
+            MtPproduct.setSerialnumber(null);
+        }
 
         return MtPproduct;
     }

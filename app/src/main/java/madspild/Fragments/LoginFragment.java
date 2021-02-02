@@ -56,8 +56,8 @@ public class LoginFragment extends Fragment {
           passwordTextInput = (TextInputLayout)view.findViewById(R.id.login_password_text_input); //password
           passwordEditText = (TextInputEditText)view.findViewById(R.id.login_password_edit_text);
 
-        usernameTextInput.getEditText().setText("test1");
-        passwordTextInput.getEditText().setText("test1");
+        usernameTextInput.getEditText().setText("testtest");
+        passwordTextInput.getEditText().setText("testtest");
 
         loginButton = view.findViewById(R.id.activity_start_createuser);
         loginCreateAcountText = view.findViewById(R.id.login_create_account_text);
